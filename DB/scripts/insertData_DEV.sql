@@ -34,16 +34,16 @@ exec dbo.UsersInsert 'user5', '7163bbbb90281071d59289fe999d33de', 'Ave Langsbury
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 exec dbo.AuthorsInsert 'Styrbjörn', 'Felstead', '1956-01-29', null;
-exec dbo.AuthorsInsert 'Méng', 'Southworth', '1973-08-09','2013-09-05';
+exec dbo.AuthorsInsert 'Méng', 'Southworth',	'1973-08-09','2013-09-05';
 exec dbo.AuthorsInsert 'Yè', 'Kerford', '1939-06-25', '1979-04-06';
-exec dbo.AuthorsInsert 'Åke', 'Bloodworth', '1981-08-13 19:37:11',null;
+exec dbo.AuthorsInsert 'Åke', 'Bloodworth', '1981-08-13',null;
 exec dbo.AuthorsInsert 'Célia', 'Lansley', '1939-12-20','1996-01-06';
 exec dbo.AuthorsInsert 'Yè', 'Domokos', '1976-08-11', null;
 exec dbo.AuthorsInsert 'Estève', 'Ahmed', '1968-09-17', null;
 exec dbo.AuthorsInsert 'Inès', 'Mallia', '1965-08-14', '2003-06-19';
 exec dbo.AuthorsInsert 'Françoise', 'Wipper', '1919-04-02', '1985-09-11';
 exec dbo.AuthorsInsert 'Mén', 'Seeley', '1969-03-18', '2005-10-06';
-exec dbo.AuthorsInsert 'Marie-françoise', 'Gumme', '1977-02-01 04:11:11', null;
+exec dbo.AuthorsInsert 'Marie-françoise', 'Gumme', '1977-02-01', null;
 exec dbo.AuthorsInsert 'Anaïs', 'Zammett', '1913-01-03', '1966-06-26';
 exec dbo.AuthorsInsert 'Åsa', 'Seakings', '1920-04-05','1958-04-07';
 exec dbo.AuthorsInsert 'Örjan', 'Dykins', '1981-09-29', null;
@@ -334,6 +334,56 @@ exec [dbo].[Book_GenresInsert] 50, 8;
 --Orders
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+exec dbo.OrdersInsert 20, 2, '2015-05-05', 225;
+exec dbo.OrdersInsert 15, 4, '2013-05-25', 222;
+exec dbo.OrdersInsert 26, 2, '2013-03-20', 142;
+exec dbo.OrdersInsert 45, 2, '2013-04-14', 182;
+exec dbo.OrdersInsert 12, 1, '2016-12-28', 84;
+exec dbo.OrdersInsert 41, 4, '2016-02-20', 103;
+exec dbo.OrdersInsert 19, 1, '2016-06-05', 19;
+exec dbo.OrdersInsert 18, 5, '2017-01-31', 29;
+exec dbo.OrdersInsert 16, 3, '2013-01-11', 148;
+exec dbo.OrdersInsert 42, 4, '2013-11-13', 196;
+exec dbo.OrdersInsert 36, 4, '2017-04-08', 76;
+exec dbo.OrdersInsert 47, 1, '2016-01-03', 30;
+exec dbo.OrdersInsert 33, 5, '2015-01-22', 254;
+exec dbo.OrdersInsert 3, 1, '2015-02-03', 249;
+exec dbo.OrdersInsert 25, 1, '2017-04-17', 178;
+exec dbo.OrdersInsert 5, 3, '2014-06-17', 249;
+exec dbo.OrdersInsert 21, 5, '2013-03-21', 163;
+exec dbo.OrdersInsert 31, 3, '2014-11-13', 18;
+exec dbo.OrdersInsert 21, 4, '2017-04-14', 185;
+exec dbo.OrdersInsert 15, 4, '2015-12-03', 249;
+exec dbo.OrdersInsert 12, 5, '2017-10-21', 213;
+exec dbo.OrdersInsert 18, 4, '2014-04-03', 87;
+exec dbo.OrdersInsert 19, 5, '2013-11-27', 107;
+exec dbo.OrdersInsert 45, 4, '2015-08-31', 139;
+exec dbo.OrdersInsert 49, 3, '2013-08-21', 174;
+exec dbo.OrdersInsert 47, 3, '2012-12-03', 185;
+exec dbo.OrdersInsert 40, 4, '2016-12-15', 240;
+exec dbo.OrdersInsert 28, 3, '2013-07-30', 89;
+exec dbo.OrdersInsert 43, 5, '2016-07-03', 88;
+exec dbo.OrdersInsert 48, 2, '2014-06-30', 97;
+exec dbo.OrdersInsert 26, 2, '2017-07-23', 215;
+exec dbo.OrdersInsert 6, 5, '2013-12-21', 66;
+exec dbo.OrdersInsert 38, 2, '2016-10-17', 131;
+exec dbo.OrdersInsert 7, 2, '2014-03-18', 7;
+exec dbo.OrdersInsert 12, 5, '2013-03-10', 220;
+exec dbo.OrdersInsert 27, 3, '2013-01-19', 168;
+exec dbo.OrdersInsert 15, 5, '2017-08-22', 152;
+exec dbo.OrdersInsert 2, 2, '2016-04-05', 16;
+exec dbo.OrdersInsert 32, 3, '2015-12-17', 92;
+exec dbo.OrdersInsert 32, 5, '2013-02-07', 136;
+exec dbo.OrdersInsert 26, 3, '2013-12-14', 223;
+exec dbo.OrdersInsert 11, 2, '2015-07-13', 121;
+exec dbo.OrdersInsert 47, 5, '2015-10-18', 180;
+exec dbo.OrdersInsert 50, 5, '2013-02-15', 51;
+exec dbo.OrdersInsert 3, 1, '2014-11-29', 196;
+exec dbo.OrdersInsert 11, 1, '2013-07-14', 212;
+exec dbo.OrdersInsert 49, 5, '2012-12-07', 9;
+exec dbo.OrdersInsert 50, 5, '2013-07-30', 252;
+exec dbo.OrdersInsert 47, 5, '2014-06-30', 5;
+exec dbo.OrdersInsert 42, 1, '2016-01-29', 252;
 
 
 
@@ -358,4 +408,12 @@ INNER JOIN Book_Genres as bg
     ON b.id = bg.Book_Id
 INNER JOIN genres as g
     ON g.id = bg.Genre_Id
+WHERE genre = 'Thriller'	--получить книги по жанру
+
+SELECT u.name, b.name
+FROM Books as b
+INNER JOIN orders as o
+    ON b.id = o.Book_Id
+INNER JOIN users as u
+    ON u.id = o.User_Id
 WHERE genre = 'Thriller'	--получить книги по жанру

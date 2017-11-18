@@ -1,4 +1,13 @@
 use LibraryNotes;
+
+DROP TABLE [Orders];
+DROP TABLE [Book_Genres];
+DROP TABLE [Books];
+DROP TABLE [Users];
+DROP TABLE [Authors];
+DROP TABLE [Genres];
+
+
 ------------------------------
 --Table Users-----------------
 ------------------------------
@@ -63,9 +72,3 @@ CREATE TABLE [Orders] (
 	[Days_of_use] TINYINT not NULL CHECK ([Days_of_use] > 0),
 );
 
-DROP TABLE [Orders];
-DROP TABLE [Book_Genres];
-DROP TABLE [Books];
-DROP TABLE [Users];
-DROP TABLE [Authors];
-DROP TABLE [Genres];
