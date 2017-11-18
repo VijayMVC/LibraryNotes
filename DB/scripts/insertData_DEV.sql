@@ -2,6 +2,8 @@
 
 delete from [Orders];
 delete from [Book_Genres];
+delete from [Book_Tags];
+delete from [Tags];
 delete from [Books];
 delete from [Users];
 delete from [Authors];
@@ -13,6 +15,8 @@ DBCC CHECKIDENT ('[Books]', RESEED, 0);
 DBCC CHECKIDENT ('[Users]', RESEED, 0);
 DBCC CHECKIDENT ('[Authors]', RESEED, 0);
 DBCC CHECKIDENT ('[Genres]', RESEED, 0);
+DBCC CHECKIDENT ('[Book_Tags]', RESEED, 0);
+DBCC CHECKIDENT ('[Tags]', RESEED, 0);
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -55,37 +59,7 @@ exec dbo.AuthorsInsert 'Geneviève', 'Ackenhead', '1995-06-12',null;
 
 
 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
---Genres
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-exec dbo.GenresInsert 'Romance', 'Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.';
-exec dbo.GenresInsert 'Documentary', 'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.
-Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.
-Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.';
-exec dbo.GenresInsert 'Action', 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.';
-exec dbo.GenresInsert 'Comedy', 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.
-Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.
-Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.';
-exec dbo.GenresInsert 'Adventure', 'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.';
-exec dbo.GenresInsert 'Thriller', 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.';
-exec dbo.GenresInsert 'Drama', 'Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.';
-exec dbo.GenresInsert 'Crime', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.
-Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur c
-onvallis.'
-exec dbo.GenresInsert 'Musical', 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.
-Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.';
-exec dbo.GenresInsert 'Horror', 'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.'
-;
-exec dbo.GenresInsert 'Animation', 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.
-Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.
-Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.';
-exec dbo.GenresInsert 'Children', 'Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.';
-exec dbo.GenresInsert 'Sci-Fi', 'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.
-Fusce consequat. Nulla nisl. Nunc nisl.
-Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.';
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --Books
@@ -227,6 +201,180 @@ osuere cubilia Curae; Nulla dapibus dolor vel est. Donec odio justo, sollicitudi
 Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.';
 
 
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--Tags
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+exec dbo.TagsInsert 'accumsan';
+exec dbo.TagsInsert 'integer';
+exec dbo.TagsInsert 'ut';
+exec dbo.TagsInsert 'congue';
+exec dbo.TagsInsert 'mauris';
+exec dbo.TagsInsert 'amet';
+exec dbo.TagsInsert 'nibh';
+exec dbo.TagsInsert 'dignissim';
+exec dbo.TagsInsert 'nisl';
+exec dbo.TagsInsert 'purus';
+exec dbo.TagsInsert 'pellentesque';
+exec dbo.TagsInsert 'tempor';
+exec dbo.TagsInsert 'eleifend';
+exec dbo.TagsInsert 'orci';
+exec dbo.TagsInsert 'curabitur';
+exec dbo.TagsInsert 'iaculis';
+exec dbo.TagsInsert 'vel';
+exec dbo.TagsInsert 'cubilia';
+exec dbo.TagsInsert 'id';
+exec dbo.TagsInsert 'venenatis';
+exec dbo.TagsInsert 'pede';
+exec dbo.TagsInsert 'nulla';
+exec dbo.TagsInsert 'primis';
+exec dbo.TagsInsert 'consequat';
+exec dbo.TagsInsert 'leo';
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--Book_Tags
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+exec [dbo].[Book_TagsInsert] 1, 13;
+exec [dbo].[Book_TagsInsert] 2, 16;
+exec [dbo].[Book_TagsInsert] 3, 15;
+exec [dbo].[Book_TagsInsert] 3, 21;
+exec [dbo].[Book_TagsInsert] 4, 8;
+exec [dbo].[Book_TagsInsert] 5, 8;
+exec [dbo].[Book_TagsInsert] 6, 8;
+exec [dbo].[Book_TagsInsert] 6, 9;
+exec [dbo].[Book_TagsInsert] 6, 13;
+exec [dbo].[Book_TagsInsert] 7, 11;
+exec [dbo].[Book_TagsInsert] 7, 13;
+exec [dbo].[Book_TagsInsert] 8, 12;
+exec [dbo].[Book_TagsInsert] 9, 24;
+exec [dbo].[Book_TagsInsert] 9, 3;
+exec [dbo].[Book_TagsInsert] 9, 22;
+exec [dbo].[Book_TagsInsert] 10, 7;
+exec [dbo].[Book_TagsInsert] 11, 13;
+exec [dbo].[Book_TagsInsert] 11, 7;
+exec [dbo].[Book_TagsInsert] 11, 15;
+exec [dbo].[Book_TagsInsert] 12, 4;
+exec [dbo].[Book_TagsInsert] 13, 3;
+exec [dbo].[Book_TagsInsert] 14, 20;
+exec [dbo].[Book_TagsInsert] 14, 8;
+exec [dbo].[Book_TagsInsert] 14, 3;
+exec [dbo].[Book_TagsInsert] 14, 16;
+exec [dbo].[Book_TagsInsert] 14, 22;
+exec [dbo].[Book_TagsInsert] 14, 6;
+exec [dbo].[Book_TagsInsert] 14, 7;
+exec [dbo].[Book_TagsInsert] 14, 21;
+exec [dbo].[Book_TagsInsert] 15, 20;
+exec [dbo].[Book_TagsInsert] 16, 19;
+exec [dbo].[Book_TagsInsert] 16, 15;
+exec [dbo].[Book_TagsInsert] 16, 21;
+exec [dbo].[Book_TagsInsert] 17, 4;
+exec [dbo].[Book_TagsInsert] 18, 10;
+exec [dbo].[Book_TagsInsert] 19, 10;
+exec [dbo].[Book_TagsInsert] 19, 16;
+exec [dbo].[Book_TagsInsert] 19, 21;
+exec [dbo].[Book_TagsInsert] 19, 12;
+exec [dbo].[Book_TagsInsert] 20, 20;
+exec [dbo].[Book_TagsInsert] 20, 13;
+exec [dbo].[Book_TagsInsert] 21, 13;
+exec [dbo].[Book_TagsInsert] 21, 22;
+exec [dbo].[Book_TagsInsert] 22, 9;
+exec [dbo].[Book_TagsInsert] 22, 16;
+exec [dbo].[Book_TagsInsert] 22, 19;
+exec [dbo].[Book_TagsInsert] 23, 8;
+exec [dbo].[Book_TagsInsert] 24, 7;
+exec [dbo].[Book_TagsInsert] 24, 6;
+exec [dbo].[Book_TagsInsert] 25, 15;
+exec [dbo].[Book_TagsInsert] 26, 16;
+exec [dbo].[Book_TagsInsert] 26, 12;
+exec [dbo].[Book_TagsInsert] 27, 14;
+exec [dbo].[Book_TagsInsert] 27, 9;
+exec [dbo].[Book_TagsInsert] 28, 17;
+exec [dbo].[Book_TagsInsert] 29, 8;
+exec [dbo].[Book_TagsInsert] 29, 20;
+exec [dbo].[Book_TagsInsert] 29, 5;
+exec [dbo].[Book_TagsInsert] 29, 4;
+exec [dbo].[Book_TagsInsert] 29, 24;
+exec [dbo].[Book_TagsInsert] 30, 22;
+exec [dbo].[Book_TagsInsert] 30, 19;
+exec [dbo].[Book_TagsInsert] 30, 6;
+exec [dbo].[Book_TagsInsert] 31, 2;
+exec [dbo].[Book_TagsInsert] 31, 25;
+exec [dbo].[Book_TagsInsert] 31, 21;
+exec [dbo].[Book_TagsInsert] 32, 19;
+exec [dbo].[Book_TagsInsert] 33, 23;
+exec [dbo].[Book_TagsInsert] 33, 9;
+exec [dbo].[Book_TagsInsert] 33, 18;
+exec [dbo].[Book_TagsInsert] 33, 14;
+exec [dbo].[Book_TagsInsert] 33, 5;
+exec [dbo].[Book_TagsInsert] 33, 10;
+exec [dbo].[Book_TagsInsert] 34, 9;
+exec [dbo].[Book_TagsInsert] 35, 17;
+exec [dbo].[Book_TagsInsert] 36, 25;
+exec [dbo].[Book_TagsInsert] 37, 18;
+exec [dbo].[Book_TagsInsert] 38, 4;
+exec [dbo].[Book_TagsInsert] 38, 15;
+exec [dbo].[Book_TagsInsert] 39, 11;
+exec [dbo].[Book_TagsInsert] 40, 11;
+exec [dbo].[Book_TagsInsert] 40, 17;
+exec [dbo].[Book_TagsInsert] 40, 7;
+exec [dbo].[Book_TagsInsert] 41, 4;
+exec [dbo].[Book_TagsInsert] 41, 13;
+exec [dbo].[Book_TagsInsert] 42, 4;
+exec [dbo].[Book_TagsInsert] 42, 20;
+exec [dbo].[Book_TagsInsert] 43, 16;
+exec [dbo].[Book_TagsInsert] 43, 9;
+exec [dbo].[Book_TagsInsert] 44, 22;
+exec [dbo].[Book_TagsInsert] 45, 9;
+exec [dbo].[Book_TagsInsert] 46, 16;
+exec [dbo].[Book_TagsInsert] 47, 22;
+exec [dbo].[Book_TagsInsert] 48, 10;
+exec [dbo].[Book_TagsInsert] 48, 11;
+exec [dbo].[Book_TagsInsert] 49, 12;
+exec [dbo].[Book_TagsInsert] 50, 12;
+
+
+
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--Genres
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+exec dbo.GenresInsert 'Romance', 'Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.';
+exec dbo.GenresInsert 'Documentary', 'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.
+Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.
+Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.';
+exec dbo.GenresInsert 'Action', 'Praesent id massa id nisl venenatis lacinia. Aenean sit amet justo. Morbi ut odio.';
+exec dbo.GenresInsert 'Comedy', 'Phasellus sit amet erat. Nulla tempus. Vivamus in felis eu sapien cursus vestibulum.
+Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh ligula nec sem.
+Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.';
+exec dbo.GenresInsert 'Adventure', 'Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.';
+exec dbo.GenresInsert 'Thriller', 'Cras mi pede, malesuada in, imperdiet et, commodo vulputate, justo. In blandit ultrices enim. Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hendrerit at, vulputate vitae, nisl.';
+exec dbo.GenresInsert 'Drama', 'Curabitur at ipsum ac tellus semper interdum. Mauris ullamcorper purus sit amet nulla. Quisque arcu libero, rutrum ac, lobortis vel, dapibus at, diam.';
+exec dbo.GenresInsert 'Crime', 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.
+Vestibulum quam sapien, varius ut, blandit non, interdum in, ante. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis faucibus accumsan odio. Curabitur c
+onvallis.'
+exec dbo.GenresInsert 'Musical', 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.
+Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.';
+exec dbo.GenresInsert 'Horror', 'In hac habitasse platea dictumst. Morbi vestibulum, velit id pretium iaculis, diam erat fermentum justo, nec condimentum neque sapien placerat ante. Nulla justo.'
+;
+exec dbo.GenresInsert 'Animation', 'Morbi non lectus. Aliquam sit amet diam in magna bibendum imperdiet. Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis.
+Fusce posuere felis sed lacus. Morbi sem mauris, laoreet ut, rhoncus aliquet, pulvinar sed, nisl. Nunc rhoncus dui vel sem.
+Sed sagittis. Nam congue, risus semper porta volutpat, quam pede lobortis ligula, sit amet eleifend pede libero quis orci. Nullam molestie nibh in lectus.';
+exec dbo.GenresInsert 'Children', 'Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.';
+exec dbo.GenresInsert 'Sci-Fi', 'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.
+Fusce consequat. Nulla nisl. Nunc nisl.
+Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.';
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -397,16 +545,13 @@ select * from authors;
 
 select * from orders;
 
+select * from Tags;
+
+select * from Book_tags;
 
 select name, year, [First_Name] from authors a join books b on a.id = b.Author_Id order by author_id; --получить книги и их авторов
 
-SELECT b.id, name, genre
-FROM Books as b
-INNER JOIN Book_Genres as bg
-    ON b.id = bg.Book_Id
-INNER JOIN genres as g
-    ON g.id = bg.Genre_Id
-WHERE genre = 'Thriller'	--получить книги по жанру
+
 
 SELECT u.name, b.name
 FROM Books as b
@@ -414,3 +559,12 @@ INNER JOIN orders as o
     ON b.id = o.Book_Id
 INNER JOIN users as u
     ON u.id = o.User_Id
+	
+
+	SELECT t.name, b.name
+FROM Books as b
+INNER JOIN book_tags as bt
+    ON b.id = bt.Book_Id
+INNER JOIN Tags as t
+    ON t.id = bt.Tag_Id  --получить все книги по тегу
+	where t.name = 'leo'

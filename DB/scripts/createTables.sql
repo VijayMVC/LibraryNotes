@@ -2,6 +2,8 @@ use LibraryNotes;
 
 DROP TABLE [Orders];
 DROP TABLE [Book_Genres];
+DROP TABLE [Book_Tags];
+DROP TABLE [Tags];
 DROP TABLE [Books];
 DROP TABLE [Users];
 DROP TABLE [Authors];
@@ -72,3 +74,19 @@ CREATE TABLE [Orders] (
 	[Days_of_use] TINYINT not NULL CHECK ([Days_of_use] > 0),
 );
 
+------------------------------
+--Tags----------------------
+------------------------------
+CREATE TABLE [Tags] (
+	[Id] INT identity(1,1) primary key,
+    [Name] NVARCHAR(50) NOT NULL
+);
+
+------------------------------
+--Books/Tags----------------
+------------------------------
+CREATE TABLE [Book_Tags] (
+	[Id] INT identity(1,1) primary key,
+    [Book_Id] INT foreign key references Books(Id),
+    [Tag_Id] INT foreign key references Tags(Id)
+);
