@@ -1,5 +1,4 @@
 ﻿use LibraryNotes;
-GO
 
 delete from [Orders];
 delete from [Book_Genres];
@@ -87,7 +86,6 @@ exec dbo.GenresInsert 'Children', 'Cras non velit nec nisi vulputate nonummy. Ma
 exec dbo.GenresInsert 'Sci-Fi', 'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.
 Fusce consequat. Nulla nisl. Nunc nisl.
 Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.';
-
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --Books
@@ -416,4 +414,3 @@ INNER JOIN orders as o
     ON b.id = o.Book_Id
 INNER JOIN users as u
     ON u.id = o.User_Id
-WHERE genre = 'Thriller'	--получить книги по жанру
