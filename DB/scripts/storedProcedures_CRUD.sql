@@ -395,7 +395,7 @@ AS
 
 	BEGIN TRAN
 
-	SELECT [Id], [Book_Id], [User_Id], [Order_date], [Issue_date], [Days_of_use] 
+	SELECT [Id], [Book_Id], [User_Id], [Order_date], [Days_of_use] 
 	FROM   [dbo].[Orders] 
 	WHERE  ([Id] = @Id OR @Id IS NULL) 
 
@@ -411,7 +411,6 @@ CREATE PROC [dbo].[OrdersInsert]
     @Book_Id int,
     @User_Id int,
     @Order_date date,
-    @Issue_date date,
     @Days_of_use int
 AS 
 	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
@@ -419,10 +418,10 @@ AS
 	
 	BEGIN TRAN
 	
-	INSERT INTO [dbo].[Orders] ([Book_Id], [User_Id], [Order_date], [Issue_date], [Days_of_use])
-	SELECT @Book_Id, @User_Id, @Order_date, @Issue_date, @Days_of_use
+	INSERT INTO [dbo].[Orders] ([Book_Id], [User_Id], [Order_date], [Days_of_use])
+	SELECT @Book_Id, @User_Id, @Order_date, @Days_of_use
 	
-	SELECT [Id], [Book_Id], [User_Id], [Order_date], [Issue_date], [Days_of_use]
+	SELECT [Id], [Book_Id], [User_Id], [Order_date], [Days_of_use]
 	FROM   [dbo].[Orders]
 	WHERE  [Id] = SCOPE_IDENTITY()
                
@@ -439,7 +438,6 @@ CREATE PROC [dbo].[OrdersUpdate]
     @Book_Id int,
     @User_Id int,
     @Order_date date,
-    @Issue_date date,
     @Days_of_use int
 AS 
 	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
@@ -448,10 +446,10 @@ AS
 	BEGIN TRAN
 
 	UPDATE [dbo].[Orders]
-	SET    [Book_Id] = @Book_Id, [User_Id] = @User_Id, [Order_date] = @Order_date, [Issue_date] = @Issue_date, [Days_of_use] = @Days_of_use
+	SET    [Book_Id] = @Book_Id, [User_Id] = @User_Id, [Order_date] = @Order_date, [Days_of_use] = @Days_of_use
 	WHERE  [Id] = @Id
 	
-	SELECT [Id], [Book_Id], [User_Id], [Order_date], [Issue_date], [Days_of_use]
+	SELECT [Id], [Book_Id], [User_Id], [Order_date], [Days_of_use]
 	FROM   [dbo].[Orders]
 	WHERE  [Id] = @Id	
 

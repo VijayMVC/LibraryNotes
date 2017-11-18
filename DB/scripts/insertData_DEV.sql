@@ -8,7 +8,18 @@ delete from [Users];
 delete from [Authors];
 delete from [Genres];
 
+DBCC CHECKIDENT ('[Orders]', RESEED, 0);				--обнуление всех Identity
+DBCC CHECKIDENT ('[Book_Genres]', RESEED, 0);
+DBCC CHECKIDENT ('[Books]', RESEED, 0);
+DBCC CHECKIDENT ('[Users]', RESEED, 0);
+DBCC CHECKIDENT ('[Authors]', RESEED, 0);
+DBCC CHECKIDENT ('[Genres]', RESEED, 0);
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --Users
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 exec dbo.UsersInsert 'user1', '6ff99740dca09d027c4ff58396b0d06c', 'Sheelagh Saunton', '00 Meadow Ridge Parkway', 'Male', '+86 775 607-4927';
 exec dbo.UsersInsert 'user2', '4fd4ffab1716cd5d43356452a8dcaadd', 'Clare Bentzen', '3 Commercial Lane', 'Male', '+33 982 508-5896';
 exec dbo.UsersInsert 'user3', 'f26c0d44a1371fa083d82a024c51cc7b', 'Willy Sells', '047 Nancy Circle', 'Male', '+55 295 653-6644';
@@ -17,31 +28,39 @@ exec dbo.UsersInsert 'user5', '7163bbbb90281071d59289fe999d33de', 'Ave Langsbury
 
 
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --Authors
-exec dbo.AuthorsInsert 'Styrbjörn', 'Felstead', '1956-01-29 23:08:40', '2014-11-22 23:08:40';
-exec dbo.AuthorsInsert 'Méng', 'Southworth', '1973-08-09 00:09:10','2013-09-05 00:09:10';
-exec dbo.AuthorsInsert 'Yè', 'Kerford', '1939-06-25 12:08:35', '1979-04-06 12:08:35';
-exec dbo.AuthorsInsert 'Åke', 'Bloodworth', '1981-08-13 19:37:11','2014-05-25 19:37:11';
-exec dbo.AuthorsInsert 'Célia', 'Lansley', '1939-12-20 08:05:52','1996-01-06 08:05:52';
-exec dbo.AuthorsInsert 'Yè', 'Domokos', '1976-08-11 19:21:37', '2013-10-05 19:21:37';
-exec dbo.AuthorsInsert 'Estève', 'Ahmed', '1968-09-17 17:07:19', '2005-03-05 17:07:19';
-exec dbo.AuthorsInsert 'Inès', 'Mallia', '1965-08-14 20:26:31', '2003-06-19 20:26:31';
-exec dbo.AuthorsInsert 'Françoise', 'Wipper', '1919-04-02 05:10:18', '1985-09-11 05:10:18';
-exec dbo.AuthorsInsert 'Mén', 'Seeley', '1969-03-18 04:48:44', '2005-10-06 04:48:44';
-exec dbo.AuthorsInsert 'Marie-françoise', 'Gumme', '1977-02-01 04:11:11', '2008-09-12 04:11:11';
-exec dbo.AuthorsInsert 'Anaïs', 'Zammett', '1913-01-03 04:02:19', '1966-06-26 04:02:19';
-exec dbo.AuthorsInsert 'Åsa', 'Seakings', '1920-04-05 03:48:26','1958-04-07 03:48:26';
-exec dbo.AuthorsInsert 'Örjan', 'Dykins', '1981-09-29 14:22:44', '2017-05-30 14:22:44';
-exec dbo.AuthorsInsert 'Anaël', 'Gallamore', '1946-01-27 13:13:05', '2002-05-27 13:13:05';
-exec dbo.AuthorsInsert 'Léa', 'Dank', '1976-11-25 13:10:12', '2022-10-01 13:10:12';
-exec dbo.AuthorsInsert 'Bécassine', 'Aughtie', '1916-10-07 18:05:01', '1965-11-12 18:05:01';
-exec dbo.AuthorsInsert 'Méline', 'Press', '1998-02-25 07:35:06', '2034-01-14 07:35:06';
-exec dbo.AuthorsInsert 'Tán', 'Twycross', '1991-02-28 12:08:17', '2047-08-07 12:08:17';
-exec dbo.AuthorsInsert 'Geneviève', 'Ackenhead', '1995-06-12 06:57:22', '2039-06-27 06:57:22';
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+exec dbo.AuthorsInsert 'Styrbjörn', 'Felstead', '1956-01-29', null;
+exec dbo.AuthorsInsert 'Méng', 'Southworth', '1973-08-09','2013-09-05';
+exec dbo.AuthorsInsert 'Yè', 'Kerford', '1939-06-25', '1979-04-06';
+exec dbo.AuthorsInsert 'Åke', 'Bloodworth', '1981-08-13 19:37:11',null;
+exec dbo.AuthorsInsert 'Célia', 'Lansley', '1939-12-20','1996-01-06';
+exec dbo.AuthorsInsert 'Yè', 'Domokos', '1976-08-11', null;
+exec dbo.AuthorsInsert 'Estève', 'Ahmed', '1968-09-17', null;
+exec dbo.AuthorsInsert 'Inès', 'Mallia', '1965-08-14', '2003-06-19';
+exec dbo.AuthorsInsert 'Françoise', 'Wipper', '1919-04-02', '1985-09-11';
+exec dbo.AuthorsInsert 'Mén', 'Seeley', '1969-03-18', '2005-10-06';
+exec dbo.AuthorsInsert 'Marie-françoise', 'Gumme', '1977-02-01 04:11:11', null;
+exec dbo.AuthorsInsert 'Anaïs', 'Zammett', '1913-01-03', '1966-06-26';
+exec dbo.AuthorsInsert 'Åsa', 'Seakings', '1920-04-05','1958-04-07';
+exec dbo.AuthorsInsert 'Örjan', 'Dykins', '1981-09-29', null;
+exec dbo.AuthorsInsert 'Anaël', 'Gallamore', '1946-01-27', '2002-05-27';
+exec dbo.AuthorsInsert 'Léa', 'Dank', '1976-11-25', null;
+exec dbo.AuthorsInsert 'Bécassine', 'Aughtie', '1916-10-07', '1965-11-12';
+exec dbo.AuthorsInsert 'Méline', 'Press', '1998-02-25', null;
+exec dbo.AuthorsInsert 'Tán', 'Twycross', '1991-02-28', null;
+exec dbo.AuthorsInsert 'Geneviève', 'Ackenhead', '1995-06-12',null;
 
 
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --Genres
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 exec dbo.GenresInsert 'Romance', 'Nullam sit amet turpis elementum ligula vehicula consequat. Morbi a ipsum. Integer a nibh.';
 exec dbo.GenresInsert 'Documentary', 'In sagittis dui vel nisl. Duis ac nibh. Fusce lacus purus, aliquet at, feugiat non, pretium quis, lectus.
 Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.
@@ -69,9 +88,11 @@ exec dbo.GenresInsert 'Sci-Fi', 'Morbi porttitor lorem id ligula. Suspendisse or
 Fusce consequat. Nulla nisl. Nunc nisl.
 Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.';
 
-
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --Books
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 exec dbo.BooksInsert 'Lust for Gold', 2000, 5, 'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hend
 rerit at, vulputate vitae, nisl.
 
@@ -209,7 +230,14 @@ Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare
 
 
 
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--Book_genres
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+exec [dbo].[Book_GenresInsert] 1, 7;
+exec [dbo].[Book_GenresInsert] 1, 3;
+exec [dbo].[Book_GenresInsert] 1, 9;
 exec [dbo].[Book_GenresInsert] 2, 13;
 exec [dbo].[Book_GenresInsert] 2, 6;
 exec [dbo].[Book_GenresInsert] 3, 3;
@@ -297,11 +325,15 @@ exec [dbo].[Book_GenresInsert] 48, 10;
 exec [dbo].[Book_GenresInsert] 48, 12;
 exec [dbo].[Book_GenresInsert] 49, 3;
 exec [dbo].[Book_GenresInsert] 50, 8;
-exec [dbo].[Book_GenresInsert] 51, 7;
-exec [dbo].[Book_GenresInsert] 51, 3;
-exec [dbo].[Book_GenresInsert] 51, 9;
 
 
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+--Orders
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -320,7 +352,7 @@ select * from orders;
 
 select name, year, [First_Name] from authors a join books b on a.id = b.Author_Id order by author_id; --получить книги и их авторов
 
-SELECT name, genre
+SELECT b.id, name, genre
 FROM Books as b
 INNER JOIN Book_Genres as bg
     ON b.id = bg.Book_Id
