@@ -12,8 +12,6 @@ AS
 	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 
-	BEGIN TRAN
-
 	SELECT b.[Name], b.[Year]
 		FROM [dbo].[Books] as b
 			INNER JOIN [dbo].[Book_Genres] as bg
@@ -22,9 +20,59 @@ AS
 		ON g.[Id] = bg.[Genre_Id]
 		WHERE g.[Genre] = @genre	
 
-	COMMIT
 GO
 
 
+----------------------[Получить книги по тэгу] ------------------------------------
+IF OBJECT_ID('[dbo].[selectBooksByTag]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[selectBooksByTag] 
+END 
+GO
+CREATE PROC [dbo].[selectBooksByTag] 
+    @tag NVARCHAR(50)
+AS 
+	begin
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 
+		SELECT t.name, b.name
+			FROM [Books] as b
+				INNER JOIN [Book_Tags] as bt
+			ON b.[Id] = bt.[Book_Id]
+				INNER JOIN [Tags] as t
+			ON t.[Id] = bt.[Tag_Id]  --получить все книги по тегу
+			WHERE t.[Name] = @tag
+
+	end;
+GO
+
+----------------------[Получить книгу с 3/3 тэгами: точное соответствие по тематике] ------------------------------------
+IF OBJECT_ID('[dbo].[selectBooksByTag]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[selectBooksByTag] 
+END 
+GO
+CREATE PROC [dbo].[selectBooksByTag] 
+    @tag1 NVARCHAR(50),
+    @tag2 NVARCHAR(50),
+    @tag3 NVARCHAR(50)
+AS 
+	begin
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+
+		SELECT  count(b.name), t.name
+			FROM [Books] as b
+				INNER JOIN [Book_Tags] as bt
+			ON b.[Id] = bt.[Book_Id]
+				INNER JOIN [Tags] as t
+			ON t.[Id] = bt.[Tag_Id] group by t.name  --получить все книги по тегу
+			WHERE t.[Name] = @tag 
+
+	end;
+GO
+
+
+exec [dbo].[selectBooksByTag] 'leo';
 exec [dbo].[selectBooksByGenre] 'Thriller';

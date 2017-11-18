@@ -10,16 +10,18 @@ GO
 CREATE PROC [dbo].[AuthorsSelect] 
     @Id int
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 
-	BEGIN TRAN
+		BEGIN TRAN
 
-	SELECT [Id], [First_Name], [Last_Name], [Birth_date], [Die_date] 
-	FROM   [dbo].[Authors] 
-	WHERE  ([Id] = @Id OR @Id IS NULL) 
+		SELECT [Id], [First_Name], [Last_Name], [Birth_date], [Die_date] 
+		FROM   [dbo].[Authors] 
+		WHERE  ([Id] = @Id OR @Id IS NULL) 
 
-	COMMIT
+		COMMIT
+	END;
 GO
 ----------------------[Authors].[AuthorsInsert] ------------------------------------
 IF OBJECT_ID('[dbo].[AuthorsInsert]') IS NOT NULL
@@ -33,19 +35,21 @@ CREATE PROC [dbo].[AuthorsInsert]
     @Birth_date date,
     @Die_date date = NULL
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
 	
-	BEGIN TRAN
+		BEGIN TRAN
 	
-	INSERT INTO [dbo].[Authors] ([First_Name], [Last_Name], [Birth_date], [Die_date])
-	SELECT @First_Name, @Last_Name, @Birth_date, @Die_date
+		INSERT INTO [dbo].[Authors] ([First_Name], [Last_Name], [Birth_date], [Die_date])
+		SELECT @First_Name, @Last_Name, @Birth_date, @Die_date
 	
-	SELECT [Id], [First_Name], [Last_Name], [Birth_date], [Die_date]
-	FROM   [dbo].[Authors]
-	WHERE  [Id] = SCOPE_IDENTITY()
+		SELECT [Id], [First_Name], [Last_Name], [Birth_date], [Die_date]
+		FROM   [dbo].[Authors]
+		WHERE  [Id] = SCOPE_IDENTITY()
                
-	COMMIT
+		COMMIT
+	END;
 GO
 ----------------------[Authors].[AuthorsUpdate] ------------------------------------
 IF OBJECT_ID('[dbo].[AuthorsUpdate]') IS NOT NULL
@@ -60,20 +64,22 @@ CREATE PROC [dbo].[AuthorsUpdate]
     @Birth_date date,
     @Die_date date = NULL
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+		
+		BEGIN TRAN
 	
-	BEGIN TRAN
-
-	UPDATE [dbo].[Authors]
-	SET    [First_Name] = @First_Name, [Last_Name] = @Last_Name, [Birth_date] = @Birth_date, [Die_date] = @Die_date
-	WHERE  [Id] = @Id
+		UPDATE [dbo].[Authors]
+		SET    [First_Name] = @First_Name, [Last_Name] = @Last_Name, [Birth_date] = @Birth_date, [Die_date] = @Die_date
+		WHERE  [Id] = @Id
 	
-	SELECT [Id], [First_Name], [Last_Name], [Birth_date], [Die_date]
-	FROM   [dbo].[Authors]
-	WHERE  [Id] = @Id	
+		SELECT [Id], [First_Name], [Last_Name], [Birth_date], [Die_date]
+		FROM   [dbo].[Authors]
+		WHERE  [Id] = @Id	
 
 	COMMIT
+	END;
 GO
 ----------------------[Authors].[AuthorsDelete] ------------------------------------
 IF OBJECT_ID('[dbo].[AuthorsDelete]') IS NOT NULL
@@ -84,16 +90,18 @@ GO
 CREATE PROC [dbo].[AuthorsDelete] 
     @Id int
 AS 
-	SET NOCOUNT ON --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+			
+		BEGIN TRAN
 	
-	BEGIN TRAN
-
-	DELETE
-	FROM   [dbo].[Authors]
-	WHERE  [Id] = @Id
-
-	COMMIT
+		DELETE
+		FROM   [dbo].[Authors]
+		WHERE  [Id] = @Id
+	
+		COMMIT
+	END;
 GO
 ----------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------
@@ -107,16 +115,18 @@ GO
 CREATE PROC [dbo].[Book_GenresSelect] 
     @Id int
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 
-	BEGIN TRAN
+		BEGIN TRAN
 
-	SELECT [Id], [Book_Id], [Genre_Id] 
-	FROM   [dbo].[Book_Genres] 
-	WHERE  ([Id] = @Id OR @Id IS NULL) 
+		SELECT [Id], [Book_Id], [Genre_Id] 
+		FROM   [dbo].[Book_Genres] 
+		WHERE  ([Id] = @Id OR @Id IS NULL) 
 
-	COMMIT
+		COMMIT
+	END;
 GO
 ----------------------[Book_Genres].[Book_GenresInsert] ------------------------------------
 IF OBJECT_ID('[dbo].[Book_GenresInsert]') IS NOT NULL
@@ -128,19 +138,21 @@ CREATE PROC [dbo].[Book_GenresInsert]
     @Book_Id int = NULL,
     @Genre_Id int = NULL
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
 	
-	BEGIN TRAN
+		BEGIN TRAN
 	
-	INSERT INTO [dbo].[Book_Genres] ([Book_Id], [Genre_Id])
-	SELECT @Book_Id, @Genre_Id
+		INSERT INTO [dbo].[Book_Genres] ([Book_Id], [Genre_Id])
+		SELECT @Book_Id, @Genre_Id
 	
-	SELECT [Id], [Book_Id], [Genre_Id]
-	FROM   [dbo].[Book_Genres]
-	WHERE  [Id] = SCOPE_IDENTITY()
+		SELECT [Id], [Book_Id], [Genre_Id]
+		FROM   [dbo].[Book_Genres]
+		WHERE  [Id] = SCOPE_IDENTITY()
                
-	COMMIT
+		COMMIT
+	END;
 GO
 ----------------------[Book_Genres].[Book_GenresUpdate] ------------------------------------
 IF OBJECT_ID('[dbo].[Book_GenresUpdate]') IS NOT NULL
@@ -153,20 +165,22 @@ CREATE PROC [dbo].[Book_GenresUpdate]
     @Book_Id int = NULL,
     @Genre_Id int = NULL
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+		
+		BEGIN TRAN
 	
-	BEGIN TRAN
-
-	UPDATE [dbo].[Book_Genres]
-	SET    [Book_Id] = @Book_Id, [Genre_Id] = @Genre_Id
-	WHERE  [Id] = @Id
+		UPDATE [dbo].[Book_Genres]
+		SET    [Book_Id] = @Book_Id, [Genre_Id] = @Genre_Id
+		WHERE  [Id] = @Id
 	
-	SELECT [Id], [Book_Id], [Genre_Id]
-	FROM   [dbo].[Book_Genres]
-	WHERE  [Id] = @Id	
+		SELECT [Id], [Book_Id], [Genre_Id]
+		FROM   [dbo].[Book_Genres]
+		WHERE  [Id] = @Id	
 
 	COMMIT
+	END;
 GO
 ----------------------[Book_Genres].[Book_GenresDelete] ------------------------------------
 IF OBJECT_ID('[dbo].[Book_GenresDelete]') IS NOT NULL
@@ -177,16 +191,18 @@ GO
 CREATE PROC [dbo].[Book_GenresDelete] 
     @Id int
 AS 
-	SET NOCOUNT ON --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+			
+		BEGIN TRAN
 	
-	BEGIN TRAN
-
-	DELETE
-	FROM   [dbo].[Book_Genres]
-	WHERE  [Id] = @Id
-
-	COMMIT
+		DELETE
+		FROM   [dbo].[Book_Genres]
+		WHERE  [Id] = @Id
+	
+		COMMIT
+	END;
 GO
 ----------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------
@@ -200,16 +216,18 @@ GO
 CREATE PROC [dbo].[Book_TagsSelect] 
     @Id int
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 
-	BEGIN TRAN
+		BEGIN TRAN
 
-	SELECT [Id], [Book_Id], [Tag_Id] 
-	FROM   [dbo].[Book_Tags] 
-	WHERE  ([Id] = @Id OR @Id IS NULL) 
+		SELECT [Id], [Book_Id], [Tag_Id] 
+		FROM   [dbo].[Book_Tags] 
+		WHERE  ([Id] = @Id OR @Id IS NULL) 
 
-	COMMIT
+		COMMIT
+	END;
 GO
 ----------------------[Book_Tags].[Book_TagsInsert] ------------------------------------
 IF OBJECT_ID('[dbo].[Book_TagsInsert]') IS NOT NULL
@@ -221,19 +239,21 @@ CREATE PROC [dbo].[Book_TagsInsert]
     @Book_Id int = NULL,
     @Tag_Id int = NULL
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
 	
-	BEGIN TRAN
+		BEGIN TRAN
 	
-	INSERT INTO [dbo].[Book_Tags] ([Book_Id], [Tag_Id])
-	SELECT @Book_Id, @Tag_Id
+		INSERT INTO [dbo].[Book_Tags] ([Book_Id], [Tag_Id])
+		SELECT @Book_Id, @Tag_Id
 	
-	SELECT [Id], [Book_Id], [Tag_Id]
-	FROM   [dbo].[Book_Tags]
-	WHERE  [Id] = SCOPE_IDENTITY()
+		SELECT [Id], [Book_Id], [Tag_Id]
+		FROM   [dbo].[Book_Tags]
+		WHERE  [Id] = SCOPE_IDENTITY()
                
-	COMMIT
+		COMMIT
+	END;
 GO
 ----------------------[Book_Tags].[Book_TagsUpdate] ------------------------------------
 IF OBJECT_ID('[dbo].[Book_TagsUpdate]') IS NOT NULL
@@ -246,20 +266,22 @@ CREATE PROC [dbo].[Book_TagsUpdate]
     @Book_Id int = NULL,
     @Tag_Id int = NULL
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+		
+		BEGIN TRAN
 	
-	BEGIN TRAN
-
-	UPDATE [dbo].[Book_Tags]
-	SET    [Book_Id] = @Book_Id, [Tag_Id] = @Tag_Id
-	WHERE  [Id] = @Id
+		UPDATE [dbo].[Book_Tags]
+		SET    [Book_Id] = @Book_Id, [Tag_Id] = @Tag_Id
+		WHERE  [Id] = @Id
 	
-	SELECT [Id], [Book_Id], [Tag_Id]
-	FROM   [dbo].[Book_Tags]
-	WHERE  [Id] = @Id	
+		SELECT [Id], [Book_Id], [Tag_Id]
+		FROM   [dbo].[Book_Tags]
+		WHERE  [Id] = @Id	
 
 	COMMIT
+	END;
 GO
 ----------------------[Book_Tags].[Book_TagsDelete] ------------------------------------
 IF OBJECT_ID('[dbo].[Book_TagsDelete]') IS NOT NULL
@@ -270,16 +292,18 @@ GO
 CREATE PROC [dbo].[Book_TagsDelete] 
     @Id int
 AS 
-	SET NOCOUNT ON --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+			
+		BEGIN TRAN
 	
-	BEGIN TRAN
-
-	DELETE
-	FROM   [dbo].[Book_Tags]
-	WHERE  [Id] = @Id
-
-	COMMIT
+		DELETE
+		FROM   [dbo].[Book_Tags]
+		WHERE  [Id] = @Id
+	
+		COMMIT
+	END;
 GO
 ----------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------
@@ -293,16 +317,18 @@ GO
 CREATE PROC [dbo].[BooksSelect] 
     @Id int
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 
-	BEGIN TRAN
+		BEGIN TRAN
 
-	SELECT [Id], [Name], [Year], [Author_Id], [Description] 
-	FROM   [dbo].[Books] 
-	WHERE  ([Id] = @Id OR @Id IS NULL) 
+		SELECT [Id], [Name], [Year], [Author_Id], [Description] 
+		FROM   [dbo].[Books] 
+		WHERE  ([Id] = @Id OR @Id IS NULL) 
 
-	COMMIT
+		COMMIT
+	END;
 GO
 ----------------------[Books].[BooksInsert] ------------------------------------
 IF OBJECT_ID('[dbo].[BooksInsert]') IS NOT NULL
@@ -316,19 +342,21 @@ CREATE PROC [dbo].[BooksInsert]
     @Author_Id int = NULL,
     @Description nvarchar(1000) = NULL
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
 	
-	BEGIN TRAN
+		BEGIN TRAN
 	
-	INSERT INTO [dbo].[Books] ([Name], [Year], [Author_Id], [Description])
-	SELECT @Name, @Year, @Author_Id, @Description
+		INSERT INTO [dbo].[Books] ([Name], [Year], [Author_Id], [Description])
+		SELECT @Name, @Year, @Author_Id, @Description
 	
-	SELECT [Id], [Name], [Year], [Author_Id], [Description]
-	FROM   [dbo].[Books]
-	WHERE  [Id] = SCOPE_IDENTITY()
+		SELECT [Id], [Name], [Year], [Author_Id], [Description]
+		FROM   [dbo].[Books]
+		WHERE  [Id] = SCOPE_IDENTITY()
                
-	COMMIT
+		COMMIT
+	END;
 GO
 ----------------------[Books].[BooksUpdate] ------------------------------------
 IF OBJECT_ID('[dbo].[BooksUpdate]') IS NOT NULL
@@ -343,20 +371,22 @@ CREATE PROC [dbo].[BooksUpdate]
     @Author_Id int = NULL,
     @Description nvarchar(1000) = NULL
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+		
+		BEGIN TRAN
 	
-	BEGIN TRAN
-
-	UPDATE [dbo].[Books]
-	SET    [Name] = @Name, [Year] = @Year, [Author_Id] = @Author_Id, [Description] = @Description
-	WHERE  [Id] = @Id
+		UPDATE [dbo].[Books]
+		SET    [Name] = @Name, [Year] = @Year, [Author_Id] = @Author_Id, [Description] = @Description
+		WHERE  [Id] = @Id
 	
-	SELECT [Id], [Name], [Year], [Author_Id], [Description]
-	FROM   [dbo].[Books]
-	WHERE  [Id] = @Id	
+		SELECT [Id], [Name], [Year], [Author_Id], [Description]
+		FROM   [dbo].[Books]
+		WHERE  [Id] = @Id	
 
 	COMMIT
+	END;
 GO
 ----------------------[Books].[BooksDelete] ------------------------------------
 IF OBJECT_ID('[dbo].[BooksDelete]') IS NOT NULL
@@ -367,16 +397,18 @@ GO
 CREATE PROC [dbo].[BooksDelete] 
     @Id int
 AS 
-	SET NOCOUNT ON --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+			
+		BEGIN TRAN
 	
-	BEGIN TRAN
-
-	DELETE
-	FROM   [dbo].[Books]
-	WHERE  [Id] = @Id
-
-	COMMIT
+		DELETE
+		FROM   [dbo].[Books]
+		WHERE  [Id] = @Id
+	
+		COMMIT
+	END;
 GO
 ----------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------
@@ -390,16 +422,18 @@ GO
 CREATE PROC [dbo].[GenresSelect] 
     @Id int
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 
-	BEGIN TRAN
+		BEGIN TRAN
 
-	SELECT [Id], [Genre], [Description] 
-	FROM   [dbo].[Genres] 
-	WHERE  ([Id] = @Id OR @Id IS NULL) 
+		SELECT [Id], [Genre], [Description] 
+		FROM   [dbo].[Genres] 
+		WHERE  ([Id] = @Id OR @Id IS NULL) 
 
-	COMMIT
+		COMMIT
+	END;
 GO
 ----------------------[Genres].[GenresInsert] ------------------------------------
 IF OBJECT_ID('[dbo].[GenresInsert]') IS NOT NULL
@@ -411,19 +445,21 @@ CREATE PROC [dbo].[GenresInsert]
     @Genre nvarchar(50),
     @Description nvarchar(700) = NULL
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
 	
-	BEGIN TRAN
+		BEGIN TRAN
 	
-	INSERT INTO [dbo].[Genres] ([Genre], [Description])
-	SELECT @Genre, @Description
+		INSERT INTO [dbo].[Genres] ([Genre], [Description])
+		SELECT @Genre, @Description
 	
-	SELECT [Id], [Genre], [Description]
-	FROM   [dbo].[Genres]
-	WHERE  [Id] = SCOPE_IDENTITY()
+		SELECT [Id], [Genre], [Description]
+		FROM   [dbo].[Genres]
+		WHERE  [Id] = SCOPE_IDENTITY()
                
-	COMMIT
+		COMMIT
+	END;
 GO
 ----------------------[Genres].[GenresUpdate] ------------------------------------
 IF OBJECT_ID('[dbo].[GenresUpdate]') IS NOT NULL
@@ -436,20 +472,22 @@ CREATE PROC [dbo].[GenresUpdate]
     @Genre nvarchar(50),
     @Description nvarchar(700) = NULL
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+		
+		BEGIN TRAN
 	
-	BEGIN TRAN
-
-	UPDATE [dbo].[Genres]
-	SET    [Genre] = @Genre, [Description] = @Description
-	WHERE  [Id] = @Id
+		UPDATE [dbo].[Genres]
+		SET    [Genre] = @Genre, [Description] = @Description
+		WHERE  [Id] = @Id
 	
-	SELECT [Id], [Genre], [Description]
-	FROM   [dbo].[Genres]
-	WHERE  [Id] = @Id	
+		SELECT [Id], [Genre], [Description]
+		FROM   [dbo].[Genres]
+		WHERE  [Id] = @Id	
 
 	COMMIT
+	END;
 GO
 ----------------------[Genres].[GenresDelete] ------------------------------------
 IF OBJECT_ID('[dbo].[GenresDelete]') IS NOT NULL
@@ -460,16 +498,18 @@ GO
 CREATE PROC [dbo].[GenresDelete] 
     @Id int
 AS 
-	SET NOCOUNT ON --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+			
+		BEGIN TRAN
 	
-	BEGIN TRAN
-
-	DELETE
-	FROM   [dbo].[Genres]
-	WHERE  [Id] = @Id
-
-	COMMIT
+		DELETE
+		FROM   [dbo].[Genres]
+		WHERE  [Id] = @Id
+	
+		COMMIT
+	END;
 GO
 ----------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------
@@ -483,16 +523,18 @@ GO
 CREATE PROC [dbo].[OrdersSelect] 
     @Id int
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 
-	BEGIN TRAN
+		BEGIN TRAN
 
-	SELECT [Id], [Book_Id], [User_Id], [Order_date], [Days_of_use] 
-	FROM   [dbo].[Orders] 
-	WHERE  ([Id] = @Id OR @Id IS NULL) 
+		SELECT [Id], [Book_Id], [User_Id], [Order_date], [Days_of_use] 
+		FROM   [dbo].[Orders] 
+		WHERE  ([Id] = @Id OR @Id IS NULL) 
 
-	COMMIT
+		COMMIT
+	END;
 GO
 ----------------------[Orders].[OrdersInsert] ------------------------------------
 IF OBJECT_ID('[dbo].[OrdersInsert]') IS NOT NULL
@@ -506,19 +548,21 @@ CREATE PROC [dbo].[OrdersInsert]
     @Order_date date,
     @Days_of_use tinyint
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
 	
-	BEGIN TRAN
+		BEGIN TRAN
 	
-	INSERT INTO [dbo].[Orders] ([Book_Id], [User_Id], [Order_date], [Days_of_use])
-	SELECT @Book_Id, @User_Id, @Order_date, @Days_of_use
+		INSERT INTO [dbo].[Orders] ([Book_Id], [User_Id], [Order_date], [Days_of_use])
+		SELECT @Book_Id, @User_Id, @Order_date, @Days_of_use
 	
-	SELECT [Id], [Book_Id], [User_Id], [Order_date], [Days_of_use]
-	FROM   [dbo].[Orders]
-	WHERE  [Id] = SCOPE_IDENTITY()
+		SELECT [Id], [Book_Id], [User_Id], [Order_date], [Days_of_use]
+		FROM   [dbo].[Orders]
+		WHERE  [Id] = SCOPE_IDENTITY()
                
-	COMMIT
+		COMMIT
+	END;
 GO
 ----------------------[Orders].[OrdersUpdate] ------------------------------------
 IF OBJECT_ID('[dbo].[OrdersUpdate]') IS NOT NULL
@@ -533,20 +577,22 @@ CREATE PROC [dbo].[OrdersUpdate]
     @Order_date date,
     @Days_of_use tinyint
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+		
+		BEGIN TRAN
 	
-	BEGIN TRAN
-
-	UPDATE [dbo].[Orders]
-	SET    [Book_Id] = @Book_Id, [User_Id] = @User_Id, [Order_date] = @Order_date, [Days_of_use] = @Days_of_use
-	WHERE  [Id] = @Id
+		UPDATE [dbo].[Orders]
+		SET    [Book_Id] = @Book_Id, [User_Id] = @User_Id, [Order_date] = @Order_date, [Days_of_use] = @Days_of_use
+		WHERE  [Id] = @Id
 	
-	SELECT [Id], [Book_Id], [User_Id], [Order_date], [Days_of_use]
-	FROM   [dbo].[Orders]
-	WHERE  [Id] = @Id	
+		SELECT [Id], [Book_Id], [User_Id], [Order_date], [Days_of_use]
+		FROM   [dbo].[Orders]
+		WHERE  [Id] = @Id	
 
 	COMMIT
+	END;
 GO
 ----------------------[Orders].[OrdersDelete] ------------------------------------
 IF OBJECT_ID('[dbo].[OrdersDelete]') IS NOT NULL
@@ -557,16 +603,18 @@ GO
 CREATE PROC [dbo].[OrdersDelete] 
     @Id int
 AS 
-	SET NOCOUNT ON --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+			
+		BEGIN TRAN
 	
-	BEGIN TRAN
-
-	DELETE
-	FROM   [dbo].[Orders]
-	WHERE  [Id] = @Id
-
-	COMMIT
+		DELETE
+		FROM   [dbo].[Orders]
+		WHERE  [Id] = @Id
+	
+		COMMIT
+	END;
 GO
 ----------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------
@@ -580,16 +628,18 @@ GO
 CREATE PROC [dbo].[TagsSelect] 
     @Id int
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 
-	BEGIN TRAN
+		BEGIN TRAN
 
-	SELECT [Id], [Name] 
-	FROM   [dbo].[Tags] 
-	WHERE  ([Id] = @Id OR @Id IS NULL) 
+		SELECT [Id], [Name] 
+		FROM   [dbo].[Tags] 
+		WHERE  ([Id] = @Id OR @Id IS NULL) 
 
-	COMMIT
+		COMMIT
+	END;
 GO
 ----------------------[Tags].[TagsInsert] ------------------------------------
 IF OBJECT_ID('[dbo].[TagsInsert]') IS NOT NULL
@@ -600,19 +650,21 @@ GO
 CREATE PROC [dbo].[TagsInsert] 
     @Name nvarchar(50)
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
 	
-	BEGIN TRAN
+		BEGIN TRAN
 	
-	INSERT INTO [dbo].[Tags] ([Name])
-	SELECT @Name
+		INSERT INTO [dbo].[Tags] ([Name])
+		SELECT @Name
 	
-	SELECT [Id], [Name]
-	FROM   [dbo].[Tags]
-	WHERE  [Id] = SCOPE_IDENTITY()
+		SELECT [Id], [Name]
+		FROM   [dbo].[Tags]
+		WHERE  [Id] = SCOPE_IDENTITY()
                
-	COMMIT
+		COMMIT
+	END;
 GO
 ----------------------[Tags].[TagsUpdate] ------------------------------------
 IF OBJECT_ID('[dbo].[TagsUpdate]') IS NOT NULL
@@ -624,20 +676,22 @@ CREATE PROC [dbo].[TagsUpdate]
     @Id int,
     @Name nvarchar(50)
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+		
+		BEGIN TRAN
 	
-	BEGIN TRAN
-
-	UPDATE [dbo].[Tags]
-	SET    [Name] = @Name
-	WHERE  [Id] = @Id
+		UPDATE [dbo].[Tags]
+		SET    [Name] = @Name
+		WHERE  [Id] = @Id
 	
-	SELECT [Id], [Name]
-	FROM   [dbo].[Tags]
-	WHERE  [Id] = @Id	
+		SELECT [Id], [Name]
+		FROM   [dbo].[Tags]
+		WHERE  [Id] = @Id	
 
 	COMMIT
+	END;
 GO
 ----------------------[Tags].[TagsDelete] ------------------------------------
 IF OBJECT_ID('[dbo].[TagsDelete]') IS NOT NULL
@@ -648,16 +702,18 @@ GO
 CREATE PROC [dbo].[TagsDelete] 
     @Id int
 AS 
-	SET NOCOUNT ON --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+			
+		BEGIN TRAN
 	
-	BEGIN TRAN
-
-	DELETE
-	FROM   [dbo].[Tags]
-	WHERE  [Id] = @Id
-
-	COMMIT
+		DELETE
+		FROM   [dbo].[Tags]
+		WHERE  [Id] = @Id
+	
+		COMMIT
+	END;
 GO
 ----------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------
@@ -671,16 +727,18 @@ GO
 CREATE PROC [dbo].[UsersSelect] 
     @Id int
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 
-	BEGIN TRAN
+		BEGIN TRAN
 
-	SELECT [Id], [Login], [Password], [Name], [Address], [Sex], [PhoneNumber] 
-	FROM   [dbo].[Users] 
-	WHERE  ([Id] = @Id OR @Id IS NULL) 
+		SELECT [Id], [Login], [Password], [Name], [Address], [Sex], [PhoneNumber] 
+		FROM   [dbo].[Users] 
+		WHERE  ([Id] = @Id OR @Id IS NULL) 
 
-	COMMIT
+		COMMIT
+	END;
 GO
 ----------------------[Users].[UsersInsert] ------------------------------------
 IF OBJECT_ID('[dbo].[UsersInsert]') IS NOT NULL
@@ -696,19 +754,21 @@ CREATE PROC [dbo].[UsersInsert]
     @Sex nvarchar(6) = NULL,
     @PhoneNumber char(25)
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
 	
-	BEGIN TRAN
+		BEGIN TRAN
 	
-	INSERT INTO [dbo].[Users] ([Login], [Password], [Name], [Address], [Sex], [PhoneNumber])
-	SELECT @Login, @Password, @Name, @Address, @Sex, @PhoneNumber
+		INSERT INTO [dbo].[Users] ([Login], [Password], [Name], [Address], [Sex], [PhoneNumber])
+		SELECT @Login, @Password, @Name, @Address, @Sex, @PhoneNumber
 	
-	SELECT [Id], [Login], [Password], [Name], [Address], [Sex], [PhoneNumber]
-	FROM   [dbo].[Users]
-	WHERE  [Id] = SCOPE_IDENTITY()
+		SELECT [Id], [Login], [Password], [Name], [Address], [Sex], [PhoneNumber]
+		FROM   [dbo].[Users]
+		WHERE  [Id] = SCOPE_IDENTITY()
                
-	COMMIT
+		COMMIT
+	END;
 GO
 ----------------------[Users].[UsersUpdate] ------------------------------------
 IF OBJECT_ID('[dbo].[UsersUpdate]') IS NOT NULL
@@ -725,20 +785,22 @@ CREATE PROC [dbo].[UsersUpdate]
     @Sex nvarchar(6) = NULL,
     @PhoneNumber char(25)
 AS 
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+		
+		BEGIN TRAN
 	
-	BEGIN TRAN
-
-	UPDATE [dbo].[Users]
-	SET    [Login] = @Login, [Password] = @Password, [Name] = @Name, [Address] = @Address, [Sex] = @Sex, [PhoneNumber] = @PhoneNumber
-	WHERE  [Id] = @Id
+		UPDATE [dbo].[Users]
+		SET    [Login] = @Login, [Password] = @Password, [Name] = @Name, [Address] = @Address, [Sex] = @Sex, [PhoneNumber] = @PhoneNumber
+		WHERE  [Id] = @Id
 	
-	SELECT [Id], [Login], [Password], [Name], [Address], [Sex], [PhoneNumber]
-	FROM   [dbo].[Users]
-	WHERE  [Id] = @Id	
+		SELECT [Id], [Login], [Password], [Name], [Address], [Sex], [PhoneNumber]
+		FROM   [dbo].[Users]
+		WHERE  [Id] = @Id	
 
 	COMMIT
+	END;
 GO
 ----------------------[Users].[UsersDelete] ------------------------------------
 IF OBJECT_ID('[dbo].[UsersDelete]') IS NOT NULL
@@ -749,16 +811,18 @@ GO
 CREATE PROC [dbo].[UsersDelete] 
     @Id int
 AS 
-	SET NOCOUNT ON --отлючить вывод кол-ва обработанных строк
-	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+	BEGIN
+		SET NOCOUNT ON --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+			
+		BEGIN TRAN
 	
-	BEGIN TRAN
-
-	DELETE
-	FROM   [dbo].[Users]
-	WHERE  [Id] = @Id
-
-	COMMIT
+		DELETE
+		FROM   [dbo].[Users]
+		WHERE  [Id] = @Id
+	
+		COMMIT
+	END;
 GO
 ----------------------------------------------------------------------------------------
 ----------------------------------------------------------------------------------------

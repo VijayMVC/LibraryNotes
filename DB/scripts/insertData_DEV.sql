@@ -242,107 +242,156 @@ exec dbo.TagsInsert 'leo';
 --Book_Tags
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+exec [dbo].[Book_TagsInsert] 1, 16;
 exec [dbo].[Book_TagsInsert] 1, 13;
-exec [dbo].[Book_TagsInsert] 2, 16;
-exec [dbo].[Book_TagsInsert] 3, 15;
+exec [dbo].[Book_TagsInsert] 1, 21;
+exec [dbo].[Book_TagsInsert] 2, 10;
+exec [dbo].[Book_TagsInsert] 2, 20;
+exec [dbo].[Book_TagsInsert] 2, 12;
 exec [dbo].[Book_TagsInsert] 3, 21;
-exec [dbo].[Book_TagsInsert] 4, 8;
-exec [dbo].[Book_TagsInsert] 5, 8;
-exec [dbo].[Book_TagsInsert] 6, 8;
-exec [dbo].[Book_TagsInsert] 6, 9;
-exec [dbo].[Book_TagsInsert] 6, 13;
-exec [dbo].[Book_TagsInsert] 7, 11;
+exec [dbo].[Book_TagsInsert] 3, 4;
+exec [dbo].[Book_TagsInsert] 3, 9;
+exec [dbo].[Book_TagsInsert] 4, 21;
+exec [dbo].[Book_TagsInsert] 4, 16;
+exec [dbo].[Book_TagsInsert] 4, 20;
+exec [dbo].[Book_TagsInsert] 5, 23;
+exec [dbo].[Book_TagsInsert] 5, 9;
+exec [dbo].[Book_TagsInsert] 5, 22;
+exec [dbo].[Book_TagsInsert] 6, 10;
+exec [dbo].[Book_TagsInsert] 6, 6;
+exec [dbo].[Book_TagsInsert] 6, 7;
+exec [dbo].[Book_TagsInsert] 7, 18;
 exec [dbo].[Book_TagsInsert] 7, 13;
-exec [dbo].[Book_TagsInsert] 8, 12;
-exec [dbo].[Book_TagsInsert] 9, 24;
-exec [dbo].[Book_TagsInsert] 9, 3;
-exec [dbo].[Book_TagsInsert] 9, 22;
-exec [dbo].[Book_TagsInsert] 10, 7;
-exec [dbo].[Book_TagsInsert] 11, 13;
-exec [dbo].[Book_TagsInsert] 11, 7;
-exec [dbo].[Book_TagsInsert] 11, 15;
-exec [dbo].[Book_TagsInsert] 12, 4;
+exec [dbo].[Book_TagsInsert] 7, 9;
+exec [dbo].[Book_TagsInsert] 8, 22;
+exec [dbo].[Book_TagsInsert] 8, 21;
+exec [dbo].[Book_TagsInsert] 8, 14;
+exec [dbo].[Book_TagsInsert] 9, 6;
+exec [dbo].[Book_TagsInsert] 9, 17;
+exec [dbo].[Book_TagsInsert] 9, 23;
+exec [dbo].[Book_TagsInsert] 10, 5;
+exec [dbo].[Book_TagsInsert] 10, 14;
+exec [dbo].[Book_TagsInsert] 10, 15;
+exec [dbo].[Book_TagsInsert] 11, 21;
+exec [dbo].[Book_TagsInsert] 11, 6;
+exec [dbo].[Book_TagsInsert] 11, 16;
+exec [dbo].[Book_TagsInsert] 12, 23;
+exec [dbo].[Book_TagsInsert] 12, 17;
+exec [dbo].[Book_TagsInsert] 12, 9;
+exec [dbo].[Book_TagsInsert] 13, 5;
 exec [dbo].[Book_TagsInsert] 13, 3;
-exec [dbo].[Book_TagsInsert] 14, 20;
-exec [dbo].[Book_TagsInsert] 14, 8;
-exec [dbo].[Book_TagsInsert] 14, 3;
-exec [dbo].[Book_TagsInsert] 14, 16;
+exec [dbo].[Book_TagsInsert] 13, 25;
+exec [dbo].[Book_TagsInsert] 14, 4;
+exec [dbo].[Book_TagsInsert] 14, 14;
 exec [dbo].[Book_TagsInsert] 14, 22;
-exec [dbo].[Book_TagsInsert] 14, 6;
-exec [dbo].[Book_TagsInsert] 14, 7;
-exec [dbo].[Book_TagsInsert] 14, 21;
 exec [dbo].[Book_TagsInsert] 15, 20;
-exec [dbo].[Book_TagsInsert] 16, 19;
-exec [dbo].[Book_TagsInsert] 16, 15;
-exec [dbo].[Book_TagsInsert] 16, 21;
+exec [dbo].[Book_TagsInsert] 15, 21;
+exec [dbo].[Book_TagsInsert] 15, 7;
+exec [dbo].[Book_TagsInsert] 16, 24;
+exec [dbo].[Book_TagsInsert] 16, 11;
+exec [dbo].[Book_TagsInsert] 16, 14;
+exec [dbo].[Book_TagsInsert] 17, 10;
+exec [dbo].[Book_TagsInsert] 17, 3;
 exec [dbo].[Book_TagsInsert] 17, 4;
-exec [dbo].[Book_TagsInsert] 18, 10;
-exec [dbo].[Book_TagsInsert] 19, 10;
-exec [dbo].[Book_TagsInsert] 19, 16;
-exec [dbo].[Book_TagsInsert] 19, 21;
-exec [dbo].[Book_TagsInsert] 19, 12;
-exec [dbo].[Book_TagsInsert] 20, 20;
-exec [dbo].[Book_TagsInsert] 20, 13;
-exec [dbo].[Book_TagsInsert] 21, 13;
-exec [dbo].[Book_TagsInsert] 21, 22;
-exec [dbo].[Book_TagsInsert] 22, 9;
-exec [dbo].[Book_TagsInsert] 22, 16;
-exec [dbo].[Book_TagsInsert] 22, 19;
-exec [dbo].[Book_TagsInsert] 23, 8;
-exec [dbo].[Book_TagsInsert] 24, 7;
+exec [dbo].[Book_TagsInsert] 18, 14;
+exec [dbo].[Book_TagsInsert] 18, 5;
+exec [dbo].[Book_TagsInsert] 18, 19;
+exec [dbo].[Book_TagsInsert] 19, 11;
+exec [dbo].[Book_TagsInsert] 19, 25;
+exec [dbo].[Book_TagsInsert] 19, 17;
+exec [dbo].[Book_TagsInsert] 20, 14;
+exec [dbo].[Book_TagsInsert] 20, 21;
+exec [dbo].[Book_TagsInsert] 20, 5;
+exec [dbo].[Book_TagsInsert] 21, 25;
+exec [dbo].[Book_TagsInsert] 21, 16;
+exec [dbo].[Book_TagsInsert] 21, 18;
+exec [dbo].[Book_TagsInsert] 22, 2;
+exec [dbo].[Book_TagsInsert] 22, 7;
+exec [dbo].[Book_TagsInsert] 22, 6;
+exec [dbo].[Book_TagsInsert] 23, 20;
+exec [dbo].[Book_TagsInsert] 23, 25;
+exec [dbo].[Book_TagsInsert] 23, 12;
+exec [dbo].[Book_TagsInsert] 24, 21;
+exec [dbo].[Book_TagsInsert] 24, 16;
 exec [dbo].[Book_TagsInsert] 24, 6;
-exec [dbo].[Book_TagsInsert] 25, 15;
-exec [dbo].[Book_TagsInsert] 26, 16;
-exec [dbo].[Book_TagsInsert] 26, 12;
-exec [dbo].[Book_TagsInsert] 27, 14;
+exec [dbo].[Book_TagsInsert] 25, 23;
+exec [dbo].[Book_TagsInsert] 25, 5;
+exec [dbo].[Book_TagsInsert] 25, 21;
+exec [dbo].[Book_TagsInsert] 26, 20;
+exec [dbo].[Book_TagsInsert] 26, 25;
+exec [dbo].[Book_TagsInsert] 26, 14;
 exec [dbo].[Book_TagsInsert] 27, 9;
-exec [dbo].[Book_TagsInsert] 28, 17;
+exec [dbo].[Book_TagsInsert] 27, 15;
+exec [dbo].[Book_TagsInsert] 27, 19;
+exec [dbo].[Book_TagsInsert] 28, 16;
+exec [dbo].[Book_TagsInsert] 28, 5;
+exec [dbo].[Book_TagsInsert] 28, 19;
+exec [dbo].[Book_TagsInsert] 29, 13;
 exec [dbo].[Book_TagsInsert] 29, 8;
-exec [dbo].[Book_TagsInsert] 29, 20;
 exec [dbo].[Book_TagsInsert] 29, 5;
-exec [dbo].[Book_TagsInsert] 29, 4;
-exec [dbo].[Book_TagsInsert] 29, 24;
-exec [dbo].[Book_TagsInsert] 30, 22;
-exec [dbo].[Book_TagsInsert] 30, 19;
-exec [dbo].[Book_TagsInsert] 30, 6;
-exec [dbo].[Book_TagsInsert] 31, 2;
-exec [dbo].[Book_TagsInsert] 31, 25;
-exec [dbo].[Book_TagsInsert] 31, 21;
+exec [dbo].[Book_TagsInsert] 30, 18;
+exec [dbo].[Book_TagsInsert] 30, 14;
+exec [dbo].[Book_TagsInsert] 30, 24;
+exec [dbo].[Book_TagsInsert] 31, 6;
+exec [dbo].[Book_TagsInsert] 31, 4;
+exec [dbo].[Book_TagsInsert] 31, 7;
 exec [dbo].[Book_TagsInsert] 32, 19;
-exec [dbo].[Book_TagsInsert] 33, 23;
-exec [dbo].[Book_TagsInsert] 33, 9;
-exec [dbo].[Book_TagsInsert] 33, 18;
-exec [dbo].[Book_TagsInsert] 33, 14;
-exec [dbo].[Book_TagsInsert] 33, 5;
-exec [dbo].[Book_TagsInsert] 33, 10;
-exec [dbo].[Book_TagsInsert] 34, 9;
-exec [dbo].[Book_TagsInsert] 35, 17;
-exec [dbo].[Book_TagsInsert] 36, 25;
-exec [dbo].[Book_TagsInsert] 37, 18;
+exec [dbo].[Book_TagsInsert] 32, 18;
+exec [dbo].[Book_TagsInsert] 32, 10;
+exec [dbo].[Book_TagsInsert] 33, 17;
+exec [dbo].[Book_TagsInsert] 33, 12;
+exec [dbo].[Book_TagsInsert] 33, 6;
+exec [dbo].[Book_TagsInsert] 34, 24;
+exec [dbo].[Book_TagsInsert] 34, 25;
+exec [dbo].[Book_TagsInsert] 34, 11;
+exec [dbo].[Book_TagsInsert] 35, 9;
+exec [dbo].[Book_TagsInsert] 35, 7;
+exec [dbo].[Book_TagsInsert] 35, 14;
+exec [dbo].[Book_TagsInsert] 36, 14;
+exec [dbo].[Book_TagsInsert] 36, 20;
+exec [dbo].[Book_TagsInsert] 36, 15;
+exec [dbo].[Book_TagsInsert] 37, 7;
+exec [dbo].[Book_TagsInsert] 37, 23;
+exec [dbo].[Book_TagsInsert] 37, 19;
 exec [dbo].[Book_TagsInsert] 38, 4;
 exec [dbo].[Book_TagsInsert] 38, 15;
+exec [dbo].[Book_TagsInsert] 38, 12;
+exec [dbo].[Book_TagsInsert] 39, 25;
+exec [dbo].[Book_TagsInsert] 39, 5;
 exec [dbo].[Book_TagsInsert] 39, 11;
-exec [dbo].[Book_TagsInsert] 40, 11;
-exec [dbo].[Book_TagsInsert] 40, 17;
-exec [dbo].[Book_TagsInsert] 40, 7;
-exec [dbo].[Book_TagsInsert] 41, 4;
+exec [dbo].[Book_TagsInsert] 40, 21;
+exec [dbo].[Book_TagsInsert] 40, 22;
+exec [dbo].[Book_TagsInsert] 40, 15;
+exec [dbo].[Book_TagsInsert] 41, 8;
+exec [dbo].[Book_TagsInsert] 41, 16;
 exec [dbo].[Book_TagsInsert] 41, 13;
-exec [dbo].[Book_TagsInsert] 42, 4;
-exec [dbo].[Book_TagsInsert] 42, 20;
-exec [dbo].[Book_TagsInsert] 43, 16;
-exec [dbo].[Book_TagsInsert] 43, 9;
-exec [dbo].[Book_TagsInsert] 44, 22;
-exec [dbo].[Book_TagsInsert] 45, 9;
-exec [dbo].[Book_TagsInsert] 46, 16;
-exec [dbo].[Book_TagsInsert] 47, 22;
-exec [dbo].[Book_TagsInsert] 48, 10;
-exec [dbo].[Book_TagsInsert] 48, 11;
-exec [dbo].[Book_TagsInsert] 49, 12;
+exec [dbo].[Book_TagsInsert] 42, 12;
+exec [dbo].[Book_TagsInsert] 42, 9;
+exec [dbo].[Book_TagsInsert] 42, 11;
+exec [dbo].[Book_TagsInsert] 43, 5;
+exec [dbo].[Book_TagsInsert] 43, 19;
+exec [dbo].[Book_TagsInsert] 43, 2;
+exec [dbo].[Book_TagsInsert] 44, 3;
+exec [dbo].[Book_TagsInsert] 44, 7;
+exec [dbo].[Book_TagsInsert] 44, 18;
+exec [dbo].[Book_TagsInsert] 45, 19;
+exec [dbo].[Book_TagsInsert] 45, 20;
+exec [dbo].[Book_TagsInsert] 45, 24;
+exec [dbo].[Book_TagsInsert] 46, 19;
+exec [dbo].[Book_TagsInsert] 46, 20;
+exec [dbo].[Book_TagsInsert] 46, 22;
+exec [dbo].[Book_TagsInsert] 47, 23;
+exec [dbo].[Book_TagsInsert] 47, 24;
+exec [dbo].[Book_TagsInsert] 47, 9;
+exec [dbo].[Book_TagsInsert] 48, 12;
+exec [dbo].[Book_TagsInsert] 48, 24;
+exec [dbo].[Book_TagsInsert] 48, 23;
+exec [dbo].[Book_TagsInsert] 49, 17;
+exec [dbo].[Book_TagsInsert] 49, 25;
+exec [dbo].[Book_TagsInsert] 49, 19;
+exec [dbo].[Book_TagsInsert] 50, 17;
 exec [dbo].[Book_TagsInsert] 50, 12;
-
-
-
-
+exec [dbo].[Book_TagsInsert] 50, 21;
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -532,39 +581,30 @@ exec dbo.OrdersInsert 47, 5, '2014-06-30', 5;
 exec dbo.OrdersInsert 42, 1, '2016-01-29', 252;
 
 
+--select  * from genres;
 
-select  * from genres;
+--select * from books;
 
-select * from books;
+--select * from book_genres;
 
-select * from book_genres;
+--select * from users;
 
-select * from users;
+--select * from authors;
 
-select * from authors;
+--select * from orders;
 
-select * from orders;
+--select * from Tags;
 
-select * from Tags;
+--select * from Book_tags;
 
-select * from Book_tags;
-
-select name, year, [First_Name] from authors a join books b on a.id = b.Author_Id order by author_id; --получить книги и их авторов
-
+--select name, year, [First_Name] from authors a join books b on a.id = b.Author_Id order by author_id; --получить книги и их авторов
 
 
-SELECT u.name, b.name
-FROM Books as b
-INNER JOIN orders as o
-    ON b.id = o.Book_Id
-INNER JOIN users as u
-    ON u.id = o.User_Id
+
+--SELECT u.name, b.name
+--FROM Books as b
+--INNER JOIN orders as o
+--    ON b.id = o.Book_Id
+--INNER JOIN users as u
+--    ON u.id = o.User_Id
 	
-
-	SELECT t.name, b.name
-FROM Books as b
-INNER JOIN book_tags as bt
-    ON b.id = bt.Book_Id
-INNER JOIN Tags as t
-    ON t.id = bt.Tag_Id  --получить все книги по тегу
-	where t.name = 'leo'
