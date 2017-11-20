@@ -56,8 +56,8 @@ END
 GO
 CREATE PROC [dbo].[selectSimilarBooksByTags] 
     @tag1 NVARCHAR(50),
-    @tag2 NVARCHAR(50),
-    @tag3 NVARCHAR(50)
+    @tag2 NVARCHAR(50) = NULL,
+    @tag3 NVARCHAR(50) = NULL
 AS 
 	begin
 		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
@@ -164,18 +164,123 @@ AS
 	end;
 GO
 
-exec [dbo].[selectBooksByGenre] 'Thriller';
-exec [dbo].[selectBooksByTag] 'leo';
-exec [dbo].[selectSimilarBooksByTags]  'integer', 'leo', 'id';
+----------------------[получить заказы за определенную дату] ------------------------------------
+IF OBJECT_ID('[dbo].[selectOrdersBetweenDates]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[selectOrdersBetweenDates] 
+END 
+GO
+CREATE PROC [dbo].[selectOrdersBetweenDates] 
+    @Date1 date,
+    @Date2 date 
+AS 
+	begin
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 
+			SELECT * FROM [Orders] 
+			WHERE NOT (@Date1 > [Order_date] AND [Order_date] < @Date2)
+	end;
+GO
+
+----------------------[получить активные заказы на руках](выборка прошлых просроченных + тех, что просрочены уже) ------------------------------------
+IF OBJECT_ID('[dbo].[selectActiveOrders]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[selectActiveOrders] 
+END 
+GO
+CREATE PROC [dbo].[selectActiveOrders] 
+AS 
+	begin
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+
+		SELECT * FROM [Orders] 
+		WHERE [Return_date] IS NULL
+	end;
+GO
+
+----------------------[получить просроченные заказы] ------------------------------------
+IF OBJECT_ID('[dbo].[selectOverdueOrders]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[selectOverdueOrders] 
+END 
+GO
+CREATE PROC [dbo].[selectOverdueOrders] 
+AS 
+	begin
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+
+		SELECT * FROM [Orders] 
+		WHERE DATEDIFF(day, [Required_date],[Return_date]) >0 
+		OR (DATEDIFF(day, [Required_date],getdate()) > 0 AND [Return_date] IS NULL) 
+	end;
+GO
+
+
+----------------------[обновить заказ при сдаче книги] ------------------------------------
+IF OBJECT_ID('[dbo].[updateOrderWithReturnBook]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[updateOrderWithReturnBook] 
+END 
+GO
+CREATE PROC [dbo].[updateOrderWithReturnBook] 
+   @OrderId int
+AS 
+	begin
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+		begin tran
+			UPDATE [Orders] set [Return_date] = getdate() where [Id]=@OrderId;
+
+			SELECT * FROM   [dbo].[Orders] WHERE  [Id] = @OrderId	
+		commit
+	end;
+GO
+-----------------------------------------------------------------------------------------
+--1 поиск по жанрам
+exec [dbo].[selectBooksByGenre] 'Thriller';
+
+
+--2 поиск по тэгу
+exec [dbo].[selectBooksByTag] 'leo';
+
+
+--3 поиск по совпадениям тэгов
+exec [dbo].[selectSimilarBooksByTags]  'nibh', 'leo', 'id';
+exec [dbo].[selectSimilarBooksByTags]  'pede', 'integer', 'purus';
+exec [dbo].[selectSimilarBooksByTags]  'pede', 'venenatis', 'iaculis';
+exec [dbo].[selectSimilarBooksByTags]  'pede', 'integer', 'purus';
+exec [dbo].[selectSimilarBooksByTags]  'id', 'venenatis'
+
+
+--4 поиск по авторам 
 exec [dbo].[selectBooksByAuthors]  @First_Name = 'Ye'
 exec [dbo].[selectBooksByAuthors]  @Last_Name = 'Dykins'
 exec [dbo].[selectBooksByAuthors]  'Ye', 'DOmokos'
 
+
+--5 получить все тэги книги
 exec [dbo].[selectTagsByBook] 'Lust for Gold'
 exec [dbo].[selectTagsByBook] 'Becky Sharp'
 exec [dbo].[selectTagsByBook] 'Battle of the Year'
 
+
+--6 получить все жанры книги
 exec [dbo].[selectGenresByBook] 'Lust for Gold'
 exec [dbo].[selectGenresByBook] 'Becky Sharp'
 exec [dbo].[selectGenresByBook] 'Battle of the Year'
+
+--7 получить заказы за период дат
+exec [dbo].[selectOrdersBetweenDates] '2017-02-02', '2017-11-02'
+
+--8 получить * что еще на руках
+exec [dbo].[selectActiveOrders] 
+
+--9 получить список просроченные заказы
+exec [dbo].[selectOverdueOrders]
+
+--10 обновить поле заказа -> пользователь вернул книгу
+exec [dbo].[OrdersSelectAll]
+exec [dbo].[updateOrderWithReturnBook] 3

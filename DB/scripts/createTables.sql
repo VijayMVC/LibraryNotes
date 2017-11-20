@@ -71,7 +71,8 @@ CREATE TABLE [Orders] (
     [Book_Id] INT foreign key references Books(Id) NOT NULL,
     [User_Id] INT foreign key references Users(Id) NOT NULL,
 	[Order_date] DATE NOT NULL,
-	[Days_of_use] TINYINT not NULL CHECK ([Days_of_use] > 0),
+	[Required_date] DATE NOT NULL,
+	[Return_date] DATE
 );
 
 ------------------------------

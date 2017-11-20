@@ -529,56 +529,56 @@ exec [dbo].[Book_GenresInsert] 50, 8;
 --Orders
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-exec dbo.OrdersInsert 20, 2, '2015-05-05', 225;
-exec dbo.OrdersInsert 15, 4, '2013-05-25', 222;
-exec dbo.OrdersInsert 26, 2, '2013-03-20', 142;
-exec dbo.OrdersInsert 45, 2, '2013-04-14', 182;
-exec dbo.OrdersInsert 12, 1, '2016-12-28', 84;
-exec dbo.OrdersInsert 41, 4, '2016-02-20', 103;
-exec dbo.OrdersInsert 19, 1, '2016-06-05', 19;
-exec dbo.OrdersInsert 18, 5, '2017-01-31', 29;
-exec dbo.OrdersInsert 16, 3, '2013-01-11', 148;
-exec dbo.OrdersInsert 42, 4, '2013-11-13', 196;
-exec dbo.OrdersInsert 36, 4, '2017-04-08', 76;
-exec dbo.OrdersInsert 47, 1, '2016-01-03', 30;
-exec dbo.OrdersInsert 33, 5, '2015-01-22', 254;
-exec dbo.OrdersInsert 3, 1, '2015-02-03', 249;
-exec dbo.OrdersInsert 25, 1, '2017-04-17', 178;
-exec dbo.OrdersInsert 5, 3, '2014-06-17', 249;
-exec dbo.OrdersInsert 21, 5, '2013-03-21', 163;
-exec dbo.OrdersInsert 31, 3, '2014-11-13', 18;
-exec dbo.OrdersInsert 21, 4, '2017-04-14', 185;
-exec dbo.OrdersInsert 15, 4, '2015-12-03', 249;
-exec dbo.OrdersInsert 12, 5, '2017-10-21', 213;
-exec dbo.OrdersInsert 18, 4, '2014-04-03', 87;
-exec dbo.OrdersInsert 19, 5, '2013-11-27', 107;
-exec dbo.OrdersInsert 45, 4, '2015-08-31', 139;
-exec dbo.OrdersInsert 49, 3, '2013-08-21', 174;
-exec dbo.OrdersInsert 47, 3, '2012-12-03', 185;
-exec dbo.OrdersInsert 40, 4, '2016-12-15', 240;
-exec dbo.OrdersInsert 28, 3, '2013-07-30', 89;
-exec dbo.OrdersInsert 43, 5, '2016-07-03', 88;
-exec dbo.OrdersInsert 48, 2, '2014-06-30', 97;
-exec dbo.OrdersInsert 26, 2, '2017-07-23', 215;
-exec dbo.OrdersInsert 6, 5, '2013-12-21', 66;
-exec dbo.OrdersInsert 38, 2, '2016-10-17', 131;
-exec dbo.OrdersInsert 7, 2, '2014-03-18', 7;
-exec dbo.OrdersInsert 12, 5, '2013-03-10', 220;
-exec dbo.OrdersInsert 27, 3, '2013-01-19', 168;
-exec dbo.OrdersInsert 15, 5, '2017-08-22', 152;
-exec dbo.OrdersInsert 2, 2, '2016-04-05', 16;
-exec dbo.OrdersInsert 32, 3, '2015-12-17', 92;
-exec dbo.OrdersInsert 32, 5, '2013-02-07', 136;
-exec dbo.OrdersInsert 26, 3, '2013-12-14', 223;
-exec dbo.OrdersInsert 11, 2, '2015-07-13', 121;
-exec dbo.OrdersInsert 47, 5, '2015-10-18', 180;
-exec dbo.OrdersInsert 50, 5, '2013-02-15', 51;
-exec dbo.OrdersInsert 3, 1, '2014-11-29', 196;
-exec dbo.OrdersInsert 11, 1, '2013-07-14', 212;
-exec dbo.OrdersInsert 49, 5, '2012-12-07', 9;
-exec dbo.OrdersInsert 50, 5, '2013-07-30', 252;
-exec dbo.OrdersInsert 47, 5, '2014-06-30', 5;
-exec dbo.OrdersInsert 42, 1, '2016-01-29', 252;
+--нынешние должники
+exec [dbo].[OrdersInsert] 30, 2, '2016-07-11', '2017-08-11', null;
+exec [dbo].[OrdersInsert] 12, 5, '2016-09-03', '2017-07-17', null;
+exec [dbo].[OrdersInsert] 36, 1, '2017-01-24', '2017-06-12', null;
+exec [dbo].[OrdersInsert] 36, 5, '2017-10-16', '2017-11-12', null;
+
+--не должны, но не сдали книгу
+exec [dbo].[OrdersInsert] 12, 1, '2017-02-08', '2017-12-03', null;
+exec [dbo].[OrdersInsert] 24, 2, '2017-09-23', '2018-12-31', null;
+exec [dbo].[OrdersInsert] 40, 3, '2017-10-19', '2018-01-26', null;
+exec [dbo].[OrdersInsert] 30, 2, '2017-07-11', '2018-02-11', null;
+exec [dbo].[OrdersInsert] 12, 5, '2017-09-03', '2017-12-17', null;
+exec [dbo].[OrdersInsert] 36, 1, '2017-01-24', '2017-12-12', null;
+exec [dbo].[OrdersInsert] 36, 5, '2017-10-16', '2017-12-12', null;
+
+--просрочка
+exec [dbo].[OrdersInsert] 25, 1, '2013-01-11', '2013-12-03', '2016-09-14';
+exec [dbo].[OrdersInsert] 18, 5, '2013-08-20', '2014-07-30', '2015-12-01';
+exec [dbo].[OrdersInsert] 37, 3, '2012-05-09', '2013-05-09', '2015-04-29';
+exec [dbo].[OrdersInsert] 17, 2, '2013-02-19', '2013-03-01', '2013-06-01';
+exec [dbo].[OrdersInsert] 47, 2, '2014-02-08', '2014-08-26', '2017-02-12';
+exec [dbo].[OrdersInsert] 6, 2, '2014-12-31', '2015-12-10', '2016-01-16';
+exec [dbo].[OrdersInsert] 1, 5, '2013-04-18', '2013-05-01', '2016-05-13';
+exec [dbo].[OrdersInsert] 49, 4, '2014-08-24', '2014-10-21', '2015-11-30';
+exec [dbo].[OrdersInsert] 14, 2, '2014-12-23', '2015-06-30', '2016-09-22';
+exec [dbo].[OrdersInsert] 1, 5, '2013-01-01', '2013-02-03', '2016-11-23';
+exec [dbo].[OrdersInsert] 11, 2, '2014-04-04', '2014-08-22', '2017-05-05';
+
+exec [dbo].[OrdersInsert] 2, 4, '2013-04-11', '2015-06-13', '2013-11-06';
+exec [dbo].[OrdersInsert] 7, 4, '2012-12-04', '2014-01-16', '2013-12-14';
+exec [dbo].[OrdersInsert] 9, 5, '2014-11-25', '2017-06-02', '2015-04-01';
+exec [dbo].[OrdersInsert] 42, 4, '2017-03-27', '2017-11-04', '2017-04-09';
+exec [dbo].[OrdersInsert] 34, 3, '2014-09-03', '2017-03-08', '2015-01-14';
+exec [dbo].[OrdersInsert] 28, 5, '2014-07-09', '2016-08-18', '2015-07-10';
+exec [dbo].[OrdersInsert] 6, 2, '2016-07-21', '2016-10-28', '2016-08-25';
+exec [dbo].[OrdersInsert] 44, 1, '2017-08-06', '2017-09-16', '2017-08-11';
+exec [dbo].[OrdersInsert] 44, 5, '2013-02-16', '2015-09-23', '2014-03-03';
+exec [dbo].[OrdersInsert] 9, 5, '2014-01-25', '2017-03-01', '2016-07-08';
+exec [dbo].[OrdersInsert] 37, 3, '2015-09-10', '2016-08-30', '2015-11-06';
+exec [dbo].[OrdersInsert] 34, 4, '2016-09-04', '2017-09-27', '2017-04-02';
+exec [dbo].[OrdersInsert] 29, 5, '2015-01-23', '2016-01-03', '2015-11-08';
+exec [dbo].[OrdersInsert] 44, 4, '2014-07-30', '2015-07-30', '2014-11-26';
+exec [dbo].[OrdersInsert] 31, 3, '2016-04-02', '2016-12-21', '2016-09-06';
+exec [dbo].[OrdersInsert] 36, 5, '2016-02-09', '2017-07-13', '2016-09-11';
+exec [dbo].[OrdersInsert] 12, 5, '2014-01-27', '2016-02-18', '2015-08-04';
+exec [dbo].[OrdersInsert] 45, 5, '2013-03-29', '2015-09-03', '2013-07-03';
+exec [dbo].[OrdersInsert] 4, 4, '2013-02-04', '2014-11-11', '2013-08-22';
+exec [dbo].[OrdersInsert] 27, 5, '2013-05-01', '2015-02-19', '2013-10-15';
+exec [dbo].[OrdersInsert] 18, 1, '2014-08-07', '2017-10-02', '2015-04-02';
+exec [dbo].[OrdersInsert] 22, 5, '2014-08-10', '2016-08-06', '2015-06-19';
 
 
 --select  * from genres;
@@ -597,14 +597,4 @@ exec dbo.OrdersInsert 42, 1, '2016-01-29', 252;
 
 --select * from Book_tags;
 
---select name, year, [First_Name] from authors a join books b on a.id = b.Author_Id order by author_id; --получить книги и их авторов
-
-
-
---SELECT u.name, b.name
---FROM Books as b
---INNER JOIN orders as o
---    ON b.id = o.Book_Id
---INNER JOIN users as u
---    ON u.id = o.User_Id
 	
