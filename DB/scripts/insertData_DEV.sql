@@ -36,26 +36,26 @@ exec dbo.UsersInsert 'user5', '7163bbbb90281071d59289fe999d33de', 'Ave Langsbury
 --Authors
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-exec dbo.AuthorsInsert 'Styrbjörn', 'Felstead', '1956-01-29', null;
-exec dbo.AuthorsInsert 'Méng', 'Southworth',	'1973-08-09','2013-09-05';
-exec dbo.AuthorsInsert 'Yè', 'Kerford', '1939-06-25', '1979-04-06';
-exec dbo.AuthorsInsert 'Åke', 'Bloodworth', '1981-08-13',null;
-exec dbo.AuthorsInsert 'Célia', 'Lansley', '1939-12-20','1996-01-06';
-exec dbo.AuthorsInsert 'Yè', 'Domokos', '1976-08-11', null;
-exec dbo.AuthorsInsert 'Estève', 'Ahmed', '1968-09-17', null;
-exec dbo.AuthorsInsert 'Inès', 'Mallia', '1965-08-14', '2003-06-19';
-exec dbo.AuthorsInsert 'Françoise', 'Wipper', '1919-04-02', '1985-09-11';
-exec dbo.AuthorsInsert 'Mén', 'Seeley', '1969-03-18', '2005-10-06';
-exec dbo.AuthorsInsert 'Marie-françoise', 'Gumme', '1977-02-01', null;
-exec dbo.AuthorsInsert 'Anaïs', 'Zammett', '1913-01-03', '1966-06-26';
-exec dbo.AuthorsInsert 'Åsa', 'Seakings', '1920-04-05','1958-04-07';
-exec dbo.AuthorsInsert 'Örjan', 'Dykins', '1981-09-29', null;
-exec dbo.AuthorsInsert 'Anaël', 'Gallamore', '1946-01-27', '2002-05-27';
-exec dbo.AuthorsInsert 'Léa', 'Dank', '1976-11-25', null;
-exec dbo.AuthorsInsert 'Bécassine', 'Aughtie', '1916-10-07', '1965-11-12';
-exec dbo.AuthorsInsert 'Méline', 'Press', '1998-02-25', null;
-exec dbo.AuthorsInsert 'Tán', 'Twycross', '1991-02-28', null;
-exec dbo.AuthorsInsert 'Geneviève', 'Ackenhead', '1995-06-12',null;
+exec dbo.AuthorsInsert 'Styrbjorn', 'Felstead', '1956-01-29', null;
+exec dbo.AuthorsInsert 'Meng', 'Southworth',	'1973-08-09','2013-09-05';
+exec dbo.AuthorsInsert 'Ye', 'Kerford', '1939-06-25', '1979-04-06';
+exec dbo.AuthorsInsert 'Ake', 'Bloodworth', '1981-08-13',null;
+exec dbo.AuthorsInsert 'Celia', 'Lansley', '1939-12-20','1996-01-06';
+exec dbo.AuthorsInsert 'Ye', 'Domokos', '1976-08-11', null;
+exec dbo.AuthorsInsert 'Esteve', 'Ahmed', '1968-09-17', null;
+exec dbo.AuthorsInsert 'Ines', 'Mallia', '1965-08-14', '2003-06-19';
+exec dbo.AuthorsInsert 'Francoise', 'Wipper', '1919-04-02', '1985-09-11';
+exec dbo.AuthorsInsert 'Men', 'Seeley', '1969-03-18', '2005-10-06';
+exec dbo.AuthorsInsert 'Marie', 'Gumme', '1977-02-01', null;
+exec dbo.AuthorsInsert 'Anais', 'Zammett', '1913-01-03', '1966-06-26';
+exec dbo.AuthorsInsert 'Asa', 'Seakings', '1920-04-05','1958-04-07';
+exec dbo.AuthorsInsert 'Orjan', 'Dykins', '1981-09-29', null;
+exec dbo.AuthorsInsert 'Anael', 'Gallamore', '1946-01-27', '2002-05-27';
+exec dbo.AuthorsInsert 'Lea', 'Dank', '1976-11-25', null;
+exec dbo.AuthorsInsert 'Becassine', 'Aughtie', '1916-10-07', '1965-11-12';
+exec dbo.AuthorsInsert 'Meline', 'Press', '1998-02-25', null;
+exec dbo.AuthorsInsert 'Tan', 'Twycross', '1991-02-28', null;
+exec dbo.AuthorsInsert 'Genevieve', 'Ackenhead', '1995-06-12',null;
 
 
 
