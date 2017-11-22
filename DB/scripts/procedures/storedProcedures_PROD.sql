@@ -265,6 +265,7 @@ AS
 
 	end;
 GO
+
 -----------------------------------------------------------------------------------------
 --1 поиск по жанрам
 exec [dbo].[selectBooksByGenre] 'Thriller';
@@ -312,5 +313,6 @@ exec [dbo].[selectOverdueOrders]
 exec [dbo].[OrdersSelectAll]
 exec [dbo].[updateOrderWithReturnBook] 3
 
---11 топ заказываемых жанров за период времени
+--11 топ заказываемых жанров
 exec [dbo].[selectTopPopularGenres] 
+
