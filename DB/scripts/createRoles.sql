@@ -2,8 +2,8 @@ create database LibraryNotes
 ON(
 		NAME = 'ControlDiet_DB',
 		FILENAME = 'D:\БГТУ\Курсовой проект\Course project\DB\files\LibraryNotes.mdf',
-		SIZE = 50MB,
-		MAXSIZE = 100MB,
+		SIZE = 20MB,
+		MAXSIZE = 50MB,
 		FILEGROWTH = 10%
 )
 LOG ON(

@@ -238,6 +238,33 @@ AS
 		commit
 	end;
 GO
+
+
+----------------------[топ полуп€рных жанров] ------------------------------------
+IF OBJECT_ID('[dbo].[selectTopPopularGenres]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[selectTopPopularGenres] 
+END 
+GO
+CREATE PROC [dbo].[selectTopPopularGenres] 
+AS 
+	begin
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+		
+		SELECT count(g.[Genre]) as Rating,g.[Genre]
+			FROM [Books] as b
+				INNER JOIN [Book_Genres] as bg
+			ON b.[Id] = bg.[Book_Id]
+				INNER JOIN [Genres] as g
+			ON g.[Id] = bg.[Genre_Id] 
+				INNER JOIN [Orders] as o 
+			ON o.Book_Id = b.Id
+			group by g.Genre
+			order by Rating desc
+
+	end;
+GO
 -----------------------------------------------------------------------------------------
 --1 поиск по жанрам
 exec [dbo].[selectBooksByGenre] 'Thriller';
@@ -284,3 +311,6 @@ exec [dbo].[selectOverdueOrders]
 --10 обновить поле заказа -> пользователь вернул книгу
 exec [dbo].[OrdersSelectAll]
 exec [dbo].[updateOrderWithReturnBook] 3
+
+--11 топ заказываемых жанров за период времени
+exec [dbo].[selectTopPopularGenres] 
