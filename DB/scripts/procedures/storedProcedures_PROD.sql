@@ -81,29 +81,20 @@ BEGIN
 END 
 GO
 CREATE PROC [dbo].[selectBooksByAuthors] 
-    @First_Name NVARCHAR(50)=NULL,
-    @Last_Name NVARCHAR(50)=NULL
+    @First NVARCHAR(50),
+    @Last NVARCHAR(50)=NULL
 AS 
 	begin
 		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 
-	IF @First_Name IS NULL
+	IF @Last IS NULL
 		BEGIN
 		  SELECT b.ID, b.name, a.First_Name, a.Last_Name
 		    FROM [Books] as b 
 			 INNER JOIN [Authors] as a
 			 ON a.id = b.Author_Id
-			 WHERE a.Last_Name = @Last_Name
-		  END;
-		  
-	ELSE IF @Last_Name IS NULL
-		BEGIN
-		  SELECT b.ID, b.name, a.First_Name, a.Last_Name
-		    FROM [Books] as b 
-			 INNER JOIN [Authors] as a
-			 ON a.id = b.Author_Id
-			 WHERE a.First_Name = @First_Name
+			 WHERE a.First_Name = @First OR a.Last_Name = @First
 		  END;
 	ELSE
 		BEGIN
@@ -111,7 +102,8 @@ AS
 		    FROM [Books] as b 
 			 INNER JOIN [Authors] as a
 			 ON a.id = b.Author_Id
-			 WHERE a.First_Name = @First_Name AND a.Last_Name = @Last_Name
+			 WHERE (a.First_Name = @First AND a.Last_Name = @Last) OR
+				   (a.Last_Name = @First AND a.First_Name = @Last)
 		  END;
 	end;
 GO
@@ -284,8 +276,10 @@ exec [dbo].[selectSimilarBooksByTags]  'id', 'venenatis'
 
 
 --4 поиск по авторам 
-exec [dbo].[selectBooksByAuthors]  @First_Name = 'Ye'
-exec [dbo].[selectBooksByAuthors]  @Last_Name = 'Dykins'
+exec [dbo].[selectBooksByAuthors]   'Ye'
+exec [dbo].[selectBooksByAuthors]   'Dykins'
+exec [dbo].[selectBooksByAuthors]   'Orjan'
+exec [dbo].[selectBooksByAuthors]   'Kerford'
 exec [dbo].[selectBooksByAuthors]  'Ye', 'DOmokos'
 
 
