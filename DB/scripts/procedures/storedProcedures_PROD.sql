@@ -295,7 +295,7 @@ exec [dbo].[selectGenresByBook] 'Becky Sharp'
 exec [dbo].[selectGenresByBook] 'Battle of the Year'
 
 --7 получить заказы за период дат
-exec [dbo].[selectOrdersBetweenDates] '2017-02-02', '2017-11-02'
+exec [dbo].[selectOrdersBetweenDates] '2015-02-02', '2017-11-02'
 
 --8 получить * что еще на руках
 exec [dbo].[selectActiveOrders] 
