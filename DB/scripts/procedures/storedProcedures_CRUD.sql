@@ -735,7 +735,7 @@ AS
 
 		BEGIN TRAN
 
-		SELECT [Id], [Login], [Password], [Name], [Address], [Sex], [PhoneNumber] 
+		SELECT [Id], [Login], [Password], [Name], [Address], [Sex], [PhoneNumber], [Admin] 
 		FROM   [dbo].[Users] 
 		WHERE  ([Id] = @Id OR @Id IS NULL) 
 
@@ -754,7 +754,8 @@ CREATE PROC [dbo].[UsersInsert]
     @Name nvarchar(50) = NULL,
     @Address nvarchar(200) = NULL,
     @Sex nvarchar(6) = NULL,
-    @PhoneNumber char(25)
+    @PhoneNumber char(25),
+    @Admin tinyint
 AS 
 	BEGIN
 		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
@@ -762,10 +763,10 @@ AS
 	
 		BEGIN TRAN
 	
-		INSERT INTO [dbo].[Users] ([Login], [Password], [Name], [Address], [Sex], [PhoneNumber])
-		SELECT @Login, @Password, @Name, @Address, @Sex, @PhoneNumber
+		INSERT INTO [dbo].[Users] ([Login], [Password], [Name], [Address], [Sex], [PhoneNumber], [Admin])
+		SELECT @Login, @Password, @Name, @Address, @Sex, @PhoneNumber, @Admin
 	
-		SELECT [Id], [Login], [Password], [Name], [Address], [Sex], [PhoneNumber]
+		SELECT [Id], [Login], [Password], [Name], [Address], [Sex], [PhoneNumber], [Admin]
 		FROM   [dbo].[Users]
 		WHERE  [Id] = SCOPE_IDENTITY()
                
@@ -785,7 +786,8 @@ CREATE PROC [dbo].[UsersUpdate]
     @Name nvarchar(50) = NULL,
     @Address nvarchar(200) = NULL,
     @Sex nvarchar(6) = NULL,
-    @PhoneNumber char(25)
+    @PhoneNumber char(25),
+    @Admin tinyint
 AS 
 	BEGIN
 		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
@@ -794,10 +796,10 @@ AS
 		BEGIN TRAN
 	
 		UPDATE [dbo].[Users]
-		SET    [Login] = @Login, [Password] = @Password, [Name] = @Name, [Address] = @Address, [Sex] = @Sex, [PhoneNumber] = @PhoneNumber
+		SET    [Login] = @Login, [Password] = @Password, [Name] = @Name, [Address] = @Address, [Sex] = @Sex, [PhoneNumber] = @PhoneNumber, [Admin] = @Admin
 		WHERE  [Id] = @Id
 	
-		SELECT [Id], [Login], [Password], [Name], [Address], [Sex], [PhoneNumber]
+		SELECT [Id], [Login], [Password], [Name], [Address], [Sex], [PhoneNumber], [Admin]
 		FROM   [dbo].[Users]
 		WHERE  [Id] = @Id	
 

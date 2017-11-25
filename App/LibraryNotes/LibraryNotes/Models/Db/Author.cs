@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace LibraryNotes.Models
 {
-    class Authors
+    class Author
     {
         public int Id { get; set; }
         public string First_Name { get; set; }
         public string Last_Name { get; set; }
         public DateTime Birth_date { get; set; }
         public DateTime? Die_date { get; set; }
-        public Authors(int id, string first_Name, string last_Name,
+        public Author(int id, string first_Name, string last_Name,
             DateTime birth_date, DateTime? Die_date, string sex, string phonenunmber)
         {
             this.Id = id;
@@ -22,5 +22,7 @@ namespace LibraryNotes.Models
             this.Birth_date = birth_date;
             this.Die_date = Die_date;
         }
+
+        public Author() { }
     }
 }

@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 
 namespace LibraryNotes.Models
 {
-    class Genres
+    class Genre
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Genres(int id, string name, string description)
+        public Genre(int id, string name, string description)
         {
             this.Id = id;
             this.Name = name;
             this.Description = description;
         }
 
+        public Genre() { }
     }
 }

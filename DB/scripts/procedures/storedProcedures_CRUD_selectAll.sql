@@ -127,7 +127,7 @@ GO
 ----------------------[Users].[UsersSelectAll] ------------------------------------
 IF OBJECT_ID('[dbo].[UsersSelectAll]') IS NOT NULL
 BEGIN 
-    DROP PROC [dbo].[UsersSelectAllAll] 
+    DROP PROC [dbo].[UsersSelectAll] 
 END 
 GO
 CREATE PROC [dbo].[UsersSelectAll] 
@@ -135,7 +135,7 @@ AS
 	BEGIN
 		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 
-		SELECT [Id], [Login], [Password], [Name], [Address], [Sex], [PhoneNumber] 
+		SELECT [Id], [Login], [Password], [Name], [Address], [Sex], [PhoneNumber], [Admin] 
 		FROM   [dbo].[Users] 
 
 	END;

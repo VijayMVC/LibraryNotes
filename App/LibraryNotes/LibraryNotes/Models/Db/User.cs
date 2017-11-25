@@ -26,5 +26,7 @@ namespace LibraryNotes.Models
             this.Sex = sex;
             this.Phonenunmber = phonenunmber;
         }
+
+        public User() { }
     }
 }

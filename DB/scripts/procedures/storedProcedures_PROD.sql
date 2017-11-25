@@ -16,7 +16,7 @@ AS
 		SELECT b.[Name], b.[Year]
 			FROM [dbo].[Books] as b
 				INNER JOIN [dbo].[Book_Genres] as bg
-			ON b.id = bg.Book_Id
+			ON b.id = bg.Book_Id3
 				INNER JOIN [dbo].[Genres] as g
 			ON g.[Id] = bg.[Genre_Id]
 			WHERE g.[Genre] = @genre	
@@ -258,6 +258,26 @@ AS
 	end;
 GO
 
+----------------------[проверка паролей] ------------------------------------
+IF OBJECT_ID('[dbo].[selectUserExist]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[selectUserExist] 
+END 
+GO
+CREATE PROC [dbo].[selectUserExist] 
+   @Login NVARCHAR(100),
+   @Password NVARCHAR(100)
+AS 
+	begin
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+
+		DECLARE @auth tinyint = NULL;         
+		Select @auth = [Admin] from Users 	where Login = @Login and Password = @Password;
+		return @auth;
+
+	end;
+GO
 -----------------------------------------------------------------------------------------
 --1 поиск по жанрам
 exec [dbo].[selectBooksByGenre] 'Thriller';
@@ -309,4 +329,7 @@ exec [dbo].[updateOrderWithReturnBook] 3
 
 --11 топ заказываемых жанров
 exec [dbo].[selectTopPopularGenres] 
+
+--12 проверить пароль
+exec [dbo].[selectUserExist] '1', '1';
 

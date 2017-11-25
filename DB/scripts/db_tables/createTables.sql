@@ -20,7 +20,8 @@ CREATE TABLE [Users](
     [Name] NVARCHAR(50),
     [Address] NVARCHAR(200),
 	[Sex] NVARCHAR(6) check( Sex in('Male','Female')),
-	[PhoneNumber] CHAR(25) NOT NULL
+	[PhoneNumber] CHAR(25) NOT NULL,
+	[Admin] tinyint default 1 NOT NULL
 );
 
 ------------------------------

@@ -23,11 +23,14 @@ DBCC CHECKIDENT ('[Tags]', RESEED, 0);
 --Users
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-exec dbo.UsersInsert 'user1', '6ff99740dca09d027c4ff58396b0d06c', 'Sheelagh Saunton', '00 Meadow Ridge Parkway', 'Male', '+86 775 607-4927';
-exec dbo.UsersInsert 'user2', '4fd4ffab1716cd5d43356452a8dcaadd', 'Clare Bentzen', '3 Commercial Lane', 'Male', '+33 982 508-5896';
-exec dbo.UsersInsert 'user3', 'f26c0d44a1371fa083d82a024c51cc7b', 'Willy Sells', '047 Nancy Circle', 'Male', '+55 295 653-6644';
-exec dbo.UsersInsert 'user4', 'be1583f52f4fae02ce241177835f9289', 'Merridie Dunan', '7 Pleasure Way', 'Male', '+62 304 827-9565';
-exec dbo.UsersInsert 'user5', '7163bbbb90281071d59289fe999d33de', 'Ave Langsbury', '23672 Coleman Park', 'Male', '+351 527 321-4831';
+exec dbo.UsersInsert 'admin', 'admin', 'Sheelagh Saunton', '00 Meadow Ridge Parkway', 'Male', '+86 775 607-4927', 2;
+
+exec dbo.UsersInsert 'user1', '6ff99740dca09d027c4ff58396b0d06c', 'Sheelagh Saunton', '00 Meadow Ridge Parkway', 'Male', '+86 775 607-4927',1;
+exec dbo.UsersInsert 'user2', '4fd4ffab1716cd5d43356452a8dcaadd', 'Clare Bentzen', '3 Commercial Lane', 'Male', '+33 982 508-5896',1;
+exec dbo.UsersInsert 'user3', 'f26c0d44a1371fa083d82a024c51cc7b', 'Willy Sells', '047 Nancy Circle', 'Male', '+55 295 653-6644',1;
+exec dbo.UsersInsert 'user4', 'be1583f52f4fae02ce241177835f9289', 'Merridie Dunan', '7 Pleasure Way', 'Male', '+62 304 827-9565',1;
+exec dbo.UsersInsert 'user5', '7163bbbb90281071d59289fe999d33de', 'Ave Langsbury', '23672 Coleman Park', 'Male', '+351 527 321-4831',1;
+exec dbo.UsersInsert '1', '1', 'Ave Langsbury', '23672 Coleman Park', 'Male', '+351 527 321-4831',1;
 
 
 

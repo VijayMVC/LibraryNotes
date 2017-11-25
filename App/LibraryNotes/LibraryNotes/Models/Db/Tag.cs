@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace LibraryNotes.Models
 {
-    class Books_Genres
+    class Tag
     {
         public int Id { get; set; }
-        public int Book_id { get; set; }
-        public int Genre_id { get; set; }
-        public Books_Genres(int id, int book_id, int genre_id)
+        public string Name { get; set; }
+        public Tag(int id, string name, string adress)
         {
             this.Id = id;
-            this.Book_id = book_id;
-            this.Genre_id = genre_id;
+            this.Name = name;
         }
+
+        public Tag() { }
     }
 }
