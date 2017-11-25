@@ -360,3 +360,4 @@ select * from Book_Tags;
 -----Orders
 exec [dbo].[insertOrdersFromXML] 'D:\БГТУ\Курсовой проект\Course project\DB\js\genXML\content\orders.xml';
 select * from Orders;
+
