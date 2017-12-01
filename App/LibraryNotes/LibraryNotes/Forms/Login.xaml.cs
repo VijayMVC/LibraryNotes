@@ -63,17 +63,19 @@ namespace LibraryNotes.Forms
 
                         switch (result)
                         {
-                            case (int)Metadata.AutorizationRoles.ADMIN:
+                            case (int)Metadata.AuthRoles.ADMIN:
+                                Metadata.CurrentAppRole = true;
                                 Metadata.CurrentConnectionString = Metadata.ConnectionString.admin;
                                 main.Show();
                                 Close();
                                 break;
-                            case (int)Metadata.AutorizationRoles.USER:
+                            case (int)Metadata.AuthRoles.USER:
+                                Metadata.CurrentAppRole = false;
                                 Metadata.CurrentConnectionString = Metadata.ConnectionString.user;
                                 main.Show();
                                 Close();
                                 break;
-                            case (int)Metadata.AutorizationRoles.ANON:
+                            case (int)Metadata.AuthRoles.ANON:
                                 errormessage.Text = "Incorrect login or password";
                                 break;
                             default: break;

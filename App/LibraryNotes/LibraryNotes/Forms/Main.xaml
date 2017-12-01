@@ -7,6 +7,6 @@
         mc:Ignorable="d"
         Title="Main" Height="300" Width="300">
     <Grid>
-        
+        <Button  Width="100" Height="100" Content="koko"  IsEnabled="{Binding bConnected,ElementName=mainWindow}"/>
     </Grid>
 </Window>

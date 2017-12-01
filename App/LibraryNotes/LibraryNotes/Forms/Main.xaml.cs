@@ -23,5 +23,15 @@ namespace LibraryNotes.Forms
         {
             InitializeComponent();
         }
+
+        public bool bConnected
+        {
+            get { return Metadata.CurrentAppRole; }
+            set { SetValue(bConnectedProperty, value); }
+        }
+
+        //TODO доделай биндинг свойства админ/юзер для активности кнопок
+        public static readonly DependencyProperty bConnectedProperty =
+            DependencyProperty.Register("bConnected", typeof(bool), typeof(Main), new PropertyMetadata(false));
     }
 }
