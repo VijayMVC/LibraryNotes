@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LibraryNotes
 {
 
-    class Metadata
+    public class Metadata
     {
         static public string CurrentConnectionString = ConnectionString.defaultString;
         static public bool CurrentAppRole;

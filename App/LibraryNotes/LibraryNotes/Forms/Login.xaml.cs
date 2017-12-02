@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LibraryNotes.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -26,8 +27,6 @@ namespace LibraryNotes.Forms
         {
             InitializeComponent();
         }
-        Registration registration = new Registration();
-        Main mainWindow = new Main();
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
@@ -54,34 +53,30 @@ namespace LibraryNotes.Forms
                         cmd.Parameters.AddWithValue("@Login", textBoxLogin.Text);
                         cmd.Parameters.AddWithValue("@Password", passwordBox1.Password);
 
-                        var returnParameter = cmd.Parameters.Add("@ReturnVal", SqlDbType.Int);
-                        returnParameter.Direction = ParameterDirection.ReturnValue;
-
-                        cmd.ExecuteNonQuery();
-                        var result = int.Parse(returnParameter.Value.ToString());
-                        Main main = new Main();
-
-                        switch (result)
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            case (int)Metadata.AuthRoles.ADMIN:
-                                Metadata.CurrentAppRole = true;
-                                Metadata.CurrentConnectionString = Metadata.ConnectionString.admin;
-                                main.Show();
+                            if (reader.Read())
+                            {
+                                User user = new User();
+                                user.Adress = reader["Address"].ToString();
+                                user.Login = reader["Login"].ToString();
+                                user.Password = reader["Login"].ToString();
+                                user.Name = reader["Name"].ToString();
+                                user.Sex = reader["Sex"].ToString();
+                                user.Id = int.Parse(reader["Id"].ToString());
+                                user.Phonenunmber = reader["PhoneNumber"].ToString();
+                                user.Admin = int.Parse(reader["Admin"].ToString()) == (int)Metadata.AuthRoles.ADMIN ?
+                                    Metadata.AuthRoles.ADMIN : Metadata.AuthRoles.USER;         //охи сцаки, охи сцаки, это ж еще такое написать надо
+                                new Main(user).Show();
                                 Close();
-                                break;
-                            case (int)Metadata.AuthRoles.USER:
-                                Metadata.CurrentAppRole = false;
-                                Metadata.CurrentConnectionString = Metadata.ConnectionString.user;
-                                main.Show();
-                                Close();
-                                break;
-                            case (int)Metadata.AuthRoles.ANON:
+                            }
+                            else
+                            {
                                 errormessage.Text = "Incorrect login or password";
-                                break;
-                            default: break;
+                            }
                         }
+                        conn.Close();
                     }
-
                 }
 
             }
@@ -89,7 +84,7 @@ namespace LibraryNotes.Forms
 
         private void buttonRegister_Click(object sender, RoutedEventArgs e)
         {
-            registration.Show();
+            new Registration().Show();
             Close();
         }
 

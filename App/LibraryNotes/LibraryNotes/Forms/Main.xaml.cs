@@ -1,6 +1,10 @@
-﻿using System;
+﻿using LibraryNotes.Forms.MainWindows;
+using LibraryNotes.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,19 +23,14 @@ namespace LibraryNotes.Forms
     /// </summary>
     public partial class Main : Window
     {
-        public Main()
+        private User user;
+        public Main(User user)
         {
+            this.user = user;
             InitializeComponent();
+            TabItem_UserInfo.Content = new UserInformation(this.user);
         }
 
-        public bool bConnected
-        {
-            get { return Metadata.CurrentAppRole; }
-            set { SetValue(bConnectedProperty, value); }
-        }
 
-        //TODO доделай биндинг свойства админ/юзер для активности кнопок
-        public static readonly DependencyProperty bConnectedProperty =
-            DependencyProperty.Register("bConnected", typeof(bool), typeof(Main), new PropertyMetadata(false));
     }
 }

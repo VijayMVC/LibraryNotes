@@ -265,8 +265,8 @@ BEGIN
 END 
 GO
 CREATE PROC [dbo].[selectUserExist] 
-   @Login NVARCHAR(100),
-   @Password NVARCHAR(100)
+   @Login NVARCHAR(100)=NULL,
+   @Password NVARCHAR(100)=NULL
 AS 
 	begin
 		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
@@ -274,7 +274,10 @@ AS
 
 		DECLARE @auth tinyint = NULL;         
 		Select @auth = [Admin] from Users 	where Login = @Login and Password = @Password;
-		return @auth;
+
+		if(@auth != 0)
+			select * from Users 	where Login = @Login and Password = @Password;
+			return @auth;
 
 	end;
 GO

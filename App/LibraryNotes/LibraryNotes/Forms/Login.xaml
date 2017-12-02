@@ -11,13 +11,7 @@
         <TextBox Height="23" HorizontalAlignment="Left" Margin="118,85,0,0" Name="textBoxLogin" VerticalAlignment="Top" Width="247" />
         <PasswordBox Height="23" HorizontalAlignment="Left" Margin="118,128,0,0" Name="passwordBox1" VerticalAlignment="Top" Width="247" />
         <Button Content="Login" Height="23" HorizontalAlignment="Left" Margin="118,171,0,0" Name="button1" VerticalAlignment="Top" Width="104" Click="button1_Click" />
-        <TextBlock Height="50" HorizontalAlignment="Left" Margin="250,171,0,0" Name="textBlockHeading" VerticalAlignment="Top" FontSize="12" FontStyle="Italic" Padding="5" Width="420.28">
-            Or
-            <TextBlock>
-                 <Hyperlink Click="buttonRegister_Click" FontSize="14" FontStyle="Normal">Register</Hyperlink>
-            </TextBlock>
-            
-        </TextBlock>
+        <Button Content="Register" Height="23" HorizontalAlignment="Left" Margin="270,171,0,0" Name="button2" VerticalAlignment="Top" Width="104" Click="buttonRegister_Click" />
         <TextBlock Height="23" HorizontalAlignment="Left" x:Name ="errormessage" VerticalAlignment="Top" Width="247" Margin="118,253,0,0"  OpacityMask="Crimson" Foreground="#FFE5572C"  />
     </Grid>
 </Window> 

@@ -4,9 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryNotes.Forms"
+        xmlns:wnd ="clr-namespace:LibraryNotes.Forms.MainWindows"
         mc:Ignorable="d"
-        Title="Main" Height="300" Width="300">
+        Title="Main" Height="640" Width="800">
     <Grid>
-        <Button  Width="100" Height="100" Content="koko"  IsEnabled="{Binding bConnected,ElementName=mainWindow}"/>
+    <TabControl>
+            <TabItem Header ="Books"></TabItem>
+            <TabItem Header ="Authors"></TabItem>
+            <TabItem Header ="Tags"></TabItem>
+            <TabItem Header ="Genres"></TabItem>
+            <TabItem Header ="User Info" Name="TabItem_UserInfo">
+                <Grid Name="GridUserInfo">
+
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
