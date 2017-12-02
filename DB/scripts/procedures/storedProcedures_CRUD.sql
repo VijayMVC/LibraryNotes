@@ -781,7 +781,6 @@ END
 GO
 CREATE PROC [dbo].[UsersUpdate] 
     @Id int,
-    @Login nvarchar(100),
     @Password nvarchar(100),
     @Name nvarchar(50) = NULL,
     @Address nvarchar(200) = NULL,
@@ -790,13 +789,12 @@ CREATE PROC [dbo].[UsersUpdate]
     @Admin tinyint
 AS 
 	BEGIN
-		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 		
 		BEGIN TRAN
 	
 		UPDATE [dbo].[Users]
-		SET    [Login] = @Login, [Password] = @Password, [Name] = @Name, [Address] = @Address, [Sex] = @Sex, [PhoneNumber] = @PhoneNumber, [Admin] = @Admin
+		SET    [Password] = @Password, [Name] = @Name, [Address] = @Address, [Sex] = @Sex, [PhoneNumber] = @PhoneNumber, [Admin] = @Admin
 		WHERE  [Id] = @Id
 	
 		SELECT [Id], [Login], [Password], [Name], [Address], [Sex], [PhoneNumber], [Admin]

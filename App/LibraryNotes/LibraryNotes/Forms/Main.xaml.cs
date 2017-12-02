@@ -27,10 +27,20 @@ namespace LibraryNotes.Forms
         public Main(User user)
         {
             this.user = user;
+            if (this.user.Admin == Metadata.AuthRoles.ADMIN)
+                Metadata.CurrentConnectionString = Metadata.ConnectionString.admin;
+            else
+                Metadata.CurrentConnectionString = Metadata.ConnectionString.user;
+
             InitializeComponent();
             TabItem_UserInfo.Content = new UserInformation(this.user);
         }
 
-
+        private void Logout_ButtonCLick(object sender, RoutedEventArgs e)
+        {
+            new Login().Show();
+            Metadata.CurrentConnectionString = Metadata.ConnectionString.defaultString;
+            Close();
+        }
     }
 }

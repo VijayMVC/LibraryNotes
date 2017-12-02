@@ -322,7 +322,7 @@ begin
 			C3.value('User_Id[1]', 'int') AS User_Id,
 			C3.value('Order_date[1]', 'date') AS Order_date,
 			C3.value('Required_date[1]', 'date') AS Required_date,
-			C3.value('Return_date[1]', 'date') AS Return_date
+			C3.value('Return_date[1]', 'date') AS Return_date  
 			FROM @xml.nodes('Root/Order') AS T3(C3) 
 	COMMIT;
 end;
@@ -359,5 +359,6 @@ select * from Book_Tags;
 
 -----Orders
 exec [dbo].[insertOrdersFromXML] 'D:\БГТУ\Курсовой проект\Course project\DB\js\genXML\content\orders.xml';
+exec [dbo].[insertOrdersFromXML] 'D:\orders.xml';
 select * from Orders;
 

@@ -38,6 +38,13 @@
 
             <Setter Property="Foreground" Value="Black"/>
         </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="Control.VerticalAlignment" Value="Center"/>
+            <Setter Property="Control.FontSize" Value="20" />
+
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
 
     </UserControl.Resources>
     <Grid>
@@ -63,7 +70,10 @@
             <TextBox Name="TextBoxAddress" Grid.Column="1" Grid.Row="1" />
 
             <TextBlock Text="Sex" Grid.Column="0" Grid.Row="2"  />
-            <TextBox Name="TextBoxSex" Grid.Column="1" Grid.Row="2" />
+            <ComboBox Name="TextBoxSex" Grid.Column="1" Grid.Row="2" >
+                <ComboBoxItem Content="Male"/>
+                <ComboBoxItem Content="Female"/>
+            </ComboBox>
 
             <TextBlock Text="PhoneNumber" Grid.Column="0" Grid.Row="3"  />
             <TextBox Name="TextBoxPhoneNumber" Grid.Column="1" Grid.Row="3" />
@@ -78,8 +88,8 @@
             </StackPanel>
 
             <Button Click="Save" Grid.Column="1" Grid.Row="6" Width="150" Height="50" Content="Save"/>
+                <TextBlock Name="UserInfoError" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Margin="0,37,360,37"></TextBlock>
         </Grid>
-        <Grid>
-            <TextBlock Name="UserInfoError"></TextBlock>
-        </Grid>
+    </Grid>
+    
 </UserControl>

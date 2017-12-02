@@ -12,7 +12,7 @@ delete from [Genres];
 DBCC CHECKIDENT ('[Orders]', RESEED, 0);				--обнуление всех Identity
 DBCC CHECKIDENT ('[Book_Genres]', RESEED, 0);
 DBCC CHECKIDENT ('[Books]', RESEED, 0);
-DBCC CHECKI	DENT ('[Users]', RESEED, 0);
+DBCC CHECKIDENT ('[Users]', RESEED, 0);
 DBCC CHECKIDENT ('[Authors]', RESEED, 0);
 DBCC CHECKIDENT ('[Genres]', RESEED, 0);
 DBCC CHECKIDENT ('[Book_Tags]', RESEED, 0);
@@ -600,4 +600,5 @@ exec [dbo].[OrdersInsert] 22, 5, '2014-08-10', '2016-08-06', '2015-06-19';
 
 --select * from Book_tags;
 
+	
 	

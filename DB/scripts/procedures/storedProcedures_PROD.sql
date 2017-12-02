@@ -336,3 +336,6 @@ exec [dbo].[selectTopPopularGenres]
 --12 проверить пароль
 exec [dbo].[selectUserExist] '1', '1';
 
+select * from users;
+
+--//TODO переделай контент с зазказами XML!!!
