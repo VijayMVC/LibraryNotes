@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryNotes.Models
 {
-    class Author
+   public class Author
     {
         public int Id { get; set; }
         public string First_Name { get; set; }

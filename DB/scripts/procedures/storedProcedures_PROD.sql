@@ -281,9 +281,48 @@ AS
 
 	end;
 GO
+----------------------[получить книги + автор] ------------------------------------
+IF OBJECT_ID('[dbo].[selectAuthorsAndBooks]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[selectAuthorsAndBooks] 
+END 
+GO
+CREATE PROC [dbo].[selectAuthorsAndBooks] 
+AS 
+	begin
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+
+		SELECT  b.[Id],[Name], [Year], [Description], [First_Name], [Last_Name] 							
+		FROM   [dbo].[Books] as b join [dbo].[Authors] as a																		
+		on b.Author_Id = a.Id
+
+	end;
+GO
+----------------------[получить книги + автор ID] ------------------------------------
+IF OBJECT_ID('[dbo].[selectAuthorsAndBooksId]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[selectAuthorsAndBooksId] 
+END 
+GO
+CREATE PROC [dbo].[selectAuthorsAndBooksId] 
+	@Id int
+AS 
+	begin
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+
+		SELECT  b.[Id],[Name], [Year], [Description], [First_Name], [Last_Name] 							
+		FROM   [dbo].[Books] as b join [dbo].[Authors] as a																		
+		on b.Author_Id = a.Id
+		where b.Id = @Id;
+
+	end;
+GO
 -----------------------------------------------------------------------------------------
 --1 поиск по жанрам
 exec [dbo].[selectBooksByGenre] 'Thriller';
+
 
 
 --2 поиск по тэгу
@@ -336,6 +375,8 @@ exec [dbo].[selectTopPopularGenres]
 --12 проверить пароль
 exec [dbo].[selectUserExist] '1', '1';
 
-select * from users;
-
+--13 книги+авторы
+exec [dbo].[selectAuthorsAndBooks] 
+--14 книги+авторы Id
+exec [dbo].[selectAuthorsAndBooksId] 2
 --//TODO переделай контент с зазказами XML!!!

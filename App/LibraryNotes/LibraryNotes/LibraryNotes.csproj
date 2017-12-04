@@ -64,6 +64,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\MainWindows\BookOrderInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\MainWindows\Books.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\MainWindows\UserInformation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -81,6 +89,12 @@
     </Compile>
     <Compile Include="Forms\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainWindows\BookOrderInfo.xaml.cs">
+      <DependentUpon>BookOrderInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainWindows\Books.xaml.cs">
+      <DependentUpon>Books.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\MainWindows\UserInformation.xaml.cs">
       <DependentUpon>UserInformation.xaml</DependentUpon>

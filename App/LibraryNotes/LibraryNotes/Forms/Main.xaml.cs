@@ -31,9 +31,11 @@ namespace LibraryNotes.Forms
                 Metadata.CurrentConnectionString = Metadata.ConnectionString.admin;
             else
                 Metadata.CurrentConnectionString = Metadata.ConnectionString.user;
+            Metadata.CurrentUserId = user.Id;
 
             InitializeComponent();
             TabItem_UserInfo.Content = new UserInformation(this.user);
+            DataGridBooksWrap.Content = new Books();
         }
 
         private void Logout_ButtonCLick(object sender, RoutedEventArgs e)

@@ -23,6 +23,8 @@ GRANT EXECUTE ON [dbo].[UsersUpdate]  TO [LibraryNotes_user];
 
 
 GRANT EXECUTE ON [dbo].[selectBooksByAuthors]  TO [LibraryNotes_user];
+GRANT EXECUTE ON [dbo].[selectAuthorsAndBooks]  TO [LibraryNotes_user];
+GRANT EXECUTE ON [dbo].[selectAuthorsAndBooksId]  TO [LibraryNotes_user];
 GRANT EXECUTE ON [dbo].[selectBooksByGenre]  TO [LibraryNotes_user];
 GRANT EXECUTE ON [dbo].[selectBooksByTag]  TO [LibraryNotes_user];
 GRANT EXECUTE ON [dbo].[selectGenresByBook]  TO [LibraryNotes_user];
