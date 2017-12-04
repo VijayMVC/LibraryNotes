@@ -13,8 +13,8 @@
             <TabItem Header ="Authors"></TabItem>
             <TabItem Header ="Tags"></TabItem>
             <TabItem Header ="Genres"></TabItem>
-            <TabItem Header ="User Info" Name="TabItem_UserInfo">
-            </TabItem>
+            <TabItem Header ="User Info" Name="TabItem_UserInfo"></TabItem>
+            <TabItem Header ="User Orders" Name="TabItem_UserOrders"></TabItem>
         </TabControl>
         <Button Name="Logout" VerticalAlignment="Bottom" Height="20" Width="50" Content="Logout" HorizontalAlignment="Right" Click="Logout_ButtonCLick"/>
     </Grid>

@@ -47,9 +47,38 @@ begin
 end;
 GO
 
+----------------------------------------Orders with date range to XML-----------------------
 
+IF OBJECT_ID('[dbo].[exportOrdersToXMLBetweenDate]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[exportOrdersToXMLBetweenDate] 
+END 
+GO
+CREATE PROC [dbo].[exportOrdersToXMLBetweenDate] 
+	@path nvarchar(256),
+	@Date1 date,
+	@Date2 date
+AS 
+begin
+	BEGIN TRAN
+		declare @str_date1 nvarchar(300) = CONVERT(VARCHAR, @Date1, 120);
+		declare @str_date2 nvarchar(300) = CONVERT(VARCHAR, @Date2, 120);
+		declare @sql nvarchar(500)=
+				  'bcp "SELECT [Book_Id], [User_Id], [Order_date], [Required_date], [Return_date] FROM'+
+				     '[dbo].[Orders] WHERE ('''+@str_date1+''' < [Order_date] AND [Order_date] <'''+ @str_date2+''') FOR XML PATH(''Order''), ROOT(''Root'')" queryout "'+
+				  @path+'"  -S DESKTOP-FFV5E68\SQLEXPRESS  -d LibraryNotes   -w -T ';
+		print @sql;
+		
+		EXEC xp_cmdshell @sql;
+	COMMIT;
+end;
+GO
+SELECT [Book_Id], [User_Id], [Order_date], [Required_date], [Return_date] FROM
+				     [dbo].[Orders] WHERE ( '2015-01-02'< [Order_date] AND [Order_date] < '2015-04-06')
 
 ------------------------------------------------------
 exec [exportBooksToXML] 'D:\books.xml'
 
 exec [exportOrdersToXML] 'D:\orders.xml'
+
+exec [exportOrdersToXMLBetweenDate] 'D:\ordersDateRange.xml', '2015-01-02', '2015-04-06'

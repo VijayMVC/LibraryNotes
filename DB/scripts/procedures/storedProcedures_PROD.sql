@@ -16,7 +16,7 @@ AS
 		SELECT b.[Name], b.[Year]
 			FROM [dbo].[Books] as b
 				INNER JOIN [dbo].[Book_Genres] as bg
-			ON b.id = bg.Book_Id3
+			ON b.id = bg.Book_Id
 				INNER JOIN [dbo].[Genres] as g
 			ON g.[Id] = bg.[Genre_Id]
 			WHERE g.[Genre] = @genre	
@@ -171,7 +171,7 @@ AS
 		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 
 			SELECT * FROM [Orders] 
-			WHERE NOT (@Date1 > [Order_date] AND [Order_date] < @Date2)
+			WHERE (@Date1 < [Order_date] AND [Order_date] < @Date2)
 	end;
 GO
 
