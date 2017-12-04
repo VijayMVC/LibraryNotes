@@ -73,8 +73,6 @@ begin
 	COMMIT;
 end;
 GO
-SELECT [Book_Id], [User_Id], [Order_date], [Required_date], [Return_date] FROM
-				     [dbo].[Orders] WHERE ( '2015-01-02'< [Order_date] AND [Order_date] < '2015-04-06')
 
 ------------------------------------------------------
 exec [exportBooksToXML] 'D:\books.xml'

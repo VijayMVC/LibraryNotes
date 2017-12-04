@@ -72,6 +72,30 @@ AS
 	end;
 GO
 
+----------------------[Поиск книг по заданным жарнам с учетом частоты их использования] ------------------------------------
+IF OBJECT_ID('[dbo].[selectSimilarBooksByGenres]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[selectSimilarBooksByGenres] 
+END 
+GO
+CREATE PROC [dbo].[selectSimilarBooksByGenres] 
+    @genre1 NVARCHAR(50),
+    @genre2 NVARCHAR(50) = NULL,
+    @genre3 NVARCHAR(50) = NULL
+AS 
+	begin
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+
+		  SELECT b.name, count(g.id) as Concurrences FROM [Books] as b, [Book_Genres] as bg, [Genres] as g
+		    WHERE bg.Genre_Id = g.id
+		    AND (g.Genre IN (@genre1, @genre2, @genre3))
+			AND b.id = bg.book_id 
+			GROUP BY b.name
+			order by Concurrences desc
+	end;
+GO
+
 --херота какая-то. зачем я это написал?
 ----------------------[Поиск книг по автору] ------------------------------------
 ----поиск по фирст нэйму, ласт нэйму или по всему
@@ -319,22 +343,78 @@ AS
 
 	end;
 GO
+
+
+-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------
+-----------------ЭТО МОЯ ВЕРШИНА-------------------------
+----------------------[Поиск похожих книг] ------------------------------------
+IF OBJECT_ID('[dbo].[selectSimilarBooks]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[selectSimilarBooks] 
+END 
+GO
+CREATE PROC [dbo].[selectSimilarBooks] 
+  @Book NVARCHAR(50),
+  @Top integer =5
+AS 
+	begin
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+
+		declare @genre1 nvarchar(50);
+		declare @genre2 nvarchar(50);
+		declare @genre3 nvarchar(50);
+		declare @tag1 nvarchar(50);
+		declare @tag2 nvarchar(50);
+		declare @tag3 nvarchar(50);
+
+		declare @genres table(name nvarchar(50));
+		declare @tags table(name nvarchar(50));
+		insert into @genres(name) exec [dbo].[selectGenresByBook]  @Book;
+		insert into @tags(name) exec [dbo].[selectTagsByBook]   @Book;
+
+
+		DECLARE @genre_cursor cursor 
+		set @genre_cursor = CURSOR FOR 
+			select name from @genres
+		OPEN @genre_cursor 
+		FETCH NEXT FROM @genre_cursor into @genre1;
+		FETCH NEXT FROM @genre_cursor into @genre2;
+		FETCH NEXT FROM @genre_cursor into @genre3;
+
+		DECLARE @tag_cursor cursor 
+		set @tag_cursor = CURSOR FOR 
+			select name from @tags
+		OPEN @tag_cursor 
+		FETCH NEXT FROM @tag_cursor into @tag1;
+		FETCH NEXT FROM @tag_cursor into @tag2;
+		FETCH NEXT FROM @tag_cursor into @tag3;
+
+
+		Declare @tmpSimilarBooks table(name NVARCHAR(100), Concurrences int);
+		insert into @tmpSimilarBooks(name,Concurrences) exec [dbo].[selectSimilarBooksByTags]  @tag1,@tag2,@tag3;
+		insert into @tmpSimilarBooks(name,Concurrences) exec [dbo].[selectSimilarBooksByGenres]  @genre1,@genre2,@genre3;;
+		select distinct top (@Top) *  from @tmpSimilarBooks where name!=  @Book order by Concurrences desc;
+	
+	end;
+GO
 -----------------------------------------------------------------------------------------
 --1 поиск по жанрам
 exec [dbo].[selectBooksByGenre] 'Thriller';
 
-
-
 --2 поиск по тэгу
 exec [dbo].[selectBooksByTag] 'leo';
 
-
 --3 поиск по совпадениям тэгов
 exec [dbo].[selectSimilarBooksByTags]  'nibh', 'leo', 'id';
-exec [dbo].[selectSimilarBooksByTags]  'pede', 'integer', 'purus';
 exec [dbo].[selectSimilarBooksByTags]  'pede', 'venenatis', 'iaculis';
 exec [dbo].[selectSimilarBooksByTags]  'pede', 'integer', 'purus';
 exec [dbo].[selectSimilarBooksByTags]  'id', 'venenatis'
+
+-- поиск по совпадениям жанрам
+exec [dbo].[selectSimilarBooksByGenres]  'Drama', 'Action', 'Crime';
+exec [dbo].[selectSimilarBooksByGenres]  'Adventure', 'Drama', 'Horror';
 
 
 --4 поиск по авторам 
@@ -367,7 +447,7 @@ exec [dbo].[selectOverdueOrders]
 
 --10 обновить поле заказа -> пользователь вернул книгу
 exec [dbo].[OrdersSelectAll]
-exec [dbo].[updateOrderWithReturnBook] 3
+exec [dbo].[updateOrderWithReturnBook] @OrderId = 3
 
 --11 топ заказываемых жанров
 exec [dbo].[selectTopPopularGenres] 
@@ -379,4 +459,7 @@ exec [dbo].[selectUserExist] '1', '1';
 exec [dbo].[selectAuthorsAndBooks] 
 --14 книги+авторы Id
 exec [dbo].[selectAuthorsAndBooksId] 2
---//TODO переделай контент с зазказами XML!!!
+
+--15 ПОИСК СХОЖИХ КНИГ
+EXEC [dbo].[selectSimilarBooks] '2', 4;
+EXEC [dbo].[selectSimilarBooks] 'Lust for Gold', 8;

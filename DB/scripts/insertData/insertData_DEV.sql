@@ -72,6 +72,15 @@ exec dbo.BooksInsert 'Lust for Gold', 2000, 5, 'Proin interdum mauris non ligula
 rerit at, vulputate vitae, nisl.
 
 Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.';
+exec dbo.BooksInsert '2', 2000, 5, 'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hend
+rerit at, vulputate vitae, nisl.
+
+Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.';
+
+exec dbo.BooksInsert '1', 2000, 5, 'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hend
+rerit at, vulputate vitae, nisl.
+
+Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.';
 exec dbo.BooksInsert 'Becky Sharp', 2010, 13, 'Phasellus in felis. Donec semper sapien a libero. Nam dui.
 
 Proin leo odio, porttitor id, consequat in, consequat ut, 5a. Sed accumsan felis. Ut at dolor quis odio consequat varius.';
@@ -523,6 +532,14 @@ exec [dbo].[Book_GenresInsert] 48, 10;
 exec [dbo].[Book_GenresInsert] 48, 12;
 exec [dbo].[Book_GenresInsert] 49, 3;
 exec [dbo].[Book_GenresInsert] 50, 8;
+
+exec [dbo].[Book_GenresInsert] 51, 4;
+exec [dbo].[Book_GenresInsert] 51, 1;
+exec [dbo].[Book_GenresInsert] 51, 2;
+
+exec [dbo].[Book_GenresInsert] 52, 4;
+exec [dbo].[Book_GenresInsert] 52, 1;
+exec [dbo].[Book_GenresInsert] 52, 2;
 
 
 
