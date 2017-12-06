@@ -6,16 +6,16 @@
         xmlns:local="clr-namespace:LibraryNotes.Forms.MainWindows"
         mc:Ignorable="d"
          Loaded="Window_Loaded"
-        Title="BookOrderInfo" Height="300" Width="300">
+        Title="BookOrderInfo" Height="435.9" Width="487.8">
     <Grid Margin="10">
-        <Grid.RowDefinitions >
+        <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
-            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="3.5*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
@@ -39,7 +39,10 @@
 
         <TextBlock Text="Genres" Grid.Column="0" Grid.Row="5"  />
         <TextBlock Name="TextBoxGenres" Grid.Column="1" Grid.Row="5" />
+        <TextBlock Text="Enter the date the book is returned." Grid.ColumnSpan="2" Margin="10,24,231.6,81.4" Grid.Row="6" />
 
-        <Button Name="DoOrder" Margin="0.4,0,94.6,0.4" Content="Order" Click="DoOrder_Click" Grid.Row="6" Grid.Column="1" />
+        <DatePicker x:Name="calendar1" FirstDayOfWeek="Monday" Grid.Row="6" Grid.ColumnSpan="2" Margin="10,49,251.6,68.4"></DatePicker>
+        <Button Name="DoOrder" Margin="149.8,46,51.6,68.4" Content="Order" Click="DoOrder_Click" Grid.Row="6" Grid.Column="1" />
+        <TextBlock Name="error" Grid.ColumnSpan="2" Margin="10,85,51.6,16.4" Grid.Row="6" Foreground="Red"/>
     </Grid>
 </Window>

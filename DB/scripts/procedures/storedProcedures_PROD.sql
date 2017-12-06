@@ -48,53 +48,6 @@ AS
 	end;
 GO
 
-----------------------[Поиск книг по заданным тегам с учетом частоты их использования] ------------------------------------
-IF OBJECT_ID('[dbo].[selectSimilarBooksByTags]') IS NOT NULL
-BEGIN 
-    DROP PROC [dbo].[selectSimilarBooksByTags] 
-END 
-GO
-CREATE PROC [dbo].[selectSimilarBooksByTags] 
-    @tag1 NVARCHAR(50),
-    @tag2 NVARCHAR(50) = NULL,
-    @tag3 NVARCHAR(50) = NULL
-AS 
-	begin
-		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
-
-		  SELECT b.name, count(t.id) as Concurrences FROM [Books] as b, [Book_Tags] as bt, [Tags] as t
-		    WHERE bt.tag_id = t.id
-		    AND (t.name IN (@tag1, @tag2, @tag3))
-			AND b.id = bt.book_id 
-			GROUP BY b.name
-			order by Concurrences desc
-	end;
-GO
-
-----------------------[Поиск книг по заданным жарнам с учетом частоты их использования] ------------------------------------
-IF OBJECT_ID('[dbo].[selectSimilarBooksByGenres]') IS NOT NULL
-BEGIN 
-    DROP PROC [dbo].[selectSimilarBooksByGenres] 
-END 
-GO
-CREATE PROC [dbo].[selectSimilarBooksByGenres] 
-    @genre1 NVARCHAR(50),
-    @genre2 NVARCHAR(50) = NULL,
-    @genre3 NVARCHAR(50) = NULL
-AS 
-	begin
-		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
-		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
-
-		  SELECT b.name, count(g.id) as Concurrences FROM [Books] as b, [Book_Genres] as bg, [Genres] as g
-		    WHERE bg.Genre_Id = g.id
-		    AND (g.Genre IN (@genre1, @genre2, @genre3))
-			AND b.id = bg.book_id 
-			GROUP BY b.name
-			order by Concurrences desc
-	end;
-GO
 
 --херота какая-то. зачем я это написал?
 ----------------------[Поиск книг по автору] ------------------------------------
@@ -367,11 +320,12 @@ AS
 		declare @genre3 nvarchar(50);
 		declare @tag1 nvarchar(50);
 		declare @tag2 nvarchar(50);
-		declare @tag3 nvarchar(50);
+		declare @tag3 nvarchar(50);				--по 3 переменных тегов и жанром книги
 
-		declare @genres table(name nvarchar(50));
-		declare @tags table(name nvarchar(50));
-		insert into @genres(name) exec [dbo].[selectGenresByBook]  @Book;
+		declare @genres table(name nvarchar(50));		--таблица для поиска всех жанров
+		declare @tags table(name nvarchar(50));			--таблица для поиска всех тэгов
+
+		insert into @genres(name) exec [dbo].[selectGenresByBook]  @Book;		--заполняем все жанры и тэги
 		insert into @tags(name) exec [dbo].[selectTagsByBook]   @Book;
 
 
@@ -381,7 +335,8 @@ AS
 		OPEN @genre_cursor 
 		FETCH NEXT FROM @genre_cursor into @genre1;
 		FETCH NEXT FROM @genre_cursor into @genre2;
-		FETCH NEXT FROM @genre_cursor into @genre3;
+		FETCH NEXT FROM @genre_cursor into @genre3;					--заполняем наши 3 переменные выборкой из всех жанров
+		close @genre_cursor;
 
 		DECLARE @tag_cursor cursor 
 		set @tag_cursor = CURSOR FOR 
@@ -389,14 +344,80 @@ AS
 		OPEN @tag_cursor 
 		FETCH NEXT FROM @tag_cursor into @tag1;
 		FETCH NEXT FROM @tag_cursor into @tag2;
-		FETCH NEXT FROM @tag_cursor into @tag3;
+		FETCH NEXT FROM @tag_cursor into @tag3;						--заполняем наши 3 переменные выборкой из всех тэгов
+		close @tag_cursor;
 
-
-		Declare @tmpSimilarBooks table(name NVARCHAR(100), Concurrences int);
-		insert into @tmpSimilarBooks(name,Concurrences) exec [dbo].[selectSimilarBooksByTags]  @tag1,@tag2,@tag3;
-		insert into @tmpSimilarBooks(name,Concurrences) exec [dbo].[selectSimilarBooksByGenres]  @genre1,@genre2,@genre3;;
-		select distinct top (@Top) *  from @tmpSimilarBooks where name!=  @Book order by Concurrences desc;
+		Declare @tmpSimilarBooks table(id int, name NVARCHAR(100), Concurrences int);			--таблица для совпадений книги
+		insert into @tmpSimilarBooks(id, name,Concurrences) exec [dbo].[selectSimilarBooksByTags]  @tag1,@tag2,@tag3;			--ищем похожие по тэгам 
+		insert into @tmpSimilarBooks(id, name,Concurrences) exec [dbo].[selectSimilarBooksByGenres]  @genre1,@genre2,@genre3;	--ищем похожие по жанрам
+		select distinct top (@Top) *  from @tmpSimilarBooks where name!=  @Book order by Concurrences desc;					--отбираем неповторяющие + топ N + сорировка по совпадениям + убираем саму же искомую книгу
 	
+	end;
+GO
+
+----------------------[Поиск книг по заданным тегам с учетом частоты их использования]------------------------------------
+IF OBJECT_ID('[dbo].[selectSimilarBooksByTags]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[selectSimilarBooksByTags] 
+END 
+GO
+CREATE PROC [dbo].[selectSimilarBooksByTags] 
+    @tag1 NVARCHAR(50),
+    @tag2 NVARCHAR(50) = NULL,
+    @tag3 NVARCHAR(50) = NULL
+AS 
+	begin
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+
+		  SELECT b.id, b.name, count(t.id) as Concurrences FROM [Books] as b, [Book_Tags] as bt, [Tags] as t
+		    WHERE bt.tag_id = t.id
+		    AND (t.name IN (@tag1, @tag2, @tag3))
+			AND b.id = bt.book_id 
+			GROUP BY b.name,b.id
+			order by Concurrences desc
+	end;
+GO
+
+----------------------[Поиск книг по заданным жарнам с учетом частоты их использования] ------------------------------------
+IF OBJECT_ID('[dbo].[selectSimilarBooksByGenres]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[selectSimilarBooksByGenres] 
+END 
+GO
+CREATE PROC [dbo].[selectSimilarBooksByGenres] 
+    @genre1 NVARCHAR(50),
+    @genre2 NVARCHAR(50) = NULL,
+    @genre3 NVARCHAR(50) = NULL
+AS 
+	begin
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+
+		  SELECT b.id,b.name, count(g.id) as Concurrences FROM [Books] as b, [Book_Genres] as bg, [Genres] as g
+		    WHERE bg.Genre_Id = g.id
+		    AND (g.Genre IN (@genre1, @genre2, @genre3))
+			AND b.id = bg.book_id 
+			GROUP BY b.name,b.id
+			order by Concurrences desc
+	end;
+GO
+-----------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------
+----------------------[Поиск заказов юзера] ------------------------------------
+IF OBJECT_ID('[dbo].[selectUserOrders]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[selectUserOrders] 
+END 
+GO
+CREATE PROC [dbo].[selectUserOrders] 
+  @Id integer
+AS 
+	begin
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+
+		select o.[Id], [Name], [Order_date], [Required_date], [Return_date] from [dbo].[Orders] o join [dbo].[Books] b on o.Book_Id = b.Id where [User_Id] =  @Id;
 	end;
 GO
 -----------------------------------------------------------------------------------------
@@ -463,3 +484,8 @@ exec [dbo].[selectAuthorsAndBooksId] 2
 --15 ПОИСК СХОЖИХ КНИГ
 EXEC [dbo].[selectSimilarBooks] '2', 4;
 EXEC [dbo].[selectSimilarBooks] 'Lust for Gold', 8;
+
+--16 все заказы челика
+EXEC [dbo].[selectUserOrders] 4
+
+select * from orders 

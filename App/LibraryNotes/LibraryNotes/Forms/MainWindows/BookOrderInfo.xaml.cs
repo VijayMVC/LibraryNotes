@@ -99,7 +99,7 @@ namespace LibraryNotes.Forms.MainWindows
                     }
                 }
             }
-
+            //ETO NE MOY KOD, YA TAK NE PISHU, BAZARY
             TextBoxAuthor.Text = book.author.First_Name;
             TextBoxName.Text = book.book.Name;
             TextBoxDescription.Text = book.book.Description;
@@ -109,30 +109,36 @@ namespace LibraryNotes.Forms.MainWindows
         }
         private void DoOrder_Click(object sender, RoutedEventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(Metadata.CurrentConnectionString))
-            {
-
-                using (SqlCommand cmd1 = new SqlCommand("OrdersInsert", conn)
+            if (calendar1.SelectedDate == null)
+                error.Text = "Select the return date!";
+            else
+                using (SqlConnection conn = new SqlConnection(Metadata.CurrentConnectionString))
                 {
-                    CommandType = CommandType.StoredProcedure
-                })
-                {
-                    conn.Open();
 
-                    cmd1.Parameters.AddWithValue("@Book_Id", book.book.Id);
-                    cmd1.Parameters.AddWithValue("@User_Id", Metadata.CurrentUserId);
-                    cmd1.Parameters.AddWithValue("@Order_date", DateTime.Now.ToString("yyyy-MM-dd"));//TODO дата плоха
-                    cmd1.Parameters.AddWithValue("@Required_date", DateTime.UtcNow.AddDays(new Random().Next(90)).ToString("yyyy-MM-dd"));
-                    cmd1.Parameters.AddWithValue("@Return_date", null);
-                    using (SqlDataReader reader = cmd1.ExecuteReader())
+                    using (SqlCommand cmd1 = new SqlCommand("OrdersInsert", conn)
                     {
-                        if (reader.Read())
+                        CommandType = CommandType.StoredProcedure
+                    })
+                    {
+                        conn.Open();
+
+                        cmd1.Parameters.AddWithValue("@Book_Id", book.book.Id);
+                        cmd1.Parameters.AddWithValue("@User_Id", Metadata.CurrentUserId);
+                        cmd1.Parameters.AddWithValue("@Order_date", DateTime.Now.ToString("yyyy-MM-dd"));
+
+                        DateTime date = calendar1.SelectedDate.Value;
+
+                        cmd1.Parameters.AddWithValue("@Required_date", date);
+                        cmd1.Parameters.AddWithValue("@Return_date", null);
+                        using (SqlDataReader reader = cmd1.ExecuteReader())
                         {
-                            MessageBox.Show("The book was ordered with order number: "+ reader["Id"].ToString());
-                        };
+                            if (reader.Read())
+                            {
+                                MessageBox.Show("The book was ordered with order number: " + reader["Id"].ToString());
+                            };
+                        }
                     }
                 }
-            }
         }
     }
 }

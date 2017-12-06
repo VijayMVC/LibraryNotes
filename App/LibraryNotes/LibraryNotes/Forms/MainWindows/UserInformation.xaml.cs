@@ -52,7 +52,7 @@ namespace LibraryNotes.Forms.MainWindows
                         cmd.Parameters.AddWithValue("@Address", updUser.Adress);
                         cmd.Parameters.AddWithValue("@Sex", updUser.Sex);
                         cmd.Parameters.AddWithValue("@PhoneNumber", updUser.Phonenunmber);
-                        cmd.Parameters.AddWithValue("@Admin", updUser.Admin);
+                        cmd.Parameters.AddWithValue("@Admin", updUser.Role);
                         //AHAHAHAHAHAH 4TO ETO ZA MYASO?????
                         try
                         {
@@ -80,7 +80,7 @@ namespace LibraryNotes.Forms.MainWindows
             User updUser = new User();
             updUser.Id = user.Id;
             updUser.Login = user.Login;
-            updUser.Admin = user.Admin;
+            updUser.Role = user.Role;
 
             updUser.Sex = TextBoxSex.Text;
             updUser.Name = TextBoxName.Text;

@@ -65,8 +65,9 @@ namespace LibraryNotes.Forms
                                 user.Sex = reader["Sex"].ToString();
                                 user.Id = int.Parse(reader["Id"].ToString());
                                 user.Phonenunmber = reader["PhoneNumber"].ToString();
-                                user.Admin = int.Parse(reader["Admin"].ToString()) == (int)Metadata.AuthRoles.ADMIN ?
+                                user.Role = int.Parse(reader["Admin"].ToString()) == (int)Metadata.AuthRoles.ADMIN ?
                                     Metadata.AuthRoles.ADMIN : Metadata.AuthRoles.USER;         //охи сцаки, охи сцаки, это ж еще такое написать надо
+                                Metadata.CurrentUserId = user.Id;
                                 new Main(user).Show();
                                 Close();
                             }

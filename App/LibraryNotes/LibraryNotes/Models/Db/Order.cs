@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryNotes.Models
 {
-    class Order
+   public class Order
     {
         public int id { get; set; }
         public int Book_Id { get; set; }

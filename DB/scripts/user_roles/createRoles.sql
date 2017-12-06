@@ -20,7 +20,7 @@ GRANT EXECUTE ON [dbo].[OrdersSelect]  TO [LibraryNotes_user];
 GRANT EXECUTE ON [dbo].[OrdersInsert]  TO [LibraryNotes_user];
 
 GRANT EXECUTE ON [dbo].[UsersUpdate]  TO [LibraryNotes_user];
-
+GRANT EXECUTE ON [dbo].[updateOrderWithReturnBook]  TO [LibraryNotes_user];
 
 GRANT EXECUTE ON [dbo].[selectBooksByAuthors]  TO [LibraryNotes_user];
 GRANT EXECUTE ON [dbo].[selectAuthorsAndBooks]  TO [LibraryNotes_user];
@@ -29,8 +29,11 @@ GRANT EXECUTE ON [dbo].[selectBooksByGenre]  TO [LibraryNotes_user];
 GRANT EXECUTE ON [dbo].[selectBooksByTag]  TO [LibraryNotes_user];
 GRANT EXECUTE ON [dbo].[selectGenresByBook]  TO [LibraryNotes_user];
 GRANT EXECUTE ON [dbo].[selectSimilarBooksByTags]  TO [LibraryNotes_user];
+GRANT EXECUTE ON [dbo].[selectSimilarBooksByGenres]  TO [LibraryNotes_user];
+GRANT EXECUTE ON [dbo].[selectSimilarBooks]  TO [LibraryNotes_user];
 GRANT EXECUTE ON [dbo].[selectTagsByBook]  TO [LibraryNotes_user];
 GRANT EXECUTE ON [dbo].[selectTopPopularGenres]  TO [LibraryNotes_user];
+GRANT EXECUTE ON [dbo].[selectUserOrders]  TO [LibraryNotes_user];
 go
 
 

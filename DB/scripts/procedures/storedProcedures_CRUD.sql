@@ -330,7 +330,7 @@ AS
 		COMMIT
 	END;
 GO
-----------------------[Books].[BooksInsert] ------------------------------------
+----------------------[Books].[BooksInsert]------------------------------------
 IF OBJECT_ID('[dbo].[BooksInsert]') IS NOT NULL
 BEGIN 
     DROP PROC [dbo].[BooksInsert] 
@@ -346,8 +346,13 @@ AS
 		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
 	
-		BEGIN TRAN
-	
+		declare @authorYear int;
+		select  @authorYear=YEAR([Birth_date]) from [dbo].Authors where [Id] = @Author_Id;
+
+		if (@Year< @authorYear)
+			return 0;
+
+		BEGIN TRAN	
 		INSERT INTO [dbo].[Books] ([Name], [Year], [Author_Id], [Description])
 		SELECT @Name, @Year, @Author_Id, @Description
 	
@@ -375,6 +380,12 @@ AS
 		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 		
+		declare @authorYear int;
+		select  @authorYear=YEAR([Birth_date]) from [dbo].Authors where [Id] = @Author_Id;
+
+		if (@Year< @authorYear)
+			return 0;
+
 		BEGIN TRAN
 	
 		UPDATE [dbo].[Books]
@@ -388,6 +399,7 @@ AS
 	COMMIT
 	END;
 GO
+
 ----------------------[Books].[BooksDelete] ------------------------------------
 IF OBJECT_ID('[dbo].[BooksDelete]') IS NOT NULL
 BEGIN 
@@ -553,11 +565,23 @@ AS
 		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
 	
+		declare @bookYear int;
+		select  @bookYear=[Year] from [dbo].Books where [Id] = @Book_Id;
+
+		if (YEAR(@Order_date) < @bookYear or YEAR(@Required_date) < @bookYear or YEAR(@Return_date) < @bookYear)
+			return 0;
+
+		if(DATEDIFF(day, @Order_date, @Required_date)<1)
+			return 0;
+
+		if(DATEDIFF(day, @Required_date, @Return_date)<0)
+			return 0;
+
+
 		BEGIN TRAN
-	
 		INSERT INTO [dbo].[Orders] ([Book_Id], [User_Id], [Order_date], [Required_date], [Return_date])
-		SELECT @Book_Id, @User_Id, @Order_date, @Required_date, @Return_date
-	
+		SELECT @Book_Id, @User_Id, @Order_date, @Required_date, @Return_date;
+
 		SELECT [Id], [Book_Id], [User_Id], [Order_date], [Required_date], [Return_date]
 		FROM   [dbo].[Orders]
 		WHERE  [Id] = SCOPE_IDENTITY()
@@ -583,6 +607,18 @@ AS
 		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 		
+		declare @bookYear int;
+		select  @bookYear=[Year] from [dbo].Books where [Id] = @Book_Id;
+
+		if (YEAR(@Order_date) < @bookYear or YEAR(@Required_date) < @bookYear or YEAR(@Return_date) < @bookYear)
+			return 0;
+
+		if(DATEDIFF(day, @Order_date, @Required_date)<1)
+			return 0;
+
+		if(DATEDIFF(day, @Required_date, @Return_date)<0)
+			return 0;
+
 		BEGIN TRAN
 	
 		UPDATE [dbo].[Orders]
@@ -596,6 +632,7 @@ AS
 	COMMIT
 	END;
 GO
+
 ----------------------[Orders].[OrdersDelete] ------------------------------------
 IF OBJECT_ID('[dbo].[OrdersDelete]') IS NOT NULL
 BEGIN 

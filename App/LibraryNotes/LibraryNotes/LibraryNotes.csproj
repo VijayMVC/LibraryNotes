@@ -72,7 +72,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\MainWindows\Search\ByGenres.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\MainWindows\Search\SearchControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\MainWindows\Search\ByAuthors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Forms\MainWindows\Search\SimilarBooks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\MainWindows\UserInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\MainWindows\UserOrders.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -96,8 +116,23 @@
     <Compile Include="Forms\MainWindows\Books.xaml.cs">
       <DependentUpon>Books.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MainWindows\Search\ByGenres.xaml.cs">
+      <DependentUpon>ByGenres.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainWindows\Search\SearchControl.xaml.cs">
+      <DependentUpon>SearchControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainWindows\Search\ByAuthors.xaml.cs">
+      <DependentUpon>ByAuthors.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainWindows\Search\SimilarBooks.xaml.cs">
+      <DependentUpon>SimilarBooks.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\MainWindows\UserInformation.xaml.cs">
       <DependentUpon>UserInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainWindows\UserOrders.xaml.cs">
+      <DependentUpon>UserOrders.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
@@ -105,9 +140,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Metadata.cs" />
-    <Compile Include="Models\AppUser.cs">
-      <Generator>MSBuild:Compile</Generator>
-    </Compile>
     <Compile Include="Models\Db\Author.cs" />
     <Compile Include="Models\Db\Book.cs" />
     <Compile Include="Models\Db\Book_Genres.cs" />

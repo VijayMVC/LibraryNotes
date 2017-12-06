@@ -1,4 +1,5 @@
 ﻿using LibraryNotes.Forms.MainWindows;
+using LibraryNotes.Forms.MainWindows.Search;
 using LibraryNotes.Models;
 using System;
 using System.Collections.Generic;
@@ -27,15 +28,18 @@ namespace LibraryNotes.Forms
         public Main(User user)
         {
             this.user = user;
-            if (this.user.Admin == Metadata.AuthRoles.ADMIN)
+            if (this.user.Role == Metadata.AuthRoles.ADMIN)
                 Metadata.CurrentConnectionString = Metadata.ConnectionString.admin;
             else
                 Metadata.CurrentConnectionString = Metadata.ConnectionString.user;
             Metadata.CurrentUserId = user.Id;
-
             InitializeComponent();
+            if(user.Role != Metadata.AuthRoles.ADMIN)
+            AdminPanel.Visibility = Visibility.Hidden;
             TabItem_UserInfo.Content = new UserInformation(this.user);
             DataGridBooksWrap.Content = new Books();
+            TabItem_UserOrders.Content = new UserOrders(this.user.Id);
+            BookSearch.Content = new SearchControl(this.user.Id);
         }
 
         private void Logout_ButtonCLick(object sender, RoutedEventArgs e)

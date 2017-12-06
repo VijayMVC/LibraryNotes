@@ -15,9 +15,9 @@ namespace LibraryNotes.Models
         public string Adress { get; set; }
         public string Sex { get; set; }
         public string Phonenunmber { get; set; }
-        public Metadata.AuthRoles Admin { get; set; }
+        public Metadata.AuthRoles Role { get; set; }
         public User(int id, string login, string password,
-            string name, string adress, string sex, string phonenunmber, Metadata.AuthRoles admin)
+            string name, string adress, string sex, string phonenunmber, Metadata.AuthRoles Role)
         {
             this.Id = id;
             this.Login = login;
@@ -26,7 +26,7 @@ namespace LibraryNotes.Models
             this.Adress = adress;
             this.Sex = sex;
             this.Phonenunmber = phonenunmber;
-            this.Admin = Admin;
+            this.Role = Role;
         }
 
         public User() { }

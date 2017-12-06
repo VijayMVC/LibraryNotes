@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace LibraryNotes.Models
 {
-   public class Author
+    public class Author
     {
         public int Id { get; set; }
         public string First_Name { get; set; }
         public string Last_Name { get; set; }
+        public string Full_Name { get { return First_Name + " " + Last_Name; } set { } }
         public DateTime Birth_date { get; set; }
         public DateTime? Die_date { get; set; }
         public Author(int id, string first_Name, string last_Name,
