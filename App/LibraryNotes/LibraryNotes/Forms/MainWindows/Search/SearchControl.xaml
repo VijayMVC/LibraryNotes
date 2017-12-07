@@ -10,7 +10,6 @@
         <Grid>
             <TabControl>
                 <TabItem Header ="Similar books"  Name="Content_similar_book"></TabItem>
-                <TabItem Header ="By tags" Name="Content_tags"></TabItem>
                 <TabItem Header ="By genres" Name="Content_genres"></TabItem>
                 <TabItem Header ="By authors" Name="Content_authors"></TabItem>
             </TabControl>

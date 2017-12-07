@@ -21,7 +21,6 @@ GRANT EXECUTE ON [dbo].[OrdersInsert]  TO [LibraryNotes_user];
 
 GRANT EXECUTE ON [dbo].[UsersUpdate]  TO [LibraryNotes_user];
 GRANT EXECUTE ON [dbo].[updateOrderWithReturnBook]  TO [LibraryNotes_user];
-
 GRANT EXECUTE ON [dbo].[selectBooksByAuthors]  TO [LibraryNotes_user];
 GRANT EXECUTE ON [dbo].[selectAuthorsAndBooks]  TO [LibraryNotes_user];
 GRANT EXECUTE ON [dbo].[selectAuthorsAndBooksId]  TO [LibraryNotes_user];

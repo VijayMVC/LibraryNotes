@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="LibraryNotes.Forms.MainWindows.Admin.XML"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LibraryNotes.Forms.MainWindows.Admin"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <StackPanel>
+            <GroupBox Header="Import">
+                <Grid>
+                    <StackPanel>
+                        <TextBlock>Select table to insert data</TextBlock>
+                        <ComboBox Name="combobox_Table">
+                            <ComboBoxItem Content="Genres"/>
+                            <ComboBoxItem Content="Users"/>
+                            <ComboBoxItem Content="Tags"/>
+                            <ComboBoxItem Content="Authors"/>
+                            <ComboBoxItem Content="Books"/>
+                            <ComboBoxItem Content="BooksGenres"/>
+                            <ComboBoxItem Content="BooksTags"/>
+                            <ComboBoxItem Content="Orders"/>
+
+
+                        </ComboBox>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.352*"/>
+                                <ColumnDefinition Width="0.648*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox x:Name="FBCTextBox" Margin="4,10.313,137,4.001" 
+                  TextWrapping="Wrap" Grid.ColumnSpan="2"
+                 TextChanged="FBCTextBox_TextChanged" />
+
+                            <Button x:Name="FBCButton" HorizontalAlignment="Right" 
+                Margin="0,8,13,4" Width="111" Content="Browse"
+                Grid.Column="1" Click="FBCButton_Click" />
+                        </Grid>
+                        <Button Content="Import data" Width="150" Click="Button_Click"/>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Header="Export orders by date range">
+                <Grid>
+                    <StackPanel>
+                        <TextBlock Margin="0 0 10 0">Select date range</TextBlock>
+                        <StackPanel Margin="0 0 10 0" Orientation="Horizontal">
+                            <TextBlock Margin="20 0 0 0 ">From:    </TextBlock>
+                            <DatePicker Name="DateFrom"/>
+                            <TextBlock Margin="20 0 0 0 ">To:  </TextBlock>
+                            <DatePicker Name="DateTo"/>
+                        </StackPanel>
+                        <TextBox Margin="0 0 10 0" x:Name="fileExport" 
+                TextWrapping="Wrap" />
+                        <Button Content="Export to file" Margin="0 0 10 0" Width="150" Click="Button_Click_1"/>
+
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</UserControl>

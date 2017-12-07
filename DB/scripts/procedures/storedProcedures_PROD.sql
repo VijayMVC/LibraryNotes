@@ -221,7 +221,7 @@ AS
 		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 		
-		SELECT count(g.[Genre]) as Rating,g.[Genre]
+		SELECT count(g.[Genre]) as Rating,g.[Genre], g.Id
 			FROM [Books] as b
 				INNER JOIN [Book_Genres] as bg
 			ON b.[Id] = bg.[Book_Id]
@@ -229,7 +229,7 @@ AS
 			ON g.[Id] = bg.[Genre_Id] 
 				INNER JOIN [Orders] as o 
 			ON o.Book_Id = b.Id
-			group by g.Genre
+			group by g.Genre,g.Id
 			order by Rating desc
 
 	end;
@@ -459,7 +459,6 @@ exec [dbo].[selectGenresByBook] 'Battle of the Year'
 
 --7 получить заказы за период дат
 exec [dbo].[selectOrdersBetweenDates] '2015-02-02', '2017-11-02'
-
 --8 получить * что еще на руках
 exec [dbo].[selectActiveOrders] 
 

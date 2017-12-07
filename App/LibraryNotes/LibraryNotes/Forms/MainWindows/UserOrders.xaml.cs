@@ -71,6 +71,29 @@ namespace LibraryNotes.Forms.MainWindows
             }
         }
 
-       
+        private void click_returnBook(object sender, RoutedEventArgs e)
+        {
+            var selectOrder = (BooksInfo)datagrid_user_orders.SelectedItem;
+            if (selectOrder.order.Return_date == null)
+                using (SqlConnection conn = new SqlConnection(Metadata.CurrentConnectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand("updateOrderWithReturnBook", conn)
+                    {
+                        CommandType = CommandType.StoredProcedure
+                    })
+                    {
+                        conn.Open();
+                        cmd.Parameters.AddWithValue("@OrderId", selectOrder.order.id);
+                        List<BooksInfo> Books = new List<BooksInfo>();
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                OnLoad(null, null);
+                            };
+                        }
+                    }
+                }
+        }
     }
 }

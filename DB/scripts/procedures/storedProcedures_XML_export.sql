@@ -65,7 +65,7 @@ begin
 		declare @str_date2 nvarchar(300) = CONVERT(VARCHAR, @Date2, 120);
 		declare @sql nvarchar(500)=
 				  'bcp "SELECT [Book_Id], [User_Id], [Order_date], [Required_date], [Return_date] FROM'+
-				     '[dbo].[Orders] WHERE ('''+@str_date1+''' < [Order_date] AND [Order_date] <'''+ @str_date2+''') FOR XML PATH(''Order''), ROOT(''Root'')" queryout "'+
+				     '[dbo].[Orders] WHERE ('''+@str_date1+''' <= [Order_date] AND [Order_date] <='''+ @str_date2+''') order by Order_date FOR XML PATH(''Order''), ROOT(''Root'')" queryout "'+
 				  @path+'"  -S DESKTOP-FFV5E68\SQLEXPRESS  -d LibraryNotes   -w -T ';
 		print @sql;
 		

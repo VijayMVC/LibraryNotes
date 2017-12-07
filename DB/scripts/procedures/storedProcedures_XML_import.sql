@@ -35,10 +35,14 @@ CREATE PROC [dbo].[insertGenresFromXML]
 	@path nvarchar(256)
 AS 
 begin
-	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 
+	declare @count1 int=0;
+	declare @count2 int=0;
+
+	set @count1 = (select count(*) from genres)
 	BEGIN TRAN
+	
 		declare @results table (x xml)			--таблица для рерзультата прочтения файла xml
 		declare @sql nvarchar(300)=
 				   'SELECT 
@@ -53,8 +57,11 @@ begin
 			SELECT 
 			C3.value('Genre[1]', 'NVARCHAR(50)') AS Genre,
 			C3.value('Description[1]', 'NVARCHAR(700)') AS Description
-			FROM @xml.nodes('Root/GenreItem') AS T3(C3) 
+			FROM @xml.nodes('Root/GenreItem') AS T3(C3)
+	
 	COMMIT;
+	set @count2 = (select count(*) from genres)
+	return @count2 - @count1;
 end;
 GO
 
@@ -72,6 +79,10 @@ AS
 begin
 	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+
+	declare @count1 int=0;
+	declare @count2 int=0;
+	set @count1 = (select count(*) from Users)
 
 	BEGIN TRAN
 
@@ -95,6 +106,9 @@ begin
 		C3.value('PhoneNumber[1]', 'CHAR(25)') AS [PhoneNumber]
 		FROM @xml.nodes('Root/User') AS T3(C3) 
 	COMMIT;
+
+		set @count2 = (select count(*) from Users)
+	return @count2 - @count1;
 end;
 GO
 
@@ -113,6 +127,10 @@ begin
 	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 
+	declare @count1 int=0;
+	declare @count2 int=0;
+	set @count1 = (select count(*) from Tags)
+		
 	BEGIN TRAN
 
 	declare @results table (x xml)			--таблица для рерзультата прочтения файла xml
@@ -131,6 +149,8 @@ begin
 		FROM @xml.nodes('Root/Tag') AS T3(C3) 
 	
 	COMMIT;
+	set @count2 = (select count(*) from Tags)
+	return @count2 - @count1;
 end;
 GO
 
@@ -147,7 +167,10 @@ CREATE PROC [dbo].[insertAuthorsFromXML]
 AS 
 begin
 	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
-
+	declare @count1 int=0;
+	declare @count2 int=0;
+	set @count1 = (select count(*) from Authors)
+		
 	BEGIN TRAN
 
 	declare @results table (x xml)			--таблица для рерзультата прочтения файла xml
@@ -171,6 +194,8 @@ begin
 			FROM @xml.nodes('Root/Author') AS T3(C3) 
 
 	COMMIT;
+	set @count2 = (select count(*) from Authors)
+	return @count2 - @count1;
 end;
 GO
 
@@ -191,7 +216,10 @@ AS
 begin
 	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
-
+	declare @count1 int=0;
+	declare @count2 int=0;
+	set @count1 = (select count(*) from Books)
+		
 	BEGIN TRAN
 		declare @results table (x xml)			--таблица для рерзультата прочтения файла xml
 		declare @sql nvarchar(300)=
@@ -211,6 +239,8 @@ begin
 			C3.value('Description[1]', 'NVARCHAR(1000)') AS Description
 			FROM @xml.nodes('Root/Book') AS T3(C3) 
 	COMMIT;
+	set @count2 = (select count(*) from Books)
+	return @count2 - @count1;
 end;
 GO
 
@@ -230,7 +260,10 @@ AS
 begin
 	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
-
+	declare @count1 int=0;
+	declare @count2 int=0;
+	set @count1 = (select count(*) from Book_Genres)
+		
 	BEGIN TRAN
 		declare @results table (x xml)			--таблица для рерзультата прочтения файла xml
 		declare @sql nvarchar(300)=
@@ -248,6 +281,8 @@ begin
 			C3.value('Genre_Id[1]', 'int') AS Genre_Id
 			FROM @xml.nodes('Root/BookGenre') AS T3(C3) 
 	COMMIT;
+	set @count2 = (select count(*) from Book_Genres)
+	return @count2 - @count1;
 end;
 GO
 
@@ -267,7 +302,10 @@ AS
 begin
 	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
-
+	declare @count1 int=0;
+	declare @count2 int=0;
+	set @count1 = (select count(*) from Book_Tags)
+		
 	BEGIN TRAN
 		declare @results table (x xml)			--таблица для рерзультата прочтения файла xml
 		declare @sql nvarchar(300)=
@@ -285,6 +323,8 @@ begin
 			C3.value('Tag_Id[1]', 'int') AS Genre_Id
 			FROM @xml.nodes('Root/BookGenre') AS T3(C3) 
 	COMMIT;
+	set @count2 = (select count(*) from Book_Tags)
+	return @count2 - @count1;
 end;
 GO
 
@@ -304,7 +344,10 @@ AS
 begin
 	SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 	SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
-
+	declare @count1 int=0;
+	declare @count2 int=0;
+	set @count1 = (select count(*) from Orders)
+		
 	BEGIN TRAN
 		declare @results table (x xml)			--таблица для рерзультата прочтения файла xml
 		declare @sql nvarchar(300)=
@@ -325,6 +368,8 @@ begin
 			C3.value('Return_date[1]', 'date') AS Return_date  
 			FROM @xml.nodes('Root/Order') AS T3(C3) 
 	COMMIT;
+	set @count2 = (select count(*) from Orders)
+	return @count2 - @count1;
 end;
 GO
 

@@ -1,4 +1,5 @@
 ﻿using LibraryNotes.Forms.MainWindows;
+using LibraryNotes.Forms.MainWindows.Admin;
 using LibraryNotes.Forms.MainWindows.Search;
 using LibraryNotes.Models;
 using System;
@@ -40,6 +41,7 @@ namespace LibraryNotes.Forms
             DataGridBooksWrap.Content = new Books();
             TabItem_UserOrders.Content = new UserOrders(this.user.Id);
             BookSearch.Content = new SearchControl(this.user.Id);
+            AdminPanel.Content = new AdminPanel();
         }
 
         private void Logout_ButtonCLick(object sender, RoutedEventArgs e)

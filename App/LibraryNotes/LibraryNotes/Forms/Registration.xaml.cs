@@ -97,6 +97,7 @@ namespace LibraryNotes.Forms
                             cmd.Parameters.AddWithValue("@Address", textBoxAddress.Text);
                             cmd.Parameters.AddWithValue("@Sex", comboBoxSex.Text);
                             cmd.Parameters.AddWithValue("@PhoneNumber", textBoxNumber.Text);
+                            cmd.Parameters.AddWithValue("@Admin", 1);
 
                             using (var reader = cmd.ExecuteReader())
                             {

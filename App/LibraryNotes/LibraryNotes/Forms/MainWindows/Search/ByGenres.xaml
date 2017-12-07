@@ -5,8 +5,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LibraryNotes.Forms.MainWindows.Search"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             >
     <Grid>
-        <ListBox/>
+        <StackPanel Width="300" HorizontalAlignment="Left">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Rating"/>
+                <Label Content="   Genre"/>
+            </StackPanel>
+            <ListBox x:Name="ListBoxGenres1" Height="430" DisplayMemberPath="Name"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Name="error" Foreground="Red"/>
+                    <Button Content="Add" x:Name="ButtonGenreAdd" Click="ButtonGenreAdd_Click"/>
+                <Button Content="Delete" x:Name="ButtonGenreDelete" Click="ButtonGenreDelete_Click"/>
+                <Button Content="Find" x:Name="ButtonGenreFind" Click="ButtonGenreFind_Click"/>
+            </StackPanel>
+            <ListBox x:Name="ListBoxGenres2"  Height="190" DisplayMemberPath="Name"/>
+        </StackPanel>
+        <DataGrid x:Name="datagrid_books"  Loaded="OnLoad" Width="400" Margin="300 0 0 0" IsReadOnly="True" AutoGenerateColumns="False" 
+                  MouseDoubleClick="datagrid_books_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Width="4*" 
+                             Binding="{Binding Name}"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
     </Grid>
 </UserControl>
