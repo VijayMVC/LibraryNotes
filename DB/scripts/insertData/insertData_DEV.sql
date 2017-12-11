@@ -533,13 +533,7 @@ exec [dbo].[Book_GenresInsert] 48, 12;
 exec [dbo].[Book_GenresInsert] 49, 3;
 exec [dbo].[Book_GenresInsert] 50, 8;
 
-exec [dbo].[Book_GenresInsert] 51, 4;
-exec [dbo].[Book_GenresInsert] 51, 1;
-exec [dbo].[Book_GenresInsert] 51, 2;
 
-exec [dbo].[Book_GenresInsert] 52, 4;
-exec [dbo].[Book_GenresInsert] 52, 1;
-exec [dbo].[Book_GenresInsert] 52, 2;
 
 
 

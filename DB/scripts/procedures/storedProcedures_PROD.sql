@@ -1,5 +1,9 @@
 use LibraryNotes;
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 ----------------------[ѕолучить книги по жанру] ------------------------------------
 IF OBJECT_ID('[dbo].[selectBooksByGenre]') IS NOT NULL
 BEGIN 
@@ -44,7 +48,6 @@ AS
 				INNER JOIN [Tags] as t
 			ON t.[Id] = bt.[Tag_Id]  --получить все книги по тегу
 			WHERE t.[Name] = @tag
-
 	end;
 GO
 
@@ -84,6 +87,9 @@ AS
 		  END;
 	end;
 GO
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ----------------------[ѕолучить тэги книги] ------------------------------------
 IF OBJECT_ID('[dbo].[selectTagsByBook]') IS NOT NULL
@@ -105,7 +111,6 @@ AS
 				INNER JOIN [Tags] as t
 			ON t.[Id] = bt.[Tag_Id]  --получить все книги по тегу
 			WHERE b.[Name] = @Book
-
 	end;
 GO
 
@@ -129,10 +134,11 @@ AS
 				INNER JOIN [Genres] as g
 			ON g.[Id] = bg.[Genre_Id]  --получить все книги по тегу
 			WHERE b.[Name] = @Book
-
 	end;
 GO
-
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ----------------------[получить заказы за определенную дату] ------------------------------------
 IF OBJECT_ID('[dbo].[selectOrdersBetweenDates]') IS NOT NULL
 BEGIN 
@@ -198,16 +204,19 @@ CREATE PROC [dbo].[updateOrderWithReturnBook]
    @OrderId int
 AS 
 	begin
+
 		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 		begin tran
 			UPDATE [Orders] set [Return_date] = getdate() where [Id]=@OrderId;
 
 			SELECT * FROM   [dbo].[Orders] WHERE  [Id] = @OrderId	
-		commit
 	end;
 GO
 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ----------------------[топ полуп€рных жанров] ------------------------------------
 IF OBJECT_ID('[dbo].[selectTopPopularGenres]') IS NOT NULL
@@ -231,9 +240,39 @@ AS
 			ON o.Book_Id = b.Id
 			group by g.Genre,g.Id
 			order by Rating desc
-
 	end;
 GO
+
+----------------------[топ полуп€рных жанров на промежутке даты]------------------------------------
+IF OBJECT_ID('[dbo].[selectTopPopularGenresByDateRange]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[selectTopPopularGenresByDateRange] 
+END 
+GO
+CREATE PROC [dbo].[selectTopPopularGenresByDateRange] 
+	@date1 date,
+	@date2 date
+AS 
+	begin
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+		
+		SELECT count(g.[Genre]) as Rating,g.[Genre], g.Id
+			FROM [Books] as b
+				INNER JOIN [Book_Genres] as bg
+			ON b.[Id] = bg.[Book_Id]
+				INNER JOIN [Genres] as g
+			ON g.[Id] = bg.[Genre_Id] 
+				INNER JOIN [Orders] as o 
+			ON o.Book_Id = b.Id
+			where (@date1 <= [Order_date] AND [Order_date] <= @date2)
+			group by g.Genre,g.Id
+			order by Rating desc
+	end;
+GO
+
+
+exec [dbo].[selectUserExist] 'd1', '1';
 
 ----------------------[проверка паролей] ------------------------------------
 IF OBJECT_ID('[dbo].[selectUserExist]') IS NOT NULL
@@ -249,13 +288,12 @@ AS
 		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 
-		DECLARE @auth tinyint = NULL;         
-		Select @auth = [Admin] from Users 	where Login = @Login and Password = @Password;
-
-		if(@auth != 0)
-			select * from Users 	where Login = @Login and Password = @Password;
+		DECLARE @auth tinyint = 0;         
+		Select @auth = count(*) from Users 	where Login = @Login and Password = @Password;
+		if(@auth = 1)
+			Select * from Users 	where Login = @Login and Password = @Password;
+		else
 			return @auth;
-
 	end;
 GO
 ----------------------[получить книги + автор] ------------------------------------
@@ -273,7 +311,6 @@ AS
 		SELECT  b.[Id],[Name], [Year], [Description], [First_Name], [Last_Name] 							
 		FROM   [dbo].[Books] as b join [dbo].[Authors] as a																		
 		on b.Author_Id = a.Id
-
 	end;
 GO
 ----------------------[получить книги + автор ID] ------------------------------------
@@ -293,7 +330,6 @@ AS
 		FROM   [dbo].[Books] as b join [dbo].[Authors] as a																		
 		on b.Author_Id = a.Id
 		where b.Id = @Id;
-
 	end;
 GO
 
@@ -351,7 +387,6 @@ AS
 		insert into @tmpSimilarBooks(id, name,Concurrences) exec [dbo].[selectSimilarBooksByTags]  @tag1,@tag2,@tag3;			--ищем похожие по тэгам 
 		insert into @tmpSimilarBooks(id, name,Concurrences) exec [dbo].[selectSimilarBooksByGenres]  @genre1,@genre2,@genre3;	--ищем похожие по жанрам
 		select distinct top (@Top) *  from @tmpSimilarBooks where name!=  @Book order by Concurrences desc;					--отбираем неповтор€ющие + топ N + сорировка по совпадени€м + убираем саму же искомую книгу
-	
 	end;
 GO
 
@@ -436,6 +471,7 @@ exec [dbo].[selectSimilarBooksByTags]  'id', 'venenatis'
 -- поиск по совпадени€м жанрам
 exec [dbo].[selectSimilarBooksByGenres]  'Drama', 'Action', 'Crime';
 exec [dbo].[selectSimilarBooksByGenres]  'Adventure', 'Drama', 'Horror';
+exec [dbo].[selectSimilarBooksByGenres]  'Crime', 'Sci', 'Horror';
 
 
 --4 поиск по авторам 
@@ -471,6 +507,9 @@ exec [dbo].[updateOrderWithReturnBook] @OrderId = 3
 
 --11 топ заказываемых жанров
 exec [dbo].[selectTopPopularGenres] 
+
+--11.1 топ заказываемых жанров
+exec [dbo].[selectTopPopularGenresByDateRange] '2012-02-02', '2017-11-02'
 
 --12 проверить пароль
 exec [dbo].[selectUserExist] '1', '1';

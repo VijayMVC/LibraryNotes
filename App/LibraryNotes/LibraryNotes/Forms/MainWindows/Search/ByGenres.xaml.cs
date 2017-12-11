@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -107,8 +108,10 @@ namespace LibraryNotes.Forms.MainWindows.Search
                     conn.Open();
                     List<Book> Books = new List<Book>();
                     List<Genre> genres = ListBoxGenres2.Items.Cast<Genre>().ToList();
+                    string val = "";
                     for (int i = 0; i < genres.Count; i++) {
-                        cmd.Parameters.AddWithValue($"@genre{i+1}", genres[i].Name);
+                         val = new Regex(@"\w+").Matches(genres[i].Name)[1].Value;
+                        cmd.Parameters.AddWithValue($"@genre{i+1}", val);
                     }
 
                     using (SqlDataReader reader = cmd.ExecuteReader())

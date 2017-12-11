@@ -567,7 +567,7 @@ AS
 	
 		declare @bookYear int;
 		select  @bookYear=[Year] from [dbo].Books where [Id] = @Book_Id;
-
+		
 		if (YEAR(@Order_date) < @bookYear or YEAR(@Required_date) < @bookYear or YEAR(@Return_date) < @bookYear)
 			return 0;
 
