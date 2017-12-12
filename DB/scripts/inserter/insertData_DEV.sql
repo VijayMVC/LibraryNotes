@@ -57,7 +57,7 @@ exec dbo.AuthorsInsert 'Anael', 'Gallamore', '1946-01-27', '2002-05-27';
 exec dbo.AuthorsInsert 'Lea', 'Dank', '1976-11-25', null;
 exec dbo.AuthorsInsert 'Becassine', 'Aughtie', '1916-10-07', '1965-11-12';
 exec dbo.AuthorsInsert 'Meline', 'Press', '1998-02-25', null;
-exec dbo.AuthorsInsert 'Tan', 'Twycross', '1991-02-28', null;
+exec dbo.AuthorsInsert 'Tan', 'Twycross', '1988-02-28', null;
 exec dbo.AuthorsInsert 'Genevieve', 'Ackenhead', '1995-06-12',null;
 
 
@@ -72,12 +72,12 @@ exec dbo.BooksInsert 'Lust for Gold', 2000, 5, 'Proin interdum mauris non ligula
 rerit at, vulputate vitae, nisl.
 
 Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.';
-exec dbo.BooksInsert '2', 2000, 5, 'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hend
+exec dbo.BooksInsert '2', 2011, 5, 'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hend
 rerit at, vulputate vitae, nisl.
 
 Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.';
 
-exec dbo.BooksInsert '1', 2000, 5, 'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hend
+exec dbo.BooksInsert '1', 2011, 5, 'Proin interdum mauris non ligula pellentesque ultrices. Phasellus id sapien in sapien iaculis congue. Vivamus metus arcu, adipiscing molestie, hend
 rerit at, vulputate vitae, nisl.
 
 Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.';
@@ -131,15 +131,15 @@ n, leo. Maecenas pulvinar lobortis est.';
 exec dbo.BooksInsert 'Glowing Stars', 1995, 2, 'Aenean lectus. Pellentesque eget nunc. Donec quis orci eget orci vehicula condimentum.
 
 Curabitur in libero ut massa volutpat convallis. Morbi odio odio, elementum eu, interdum eu, tincidunt in, leo. Maecenas pulvinar lobortis est.';
-exec dbo.BooksInsert 'Prospero''s Books', 1983, 19, 'Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est con
+exec dbo.BooksInsert 'Prospero''s Books', 1989, 19, 'Duis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est con
 gue elementum.';
 exec dbo.BooksInsert 'Where''s Marlowe?', 1992, 14, 'Phasellus in felis. Donec semper sapien a libero. Nam dui.';
-exec dbo.BooksInsert 'New Jack City', 2005, 9, 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.';
-exec dbo.BooksInsert 'Stolen Collection, (Skradziona kolekcja)', 2010, 13, 'Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh
+exec dbo.BooksInsert 'New Jack City', 2009, 9, 'Maecenas leo odio, condimentum id, luctus nec, molestie sed, justo. Pellentesque viverra pede ac diam. Cras pellentesque volutpat dui.';
+exec dbo.BooksInsert 'Stolen Collection, (Skradziona kolekcja)', 2015, 13, 'Proin eu mi. Nulla ac enim. In tempor, turpis nec euismod scelerisque, quam turpis adipiscing lorem, vitae mattis nibh
 ligula nec sem.
 
 Duis aliquam convallis nunc. Proin at turpis a pede posuere nonummy. Integer non velit.';
-exec dbo.BooksInsert 'Belle comme la femme d''un autre', 1998, 19, 'Nam ultrices, libero non mattis pulvinar, 12a pede ullamcorper augue, a suscipit 2a elit ac 10a. Sed vel enim sit amet nunc viv
+exec dbo.BooksInsert 'Belle comme la femme d''un autre', 2012, 19, 'Nam ultrices, libero non mattis pulvinar, 12a pede ullamcorper augue, a suscipit 2a elit ac 10a. Sed vel enim sit amet nunc viv
 erra dapibus. Nulla suscipit ligula in lacus.';
 exec dbo.BooksInsert 'Rescuers, The', 2005, 5, 'Mauris enim leo, rhoncus sed, vestibulum sit amet, cursus id, turpis. Integer aliquet, massa id lobortis convallis, tortor risus dapibus augue, vel
  accumsan tellus nisi eu orci. Mauris lacinia sapien quis libero.
@@ -204,7 +204,7 @@ exec dbo.BooksInsert 'Taken', 1995, 5, 'Quisque id justo sit amet sapien digniss
 s dolor vel est. Donec odio justo, sollicitudin ut, suscipit a, feugiat et, eros.
 
 Vestibulum ac est lacinia nisi venenatis tristique. Fusce congue, diam id ornare imperdiet, sapien urna pretium nisl, ut volutpat sapien arcu sed augue. Aliquam erat volutpat.';
-exec dbo.BooksInsert 'I Think I Do', 1994, 18, 'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.
+exec dbo.BooksInsert 'I Think I Do', 1999, 18, 'Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.
 
 Fusce consequat. Nulla nisl. Nunc nisl.';
 exec dbo.BooksInsert 'Red Like the Sky (Rosso come il cielo)', 2000, 17, 'Quisque id justo sit amet sapien dignissim vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices p
@@ -571,8 +571,8 @@ exec [dbo].[OrdersInsert] 14, 2, '2014-12-23', '2015-06-30', '2016-09-22';
 exec [dbo].[OrdersInsert] 1, 5, '2013-01-01', '2013-02-03', '2016-11-23';
 exec [dbo].[OrdersInsert] 11, 2, '2014-04-04', '2014-08-22', '2017-05-05';
 
-exec [dbo].[OrdersInsert] 2, 4, '2013-04-11', '2015-06-13', '2013-11-06';
-exec [dbo].[OrdersInsert] 7, 4, '2012-12-04', '2014-01-16', '2013-12-14';
+exec [dbo].[OrdersInsert] 2, 4, '2015-04-11', '2015-06-13', '2018-11-06';
+exec [dbo].[OrdersInsert] 7, 4, '2012-12-04', '2013-01-16', '2013-12-14';
 exec [dbo].[OrdersInsert] 9, 5, '2014-11-25', '2017-06-02', '2015-04-01';
 exec [dbo].[OrdersInsert] 42, 4, '2017-03-27', '2017-11-04', '2017-04-09';
 exec [dbo].[OrdersInsert] 34, 3, '2014-09-03', '2017-03-08', '2015-01-14';

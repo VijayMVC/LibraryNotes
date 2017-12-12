@@ -38,9 +38,12 @@ AS
 	BEGIN
 		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры  
-	
+
+		if(DATEDIFF(day, @Birth_date, @Die_date)<0)
+			RAISERROR('Bad date value(The born date in less the die date)',11,1)
+				
 		BEGIN TRAN
-	
+		
 		INSERT INTO [dbo].[Authors] ([First_Name], [Last_Name], [Birth_date], [Die_date])
 		SELECT @First_Name, @Last_Name, @Birth_date, @Die_date
 	
@@ -67,9 +70,11 @@ AS
 	BEGIN
 		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
-		
+
+		if(DATEDIFF(day, @Birth_date, @Die_date)<0)
+			RAISERROR('Bad date value(The born date in less the die date)',11,1)
 		BEGIN TRAN
-	
+		
 		UPDATE [dbo].[Authors]
 		SET    [First_Name] = @First_Name, [Last_Name] = @Last_Name, [Birth_date] = @Birth_date, [Die_date] = @Die_date
 		WHERE  [Id] = @Id
@@ -350,7 +355,7 @@ AS
 		select  @authorYear=YEAR([Birth_date]) from [dbo].Authors where [Id] = @Author_Id;
 
 		if (@Year< @authorYear)
-			return 0;
+			RAISERROR('Bad year value(See author birth date)',12,1)
 
 		BEGIN TRAN	
 		INSERT INTO [dbo].[Books] ([Name], [Year], [Author_Id], [Description])
@@ -384,7 +389,7 @@ AS
 		select  @authorYear=YEAR([Birth_date]) from [dbo].Authors where [Id] = @Author_Id;
 
 		if (@Year< @authorYear)
-			return 0;
+			RAISERROR('Bad year value(See author birth date)',12,1)
 
 		BEGIN TRAN
 	
@@ -569,14 +574,14 @@ AS
 		select  @bookYear=[Year] from [dbo].Books where [Id] = @Book_Id;
 		
 		if (YEAR(@Order_date) < @bookYear or YEAR(@Required_date) < @bookYear or YEAR(@Return_date) < @bookYear)
-			return 0;
+			RAISERROR('Bad year value(See boor year)',13,1)
 
-		if(DATEDIFF(day, @Order_date, @Required_date)<1)
-			return 0;
 
-		if(DATEDIFF(day, @Required_date, @Return_date)<0)
-			return 0;
+		if(DATEDIFF(day, @Order_date, @Required_date)<0)
+			RAISERROR('Bad date value(The order date is bigger the required date)',14,1)
 
+		if(DATEDIFF(day, @Order_date, @Return_date)<0)
+			RAISERROR('Bad date value(The order date is bigger the returned date)',15,1)
 
 		BEGIN TRAN
 		INSERT INTO [dbo].[Orders] ([Book_Id], [User_Id], [Order_date], [Required_date], [Return_date])
@@ -610,14 +615,15 @@ AS
 		declare @bookYear int;
 		select  @bookYear=[Year] from [dbo].Books where [Id] = @Book_Id;
 
+	
 		if (YEAR(@Order_date) < @bookYear or YEAR(@Required_date) < @bookYear or YEAR(@Return_date) < @bookYear)
-			return 0;
+			RAISERROR('Bad year value(See boor year)',13,1)
 
-		if(DATEDIFF(day, @Order_date, @Required_date)<1)
-			return 0;
+        if(DATEDIFF(day, @Order_date, @Required_date)<0)
+			RAISERROR('Bad date value(The order date is bigger the required date)',14,1)
 
-		if(DATEDIFF(day, @Required_date, @Return_date)<0)
-			return 0;
+		if(DATEDIFF(day, @Order_date, @Return_date)<0)
+			RAISERROR('Bad date value(The order date is bigger the returned date)',15,1)
 
 		BEGIN TRAN
 	

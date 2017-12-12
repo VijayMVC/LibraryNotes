@@ -67,8 +67,6 @@ begin
 				  'bcp "SELECT [Book_Id], [User_Id], [Order_date], [Required_date], [Return_date] FROM'+
 				     '[dbo].[Orders] WHERE ('''+@str_date1+''' <= [Order_date] AND [Order_date] <='''+ @str_date2+''') order by Order_date FOR XML PATH(''Order''), ROOT(''Root'')" queryout "'+
 				  @path+'"  -S DESKTOP-FFV5E68\SQLEXPRESS  -d LibraryNotes   -w -T ';
-		print @sql;
-		
 		EXEC xp_cmdshell @sql;
 	COMMIT;
 end;

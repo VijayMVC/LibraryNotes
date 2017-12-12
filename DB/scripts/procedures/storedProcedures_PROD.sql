@@ -52,7 +52,6 @@ AS
 GO
 
 
---херота какая-то. зачем я это написал?
 ----------------------[Поиск книг по автору] ------------------------------------
 ----поиск по фирст нэйму, ласт нэйму или по всему
 IF OBJECT_ID('[dbo].[selectBooksByAuthors]') IS NOT NULL
@@ -271,8 +270,34 @@ AS
 	end;
 GO
 
+----------------------[топ полупярных тэгов на промежутке даты]------------------------------------
+IF OBJECT_ID('[dbo].[selectTopPopularTagsByDateRange]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[selectTopPopularTagsByDateRange] 
+END 
+GO
+CREATE PROC [dbo].[selectTopPopularTagsByDateRange] 
+	@date1 date,
+	@date2 date
+AS 
+	begin
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+		
+		SELECT count(t.[Name]) as Rating,t.[Name], t.Id
+			FROM [Books] as b
+				INNER JOIN [Book_Tags] as bt
+			ON b.[Id] = bt.[Book_Id]
+				INNER JOIN [Tags] as t
+			ON t.[Id] = bt.Tag_Id 
+				INNER JOIN [Orders] as o 
+			ON o.Book_Id = b.Id
+			where (@date1 <= [Order_date] AND [Order_date] <= @date2)
+			group by t.Name,t.Id
+			order by Rating desc
+	end;
+GO
 
-exec [dbo].[selectUserExist] 'd1', '1';
 
 ----------------------[проверка паролей] ------------------------------------
 IF OBJECT_ID('[dbo].[selectUserExist]') IS NOT NULL
@@ -290,12 +315,13 @@ AS
 
 		DECLARE @auth tinyint = 0;         
 		Select @auth = count(*) from Users 	where Login = @Login and Password = @Password;
-		if(@auth = 1)
-			Select * from Users 	where Login = @Login and Password = @Password;
+		if(@auth <> 0)
+			Select * from Users where Login = @Login and Password = @Password;
 		else
-			return @auth;
+			RAISERROR('Bad password or login',16,1)
 	end;
 GO
+
 ----------------------[получить книги + автор] ------------------------------------
 IF OBJECT_ID('[dbo].[selectAuthorsAndBooks]') IS NOT NULL
 BEGIN 
@@ -429,7 +455,8 @@ AS
 		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
 		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 
-		  SELECT b.id,b.name, count(g.id) as Concurrences FROM [Books] as b, [Book_Genres] as bg, [Genres] as g
+		  SELECT b.id, b.name, count(g.id) as Concurrences
+		   FROM [Books] as b, [Book_Genres] as bg, [Genres] as g
 		    WHERE bg.Genre_Id = g.id
 		    AND (g.Genre IN (@genre1, @genre2, @genre3))
 			AND b.id = bg.book_id 
@@ -455,7 +482,35 @@ AS
 		select o.[Id], [Name], [Order_date], [Required_date], [Return_date] from [dbo].[Orders] o join [dbo].[Books] b on o.Book_Id = b.Id where [User_Id] =  @Id;
 	end;
 GO
+
+
+----------------------[Поиск кол-ва заказов юзера по датам] ------------------------------------
+IF OBJECT_ID('[dbo].[selectStatUserBooksCountByDateRange]') IS NOT NULL
+BEGIN 
+    DROP PROC [dbo].[selectStatUserBooksCountByDateRange] 
+END 
+GO
+CREATE PROC [dbo].[selectStatUserBooksCountByDateRange] 
+  @UserId integer
+AS 
+	begin
+		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
+
+		select count(o.Book_Id) as 'Count', o.Order_date from [dbo].[Users] as u 
+		inner join [dbo].[Orders] as o
+		on u.[Id] = o.[User_Id]
+		where u.Id = @UserId
+		group by  u.Id, o.Order_date
+		order by o.Order_date;
+
+	end;
+GO
 -----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
+
+
 --1 поиск по жанрам
 exec [dbo].[selectBooksByGenre] 'Thriller';
 
@@ -499,7 +554,7 @@ exec [dbo].[selectOrdersBetweenDates] '2015-02-02', '2017-11-02'
 exec [dbo].[selectActiveOrders] 
 
 --9 получить список просроченные заказы
-exec [dbo].[selectOverdueOrders]
+exec [dbo].[selectOverdueOrders] 
 
 --10 обновить поле заказа -> пользователь вернул книгу
 exec [dbo].[OrdersSelectAll]
@@ -510,6 +565,9 @@ exec [dbo].[selectTopPopularGenres]
 
 --11.1 топ заказываемых жанров
 exec [dbo].[selectTopPopularGenresByDateRange] '2012-02-02', '2017-11-02'
+
+--11.2 топ заказываемых тэгов
+exec [dbo].[selectTopPopularTagsByDateRange] '2012-02-02', '2017-11-02'
 
 --12 проверить пароль
 exec [dbo].[selectUserExist] '1', '1';
@@ -526,4 +584,7 @@ EXEC [dbo].[selectSimilarBooks] 'Lust for Gold', 8;
 --16 все заказы челика
 EXEC [dbo].[selectUserOrders] 4
 
-select * from orders 
+--17 кол-во заказов книг челика по датам 
+exec [selectStatUserBooksCountByDateRange] 1
+
+select * from orders

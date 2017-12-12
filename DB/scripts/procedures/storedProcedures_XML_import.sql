@@ -407,3 +407,14 @@ exec [dbo].[insertOrdersFromXML] 'D:\БГТУ\Курсовой проект\Course project\DB\js\g
 exec [dbo].[insertOrdersFromXML] 'D:\orders.xml';
 select * from Orders;
 
+
+
+--performance test
+exec [dbo].[OrdersSelectAll]
+
+
+select id, Order_date from orders
+
+drop index [Orders].ordersIndex
+create  index ordersIndex
+on [dbo].[Orders](Order_date asc)
