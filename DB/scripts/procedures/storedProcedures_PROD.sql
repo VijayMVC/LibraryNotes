@@ -390,7 +390,6 @@ AS
 		insert into @genres(name) exec [dbo].[selectGenresByBook]  @Book;		--заполняем все жанры и тэги
 		insert into @tags(name) exec [dbo].[selectTagsByBook]   @Book;
 
-
 		DECLARE @genre_cursor cursor 
 		set @genre_cursor = CURSOR FOR 
 			select name from @genres

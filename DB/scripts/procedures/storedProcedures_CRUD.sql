@@ -11,7 +11,7 @@ CREATE PROC [dbo].[AuthorsSelect]
     @Id int
 AS 
 	BEGIN
-		SET NOCOUNT ON  --отлючить вывод кол-ва обработанных строк
+		SET NOCOUNT ON		--отлючить вывод кол-ва обработанных строк
 		SET XACT_ABORT ON  --ролбэк транзакции и прекращение процедуры
 
 		BEGIN TRAN
